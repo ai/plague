@@ -6,7 +6,7 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
 
-if defined?(Bundler)
+if defined? Bundler
   Bundler.require *Rails.groups(:assets => %w(development test))
 end
 
@@ -23,9 +23,11 @@ module Plague
     config.filter_parameters += [:password]
 
     config.assets.enabled = true
-
     config.assets.version = '1.0'
-
     config.sass.preferred_syntax = :sass
+
+    config.autoload_paths << "#{config.root}/lib/validators/"
+
+    config.story = YAML.load_file("#{config.root}/config/story.yml")
   end
 end

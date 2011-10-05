@@ -1,0 +1,14 @@
+- content_for :head do
+  %title Вход
+  = stylesheet_link_tag :sessions
+
+%a.eye( href="/auth/google" )
+  .top-eyelid
+    %div
+  .bottom-eyelid
+    %div
+  - if flash[:wrong_signin]
+    .wrong ×
+  - else
+    .pupil
+    .hover
