@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def create
     auth   = request.env['omniauth.auth']
-    author = Rails.application.config.story['author_email']
+    author = story['author_email']
     if author != auth['user_info']['email']
       flash[:wrong_signin] = true
     else

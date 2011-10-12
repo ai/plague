@@ -2,7 +2,9 @@
 %html
   %head
     %meta( charset='UTF-8' )
-    %title= yield :title
+    %title
+      - title = yield(:title)
+      = title.present? ? title + ' — ' +story['title'] : story['title']
 
     = favicon_link_tag
     = enable_html5_for_ie

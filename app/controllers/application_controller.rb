@@ -14,4 +14,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def story
+    Rails.configuration.story
+  end
+  helper_method :story
+
 end
