@@ -6,13 +6,14 @@ gem 'mongoid'
 gem 'bson_ext'
 
 gem 'haml'
+gem 'kramdown'
 
 gem 'oa-openid'
 
 group :assets do
-  gem 'compass',      '~> 0.12.alpha'
-  gem 'sass-rails',   '~> 3.1.0'
-  gem 'coffee-rails', '~> 3.1.0'
+  gem 'compass', '~> 0.12.alpha'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier'
   gem 'therubyracer'
 end
