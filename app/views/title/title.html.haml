@@ -1,8 +1,9 @@
 .title-page.page
   .book
-    .bottom
-    .title
-      - 8.times do |i|
-        %div( class="page#{i + 1}" )
-      .head
-      = @title.html
+    .book-wrap
+      .bottom
+      .title
+        - 8.times do |i|
+          %div( class="page#{i + 1}" )
+        .head
+        = @title.html

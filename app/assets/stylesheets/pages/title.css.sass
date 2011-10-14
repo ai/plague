@@ -9,20 +9,14 @@
     width: 470px
     margin: 0 auto
     padding-top: 10px
+  .book-wrap
     position: relative
-  .shadow
-    position: absolute
-    top: 21px
-    left: 10px
-    width: 100%
-    height: 1.4 * 470px - 2px - 20px
-    z-index: 1
   .bottom
     position: absolute
-    top: 19px
+    top: 9px
     left: 11px
     width: 100%
-    height: (1.4 * 470px) - 18px
+    height: 1.4 * 470px - 20px
     background: #fcfcfc
     border: 1px solid #cfcfcf
     +box-shadow(rgba(0, 0, 0, 0.2) 0 0 15px)
@@ -34,6 +28,8 @@
     position: relative
     border: 1px solid #cfcfcf
     z-index: 2
+    +border-left-radius(4px)
+    +box-shadow(rgba(0, 0, 0, 0.15) 6px 0 6px -6px inset)
   .page1, .page2, .page3, .page4, .page5, .page6, .page7, .page8
     position: absolute
     width: 1px
