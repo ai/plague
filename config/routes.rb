@@ -3,4 +3,6 @@ Plague::Application.routes.draw do
   resource :session, only: :destroy
 
   resources :comments, only: [:index, :create]
+
+  root to: 'posts#title'
 end

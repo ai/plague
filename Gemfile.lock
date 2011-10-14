@@ -113,6 +113,9 @@ GEM
       sass (>= 3.1.4)
       sprockets (~> 2.0.0)
       tilt (~> 1.3.2)
+    sassy_noise (0.1.4)
+      chunky_png
+      compass
     sprockets (2.0.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -147,6 +150,7 @@ DEPENDENCIES
   oa-openid
   rails (= 3.1.1)
   sass-rails
+  sassy_noise
   therubyracer
   thin
   uglifier

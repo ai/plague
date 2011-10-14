@@ -1,0 +1,77 @@
+@import 'base'
+@import 'common'
+@import 'sassy-noise'
+
+html, body
+  height: 100%
+
+.title-page
+  width: 100%
+  min-height: 100%
+  background: #f2f2f2
+  .book
+    width: 470px
+    margin: 0 auto
+    padding: 10px 0
+    position: relative
+  .shadow
+    position: absolute
+    top: 21px
+    left: 10px
+    width: 100%
+    height: 1.4 * 470px - 2px - 20px
+    z-index: 1
+  .bottom
+    position: absolute
+    top: 19px
+    left: 11px
+    width: 100%
+    height: (1.4 * 470px) - 18px
+    background: #fcfcfc
+    border: 1px solid #cfcfcf
+    +box-shadow(rgba(0, 0, 0, 0.2) 0 0 15px)
+  .title
+    width: 100%
+    height: 1.4 * 470px - 2px
+    background: white
+    +sassy-noise(0.1)
+    position: relative
+    border: 1px solid #cfcfcf
+    z-index: 2
+  .page1, .page2, .page3, .page4, .page5, .page6, .page7, .page8
+    position: absolute
+    width: 1px
+    left: 100%
+  .page1, .page3, .page5, .page7
+    background: white
+  .page2, .page4, .page6, .page8
+    background: #e8e8e8
+  @for $i from 1 through 9
+    .page#{$i}
+      top: #{$i + 2}px
+      bottom: #{$i + 2}px
+      margin-left: #{$i}px
+  .head
+    position: absolute
+    background: image-url("title/vessels-and-nerves.png")
+    +image-size("title/vessels-and-nerves.png")
+    top: 165px
+    left: 50%
+    margin-left: image-width("title/vessels-and-nerves.png") / -2
+    +scale(0.9)
+  h1
+    position: absolute
+    top: 15px
+    left: 20px
+    font-size: 46px
+    font-family: Philosopher, serif
+  p
+    position: absolute
+    top: 27px
+    right: 0
+    width: 230px
+    font-size: 15px
+    line-height: 1.2
+    strong
+      display: block
+      font-weight: bold

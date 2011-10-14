@@ -15,4 +15,11 @@ module LayoutHelper
     '<![endif]-->'.html_safe
   end
 
+  def include_fonts
+    stylesheet_link_tag(
+      '//fonts.googleapis.com/css?family=Philosopher&subset=cyrillic') +
+    stylesheet_link_tag(
+      '//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic,latin')
+  end
+
 end

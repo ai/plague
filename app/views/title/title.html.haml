@@ -1,0 +1,11 @@
+- content_for :head do
+  = stylesheet_link_tag :title
+
+.title-page
+  .book
+    .bottom
+    .title
+      - 8.times do |i|
+        %div( class="page#{i + 1}" )
+      .head
+      = @title.html

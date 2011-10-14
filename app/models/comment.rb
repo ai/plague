@@ -2,7 +2,7 @@
 class Comment
   include Mongoid::Document
 
-  field :chapter
+  field :post_path
   field :author_name
   field :author_email
   field :author_ip
