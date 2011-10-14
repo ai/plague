@@ -3,3 +3,8 @@
 @mixin image-size($path)
   width: image-width($path)
   height: image-height($path)
+
+$animation-vendors: "" "-webkit-" "-moz-" "-ms-"
+@mixin animation($name, $duration, $timing: linear, $count: infinite)
+  @each $vendor in $animation-vendors
+    #{$vendor}animation: $name $duration $timing $count

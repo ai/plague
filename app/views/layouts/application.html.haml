@@ -8,11 +8,20 @@
 
     = favicon_link_tag
     = enable_html5_for_ie
-    = include_jquery
+    = stylesheet_link_tag :quick
+    = stylesheet_link_tag :application
     = include_fonts
+
+    = include_jquery
+    = javascript_include_tag :application
+
     = yield :head
 
     - if Rails.env.production?
       = render 'shared/counter'
   %body
+    .full-loader
+      .center
+        Загрузка…
+        .ouroboros
     = yield
