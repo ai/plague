@@ -30,13 +30,13 @@
     z-index: 2
     +border-left-radius(4px)
     +box-shadow(rgba(0, 0, 0, 0.15) 6px 0 6px -6px inset)
-  .page1, .page2, .page3, .page4, .page5, .page6, .page7, .page8
+  .page
     position: absolute
     width: 1px
     left: 100%
-  .page1, .page3, .page5, .page7
+  .page.odd
     background: white
-  .page2, .page4, .page6, .page8
+  .page.even
     background: #e8e8e8
   @for $i from 1 through 9
     .page#{$i}

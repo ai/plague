@@ -3,7 +3,7 @@
     .book-wrap
       .bottom
       .title
-        - 8.times do |i|
-          %div( class="page#{i + 1}" )
+        - (1..9).to_a.reverse_each do |i|
+          .page( class="page#{i} #{(i % 2).zero? ? 'even' : 'odd'}" )
         .head
         = @title.html
