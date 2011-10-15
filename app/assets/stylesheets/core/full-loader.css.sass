@@ -1,6 +1,6 @@
 $full-loader-size: 200px
 
-.full-loader
+body.js .full-loader
   position: fixed
   top: 0
   left: 0
@@ -37,6 +37,9 @@ $full-loader-size: 200px
   opacity: 0
   .center
     +scale(0.1)
+
+body.no-js .full-loader
+  display: none
 
 @each $vendor in $animation-vendors
   @#{$vendor}keyframes full-loader-ouroboros

@@ -19,9 +19,13 @@
 
     - if Rails.env.production?
       = render 'shared/counter'
-  %body
+  %body.no-js
+    :javascript
+      document.body.className = 'js';
     .full-loader
       .center
         Загрузка…
         .ouroboros
     = yield
+    .disabled-js
+      Если включить JavaScript, то сайт станет гораздо удобнее.
