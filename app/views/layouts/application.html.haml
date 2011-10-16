@@ -19,6 +19,9 @@
 
     - if Rails.env.production?
       = render 'shared/counter'
+
+    - hash = Digest::SHA1.hexdigest "Автор: Андрей Ситник <andrey@sitnik.ru>\n"
+    = "<!-- #{hash} -->".html_safe
   %body.no-js
     :javascript
       document.body.className = 'js';
