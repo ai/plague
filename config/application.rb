@@ -26,6 +26,8 @@ module Plague
     config.assets.version = '1.0'
     config.sass.preferred_syntax = :sass
 
+    config.assets.precompile += %w( quick.css sessions.css )
+
     config.autoload_paths << "#{config.root}/lib/validators/"
 
     config.story = YAML.load_file("#{config.root}/config/story.yml")

@@ -2,6 +2,7 @@
 log/*.log
 tmp/
 .sass-cache/
+public/assets/
 
 config/mongoid.yml
 config/story.yml
