@@ -1,28 +1,43 @@
 @import 'base'
 @import 'sassy-noise'
 
+$title-width: 470px
+$title-height: 1.4 * $title-width
+
 .title-page
   width: 100%
   min-height: 100%
   background: #f2f2f2
   .book
-    width: 470px
+    width: $title-width
     margin: 0 auto
     padding-top: 10px
   .book-wrap
     position: relative
   .bottom
     position: absolute
-    top: 9px
+    top: 11px
     left: 11px
-    width: 100%
-    height: 1.4 * 470px - 20px
+    width: $title-width
+    height: $title-height - 24px
     background: #fcfcfc
     border: 1px solid #cfcfcf
     +box-shadow(rgba(0, 0, 0, 0.2) 0 0 15px)
+  .page
+    position: absolute
+    width: $title-width - 2px
+  .page.odd
+    background: white
+  .page.even
+    background: #e8e8e8
+  @for $i from 1 through 12
+    .page#{$i}
+      left: #{$i}px
+      top: #{$i + 1}px
+      bottom: #{$i + 1}px
   .title
     width: 100%
-    height: 1.4 * 470px - 2px
+    height: $title-height - 2px
     background: white
     +sassy-noise(0.1)
     position: relative
@@ -30,19 +45,6 @@
     z-index: 2
     +border-left-radius(4px)
     +box-shadow(rgba(0, 0, 0, 0.15) 6px 0 6px -6px inset)
-  .page
-    position: absolute
-    width: 1px
-    left: 100%
-  .page.odd
-    background: white
-  .page.even
-    background: #e8e8e8
-  @for $i from 1 through 9
-    .page#{$i}
-      top: #{$i + 2}px
-      bottom: #{$i + 2}px
-      margin-left: #{$i}px
   .head
     position: absolute
     background: image-url("title/vessels-and-nerves.png")
