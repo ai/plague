@@ -4,12 +4,16 @@
       .bottom
       - (1..12).to_a.reverse_each do |i|
         .page( class="page#{i} #{(i % 2).zero? ? 'even' : 'odd'}" )
+      .back-side
+        .paper
       .title
         .head
         = @title.html
-      %a.open-badge.new( href="/" )
+      %a.open-badge.new( href="/" role="start-reading" )
         .border.no-right
-        .crop
+        .crop-shadow
+          .shadow
+        .crop-arrow
           .arrow
             .border
         Начать чтение
