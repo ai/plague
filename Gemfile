@@ -7,6 +7,7 @@ gem 'bson_ext'
 
 gem 'haml'
 gem 'kramdown'
+gem 'r18n-core'
 
 gem 'oa-openid'
 

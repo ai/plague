@@ -29,11 +29,16 @@ class Post
   def initialize(path, file = nil)
     path += '/' + file if file
     @path = path
-    @source_code = self.class.story_root.join(path + '.md').read
+    @filepath = self.class.story_root.join(path + '.md')
+    @source_code = @filepath.read
   end
 
   def comments
     Comment.where(post_name: self.name)
+  end
+
+  def story_title
+    @filepath.dirname.join('title').read.strip
   end
 
   def attrs
@@ -51,6 +56,13 @@ class Post
 
   def name
     attrs['name']
+  end
+
+  def date
+    @date ||= begin
+      return nil unless attrs['date']
+      Date.parse(attrs['date'])
+    end
   end
 
   def html

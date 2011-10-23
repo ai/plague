@@ -1,0 +1,59 @@
+@import 'base'
+
+.post-page
+  width: 100%
+  min-height: 100%
+  background: $gray-background
+  padding: 20px 0
+  .date-badge
+    position: absolute
+    top: 30px
+    left: 25px
+    width: 35px
+    color: white
+    text-align: center
+    line-height: 1
+    .year
+      background: #666
+      padding: 4px 0
+      font-size: 12px
+      border-bottom: 1px solid white
+      +box-shadow(rgba(0, 0, 0, 0.2) 0 0 5px)
+    .date
+      background: #666
+      padding: 4px 0 0 0
+      +box-shadow(rgba(0, 0, 0, 0.2) 0 0 5px)
+    .month
+      text-transform: uppercase
+      font-size: 12px
+    .day
+      font-size: 18px
+      padding-bottom: 6px
+    .crop
+      height: 10px
+      overflow: hidden
+      position: relative
+    .left-corner, .right-corner
+      background: #666
+      +box-shadow(rgba(0, 0, 0, 0.2) 0 0 5px)
+      height: 10px
+      position: absolute
+      top: -10px
+      width: 50px
+    .left-corner
+      left: -9px
+      +rotate(-25deg)
+    .right-corner
+      right: -9px
+      +rotate(25deg)
+  .paper
+    width: 600px
+    margin: 10px auto
+    padding: 20px 80px
+    background: white
+    +box-shadow(#ccc 0px 0px 2px 1px)
+    line-height: 1.3
+    font-size: 16px
+    position: relative
+    p
+      padding: 6px 0

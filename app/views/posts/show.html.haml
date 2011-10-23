@@ -1,3 +1,14 @@
-- title @post.title
+- title @post.title, @post.story_title
 
-= @post.html
+.post-page
+  .paper
+    - if @post.date
+      .date-badge
+        .year= @post.date.year
+        .date
+          .month= R18n.l @post.date, '%b'
+          .day= @post.date.mday
+        .crop
+          .left-corner
+          .right-corner
+    = @post.html

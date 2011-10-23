@@ -1,3 +1,4 @@
+# encoding: utf-8
 module LayoutHelper
 
   def include_jquery
@@ -22,8 +23,8 @@ module LayoutHelper
       '//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic,latin')
   end
 
-  def title(title)
-    content_for(:title) { title }
+  def title(*titles)
+    content_for(:title) { titles.join(' — ') }
   end
 
 end
