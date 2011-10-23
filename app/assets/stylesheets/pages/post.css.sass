@@ -118,10 +118,21 @@
   line-height: 1
   .year
     background: #666
-    padding: 4px 0
     font-size: 12px
     border-bottom: 1px solid white
     +box-shadow(rgba(0, 0, 0, 0.2) 0 0 5px)
+    height: 21px
+    position: relative
+    .hightlight, .text
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      line-height: 22px
+    .hightlight
+      background: $red
+      display: none
   .date
     background: #666
     padding: 4px 0 0 0

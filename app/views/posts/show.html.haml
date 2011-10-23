@@ -28,7 +28,9 @@
   .paper
     - if @post.date
       .date-badge
-        .year= @post.date.year
+        .year
+          .hightlight( role="hightlight-year" )
+          .text= @post.date.year
         .date
           .month= R18n.l @post.date, '%b'
           .day= @post.date.mday

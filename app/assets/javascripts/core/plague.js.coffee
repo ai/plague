@@ -1,4 +1,5 @@
 #= require jquery.role
+#= require jquery.easing
 #= require core/ext
 
 window.plague =

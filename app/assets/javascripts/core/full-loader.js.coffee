@@ -1,4 +1,3 @@
-#= require jquery.chrono
 #= require core/plague
 
 loader = null
