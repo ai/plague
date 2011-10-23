@@ -1,5 +1,3 @@
-#= require core/plague
-
 plague.on '.title-page', ($, $$) ->
   title = $$('.title')
 

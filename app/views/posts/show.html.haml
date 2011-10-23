@@ -1,6 +1,30 @@
 - title @post.title, @post.story_title
 
 .post-page
+  .top-menu
+    .center
+      .slide-button.what-is-it
+        %a.button( href="#what-is-it" ) Что это такое?
+        .content
+          .arrow
+            .rotated
+          %p
+            Это книга в виде блога.
+          %p
+            Герой из фантастического мира пишет дневник
+            в реальном времени (в поправкой на будущее).
+      .subscribe-and-share
+        .slide-button
+          %a.button( href="#subscribe" ) Подписаться
+          .content
+            .arrow
+              .rotated
+        .slide-button
+          %a.button( href="#share" ) Расскажи друзьям
+          .content
+            .arrow
+              .rotated
+      .title= @post.title
   .paper
     - if @post.date
       .date-badge

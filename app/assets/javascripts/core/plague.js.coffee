@@ -1,3 +1,4 @@
+#= require jquery.role
 #= require core/ext
 
 window.plague =

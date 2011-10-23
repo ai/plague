@@ -1,4 +1,5 @@
+#= require core/plague
 #= require core/full-loader
-#= require jquery.role
 
 #= require pages/title
+#= require pages/top-menu
