@@ -38,7 +38,7 @@
       color: white
       text-decoration: none
       font-size: 14px
-      line-height: 29px
+      line-height: 30px
       height: 29px
       padding: 0 10px
       text-shadow: white 0 0 0
@@ -46,7 +46,6 @@
       +box-shadow(white 0 0 13px -13px inset)
       +transition(all, 200ms)
       &:hover
-        color: white
         text-shadow: white 0 0 2px
     .content
       display: none
@@ -84,6 +83,7 @@
       .button
         +box-shadow(white 0 -13px 13px -13px inset)
         border-bottom: 1px solid white
+        text-shadow: white 0 0 0
       .content
         opacity: 1
         margin-top: 11px
@@ -92,9 +92,13 @@
     top: 0
     right: 100%
     margin-right: 30px
+    &.open .button, & .button:hover
+      color: white
     .button
-      color: #d8d8d8
       font-size: 12px
+      color: #d8d8d8
+    .content
+      font-size: 15px
 
 .post-page .paper
   width: 600px
