@@ -24,7 +24,6 @@ module Plague
 
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.sass.preferred_syntax = :sass
 
     config.assets.precompile += %w( quick.css sessions.css )
 

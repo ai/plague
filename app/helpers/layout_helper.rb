@@ -22,4 +22,8 @@ module LayoutHelper
       '//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic,latin')
   end
 
+  def title(title)
+    content_for(:title) { title }
+  end
+
 end

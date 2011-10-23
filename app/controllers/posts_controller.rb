@@ -5,5 +5,6 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.by_url params[:path]
   end
 end

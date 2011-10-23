@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  rescue_from Post::NotFound do
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  protected
+
   def author_signed_in?
     @author_signed_in ||= begin
       return false unless session[:session_token]

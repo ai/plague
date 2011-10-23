@@ -20,4 +20,5 @@ plague.on '.title-page', ($, $$) ->
   $$('@start-reading').click ->
     title.animate(opacity: 0, 200)
     back.fadeIn(200)
+    after '200ms', => location.href = @href
     false
