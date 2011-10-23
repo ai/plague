@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def title
-    @title = Post.new('title/title')
+    @title = Post.new('title')
     render 'title/title'
   end
 
