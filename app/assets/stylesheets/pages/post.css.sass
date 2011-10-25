@@ -56,7 +56,7 @@
       background: black
       color: white
       font-size: 15px
-      padding: 10px 12px 5px 12px
+      padding: 10px 12px 4px 12px
       +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
       line-height: 1.25
       margin-top: -5px
@@ -67,7 +67,7 @@
       .arrow
         position: absolute
         bottom: 100%
-        left: 35px
+        left: 45px
         width: 16px
         height: 8px
       .rotated
@@ -78,7 +78,7 @@
         position: absolute
         top: 3px
       p
-        padding-bottom: 5px
+        padding-bottom: 6px
     &.open
       .button
         +box-shadow(white 0 -13px 13px -13px inset)
@@ -99,6 +99,15 @@
       color: #d8d8d8
     .content
       font-size: 15px
+      .arrow
+        left: 44px
+  .slide-button.share
+    .content
+      left: auto
+      right: 0
+    .arrow
+      left: auto
+      right: 57px
 
 .post-page .paper
   width: 600px
