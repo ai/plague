@@ -5,6 +5,7 @@
   min-height: 100%
   background: $gray-background
   padding: 40px 0 15px 0
+  +box-sizing(border-box)
 
 .post-page .paper
   width: 600px
@@ -70,3 +71,51 @@
   .right-corner
     right: -9px
     +rotate(25deg)
+
+.post-page .next-post
+  width: 600px + 2 * 35px
+  margin: 30px auto 15px auto
+  a
+    display: inline-block
+    background: black
+    color: white
+    height: 30px
+    line-height: 30px
+    text-decoration: none
+    padding: 0 25px 0 35px
+    outline: 0px solid white
+    position: relative
+    +transition(all, 200ms)
+    +box-shadow(white 0 0 0, rgba(0, 0, 0, 0.4) 0 0 3px)
+    .border
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      +box-shadow(white 0 0 0, rgba(0, 0, 0, 0.4) 0 0 0, $gray-background 0 0 0)
+      +transition(box-shadow, 200ms)
+    .arrow
+      position: absolute
+      top: 0
+      left: 0
+      width: 40px
+      height: 30px
+      line-height: 30px
+      font-size: 22px
+      text-align: center
+    .text
+      position: relative
+      z-index: 2
+    &:hover
+      +box-shadow(white 0 0 0 3px, rgba(0, 0, 0, 0.4) 0 0 2px 3px)
+      .border
+        +box-shadow(white 0 0 0 3px, rgba(0, 0, 0, 0.4) 0 0 6px 3px, $gray-background 0 0 0 5px)
+    &:active
+      .border
+        visibility: hidden
+.post-page .to-be-continue
+  text-align: center
+  font-style: italic
+  text-shadow: white 0 1px 1px
+  margin: 30px 0

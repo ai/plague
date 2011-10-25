@@ -11,8 +11,30 @@
     width: 760px
     margin: 0 auto
     position: relative
+  .prev-next
+    float: left
+    width: 80px
+    height: 20px
+    position: relative
+    .next, .prev
+      position: absolute
+      top: 5px
+      color: white
+      height: 20px
+      line-height: 20px
+      width: 17px
+      font-size: 20px
+      text-decoration: none
+      text-align: center
+      text-shadow: white 0 0
+      +transition(text-shadow, 200ms)
+      &:hover
+        text-shadow: white 0 0 2px
+    .prev
+      left: 24px
+    .next
+      left: 44px
   .title
-    padding-left: 80px
     height: 100%
     line-height: 29px
     font-size: 19px

@@ -1,0 +1,35 @@
+.top-menu
+  .center
+
+    .slide-button.what-is-it
+      %a.button( href="#what-is-it" ) Что это такое?
+      .content
+        .arrow
+          .rotated
+        %p
+          Это книга в виде блога.
+        %p
+          Герой из фантастического мира пишет дневник
+          прямо по ходу развития событий.
+        %p
+          Вы можете написать комментарий герою или автору.
+    .subscribe-and-share
+      .slide-button.subscribe
+        %a.button( href="#subscribe" ) Подписаться
+        .content
+          .arrow
+            .rotated
+      .slide-button.share
+        %a.button( href="#share" ) Расскажи друзьям
+        .content
+          .arrow
+            .rotated
+
+    .prev-next
+      - if @post.prev
+        %a.prev( title="Предыдущая запись" href="#{@post.prev.url}" ) ↑
+      - else
+        %a.prev( title="Обложка" href="#{root_path}" ) ↑
+      - if @post.next
+        %a.next( title="Следующая запись" href="#{@post.next.url}" ) ↓
+    .title= @post.title

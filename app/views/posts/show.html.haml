@@ -1,32 +1,7 @@
 - title @post.title, @post.story_title
 
 .post-page
-  .top-menu
-    .center
-      .slide-button.what-is-it
-        %a.button( href="#what-is-it" ) Что это такое?
-        .content
-          .arrow
-            .rotated
-          %p
-            Это книга в виде блога.
-          %p
-            Герой из фантастического мира пишет дневник
-            прямо по ходу развития событий.
-          %p
-            Вы можете написать комментарий герою или автору.
-      .subscribe-and-share
-        .slide-button.subscribe
-          %a.button( href="#subscribe" ) Подписаться
-          .content
-            .arrow
-              .rotated
-        .slide-button.share
-          %a.button( href="#share" ) Расскажи друзьям
-          .content
-            .arrow
-              .rotated
-      .title= @post.title
+  = render 'top-menu'
   .paper
     - if @post.date
       .date-badge
@@ -40,3 +15,13 @@
           .left-corner
           .right-corner
     = @post.html
+
+  - if @post.next
+    .next-post
+      %a( href="#{@post.next.url}" )
+        .border
+        .arrow ↓
+        .text
+          Следующая запись
+  - else
+    .to-be-continue Продолжение следует
