@@ -10,3 +10,8 @@ window.plague =
         $$ = (selector) ->
           jQuery(selector, content)
         callback.apply content, [ jQuery, $$, content ]
+
+  hash: (hash) ->
+    scroll = $(window).scrollTop()
+    document.location.hash = hash
+    $(window).scrollTop(scroll)
