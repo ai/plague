@@ -1,35 +1,39 @@
-.top-menu
-  .center
+.top-menu{ class_if('hidden', @hide_top_menu) }
+  .top-menu-fixed
+    .center
 
-    .slide-button.what-is-it
-      %a.button( href="#what-is-it" ) Что это такое?
-      .content
-        .arrow
-          .rotated
-        %p
-          Это книга в виде блога.
-        %p
-          Герой из фантастического мира пишет дневник
-          прямо по ходу развития событий.
-        %p
-          Вы можете написать комментарий герою или автору.
-    .subscribe-and-share
-      .slide-button.subscribe
-        %a.button( href="#subscribe" ) Подписаться
+      .slide-button.what-is-it
+        %a.button( href="#what-is-it" ) Что это такое?
         .content
           .arrow
             .rotated
-      .slide-button.share
-        %a.button( href="#share" ) Расскажи друзьям
-        .content
-          .arrow
-            .rotated
+          %p
+            Это книга в виде блога.
+          %p
+            Герой из фантастического мира пишет дневник
+            прямо по ходу развития событий.
+          %p
+            Вы можете написать комментарий герою или автору.
+      .subscribe-and-share
+        .slide-button.subscribe
+          %a.button( href="#subscribe" ) Подписаться
+          .content
+            .arrow
+              .rotated
+        .slide-button.share
+          %a.button( href="#share" ) Расскажи друзьям
+          .content
+            .arrow
+              .rotated
 
-    .prev-next
-      - if @post.prev
-        %a.prev( title="Предыдущая запись" href="#{@post.prev.url}" ) ↑
-      - else
-        %a.prev( title="Обложка" href="#{root_path}" ) ↑
-      - if @post.next
-        %a.next( title="Следующая запись" href="#{@post.next.url}" ) ↓
-    .title= @post.title
+      - prevP = @post.try(:prev)
+      - nextP = @post.try(:next)
+      .prev-next{ class_if('first', !prevP), class_if('last', !nextP) }
+        %a.prev.post( title="Предыдущая запись" href="#{prevP.try(:url)}" ) ↑
+        %a.prev.title( title="Обложка" href="#{root_path}" ) ↑
+        %a.next.post( title="Следующая запись" href="#{nextP.try(:url)}" ) ↓
+        .next.disabled( title="Продолжение следует" ) ↓
+      .title
+        .top-title
+        .current-title= @post.try(:title)
+        .bottom-title

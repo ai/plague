@@ -5,9 +5,13 @@ $title-width: 470px
 $title-height: 1.4 * $title-width
 
 .title-page
+  position: absolute
+  top: 0
+  left: 0
   width: 100%
   min-height: 100%
   background: $gray-background
+  z-index: 40
   .book
     width: $title-width
     margin: 0 auto
@@ -163,7 +167,7 @@ $title-height: 1.4 * $title-width
       .border
         border-color: lighten($red, 16%)
     &:active
-      &, .arrow
+      .shadow, .arrow
         +box-shadow(rgba(0, 0, 0, 0.4) 0 0 5px)
     &.new
       top: 160px

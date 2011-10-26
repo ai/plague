@@ -1,4 +1,5 @@
 #= require core/plague
+#= require core/ext
 #= require core/full-loader
 
 #= require pages/title

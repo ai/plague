@@ -30,6 +30,10 @@ class Post
     raise NotFound
   end
 
+  def self.first
+    self.new('hero/01')
+  end
+
   attr_reader :path, :source_code
 
   def initialize(path, file = nil)

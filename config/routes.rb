@@ -4,6 +4,7 @@ Plague::Application.routes.draw do
 
   resources :comments, only: [:index, :create]
 
+  match '/posts', to: 'posts#all'
   root to: 'posts#title'
 
   match '*path', to: 'posts#show'

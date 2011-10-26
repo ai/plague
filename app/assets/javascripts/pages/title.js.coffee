@@ -1,5 +1,11 @@
-plague.on '.title-page', ($, $$) ->
-  title = $$('.title')
+#= require core/loader
+
+plague.on '.title-page', -> plague.loader.start()
+
+plague.live '.title-page', ($, $$, titlePage) ->
+  title   = $$('.title')
+  back    = $$('.back-side')
+  topMenu =  $('.top-menu-fixed')
 
   # Центрирование обложки по вертикале
 
@@ -14,9 +20,31 @@ plague.on '.title-page', ($, $$) ->
 
   # Открытие книги
 
-  back = $$('.back-side')
+  openBook = (callback) ->
+    title.animate(opacity: 0, 400)
+    back.fadeIn(400, callback)
+
   $$('@start-reading').click ->
-    title.animate(opacity: 0, 200)
-    back.fadeIn(200)
-    after '200ms', => location.href = @href
-    false
+    unless plague.loader.loaded
+      openBook => location.href = @href
+      false
+
+  titlePage.bind 'hide-page', ->
+    plague.animation.start()
+    $('.post-page').show()
+    openBook ->
+      after '300ms', ->
+        topMenu.animate(top: 0, 600)
+        titlePage.fadeOut(600, -> plague.animation.end())
+
+  # Закрытие книги
+
+  titlePage.bind 'show-page', ->
+    plague.animation.start()
+    plague.title()
+    topMenu.animate(top: -40, 600)
+    titlePage.fadeIn 600, ->
+      after '300ms', ->
+        title.animate(opacity: 1, 400)
+        back.fadeOut(400, -> plague.animation.end())
+        $('.post-page').hide()

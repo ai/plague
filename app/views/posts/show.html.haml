@@ -1,7 +1,10 @@
 - title @post.title, @post.story_title
 
-.post-page
+- unless @all_posts
   = render 'top-menu'
+
+- data = { title: @post.title, story: @post.story_title, url: @post.url }
+.post-page.page-content{ data: data }
   .paper
     - if @post.date
       .date-badge
@@ -17,11 +20,12 @@
     = @post.html
 
   - if @post.next
-    .next-post
-      %a( href="#{@post.next.url}" )
-        .border
-        .arrow ↓
-        .text
-          Следующая запись
+    - unless @all_posts
+      .next-post
+        %a( href="#{@post.next.url}" )
+          .border
+          .arrow ↓
+          .text
+            Следующая запись
   - else
     .to-be-continue Продолжение следует

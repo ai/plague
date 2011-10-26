@@ -1,4 +1,8 @@
-.title-page.page
+- unless @all_posts
+  - @hide_top_menu = true
+  = render 'top-menu'
+
+.title-page.page-content( data-url="/" )
   .book
     .book-wrap
       .bottom
@@ -9,7 +13,7 @@
       .title
         .head
         = @title.html
-      %a.open-badge.new( href="/say-and-relax.com/hero/awakening" role="start-reading" )
+      %a.open-badge.new( href="#{@first.url}" role="start-reading" )
         .border.no-right
         .gradient
         .crop-shadow

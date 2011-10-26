@@ -1,12 +1,15 @@
 .top-menu
-  position: fixed
-  top: 0
-  left: 0
-  right: 0
   height: 30px
-  background: black
-  +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
-  z-index: 50
+  background: $gray-background
+  .top-menu-fixed
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    height: 30px
+    background: black
+    +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
+    z-index: 50
   .center
     width: 760px
     margin: 0 auto
@@ -16,7 +19,18 @@
     width: 80px
     height: 20px
     position: relative
+    &.first
+      .prev.page
+        display: none
+      .prev.title
+        display: block
+    &.last
+      .next.page
+        display: none
+      .next.disabled
+        display: block
     .next, .prev
+      display: block
       position: absolute
       top: 5px
       color: white
@@ -26,20 +40,36 @@
       font-size: 20px
       text-decoration: none
       text-align: center
-      text-shadow: white 0 0
+      text-shadow: white 0 0 0
       +transition(text-shadow, 200ms)
+      &.disabled, &.disabled:hover
+        color: #888
+        text-shadow: white 0 0 0
       &:hover
         text-shadow: white 0 0 2px
     .prev
       left: 24px
+      &.title
+        display: none
     .next
       left: 44px
+      &.disabled
+        display: none
   .title
-    height: 100%
+    position: absolute
+    top: 0
+    left: 80px
+    right: 250px
+    height: 30px
     line-height: 29px
     font-size: 19px
     font-family: Philosopher, serif
     color: white
+    overflow: hidden
+    .top-title, .current-title, .bottom-title
+      height: 100%
+    .top-title
+      margin-top: -30px
   .subscribe-and-share
     float: right
     margin-right: -5px
@@ -105,7 +135,7 @@
     position: absolute
     top: 0
     right: 100%
-    margin-right: 30px
+    margin-right: 20px
     &.open .button, & .button:hover
       color: white
     .button
@@ -122,3 +152,6 @@
     .arrow
       left: auto
       right: 57px
+
+.top-menu.hidden .top-menu-fixed
+  top: -40px

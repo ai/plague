@@ -11,9 +11,9 @@ plague.on '.top-menu', ($, $$) ->
       slide.removeClass('open')
       $('body').unbind('click.hide-top-slide')
       after '200ms', -> slide.find('.content').hide()
-      plague.hash('') if location.hash == hash
+      plague.ext.hash('') if location.hash == hash
     else
-      plague.hash(hash)
+      plague.ext.hash(hash)
       $('body').trigger('click.hide-top-slide')
       slide.find('.content').show()
       link.data(opening: true)
