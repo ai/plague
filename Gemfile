@@ -17,7 +17,6 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
   gem 'therubyracer'
-  gem 'sassy_noise'
 end
 
 group :development do
