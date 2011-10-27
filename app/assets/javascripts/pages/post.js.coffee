@@ -3,6 +3,8 @@
 
 currentPost = prevPost = null
 
+recalculateScroll = ->
+
 plague.on '.post-page', ($, $$, postPage) ->
   currentPost = prevPost = postPage
   $(window).bind 'load', ->
@@ -14,12 +16,12 @@ plague.loader.ready ->
 
   currentPost = prevPost = $('.post-page:first') unless currentPost
   before = after = null
-  resize = ->
+  recalculateScroll = ->
     paper  = currentPost.find('.paper')
     before = paper.offset().top - (2 * $('.top-menu').height())
     after  = before + paper.outerHeight(true)
-  win.resize(resize)
-  resize()
+  win.resize(recalculateScroll)
+  recalculateScroll()
 
   win.bind 'scroll', ->
     return if plague.animation.animating
@@ -27,15 +29,11 @@ plague.loader.ready ->
     if x < before
       prev = currentPost.prev('.post-page:first')
       if prev.length
-        currentPost = prev
-        plague.loader.openUrl(currentPost.data('url'), 'scroll')
-        resize()
+        plague.loader.openUrl(prev.data('url'), 'scroll')
     else if x > after
       next = currentPost.next('.post-page:first')
       if next.length
-        currentPost = next
-        plague.loader.openUrl(currentPost.data('url'), 'scroll')
-        resize()
+        plague.loader.openUrl(next.data('url'), 'scroll')
 
 plague.live '.post-page', ($, $$, postPage) ->
 
@@ -77,3 +75,5 @@ plague.live '.post-page', ($, $$, postPage) ->
     prevNext.find('a.next.post').attr(href: next.data('url')) if next.length
 
     prevPost = postPage
+    currentPost = postPage
+    recalculateScroll()
