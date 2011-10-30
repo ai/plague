@@ -4,7 +4,7 @@ class Post
   URLS = { hero: 'say-and-relax.com/hero' }
 
   def self.story_root
-    Pathname(Rails.configuration.story['story_repo'])
+    Rails.root.join(Rails.configuration.story['story_repo'])
   end
 
   def self.by_file(filepath)
