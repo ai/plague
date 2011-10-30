@@ -22,4 +22,10 @@ end
 group :development do
   gem 'wirble'
   gem 'thin'
+  gem 'capistrano'
+  gem 'capistrano-unicorn'
+end
+
+group :production do
+  gem 'unicorn', require: false
 end
