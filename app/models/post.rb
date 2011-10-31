@@ -94,7 +94,9 @@ class Post
       posts = story_posts
       current = posts.find_index { |i| i == @filepath }
       return nil if current == posts.length - 1
-      self.class.by_file(posts[current + 1])
+
+      post = self.class.by_file(posts[current + 1])
+      post.draft? ? nil : post
     end
   end
 
@@ -103,7 +105,12 @@ class Post
   end
 
   def url
+    return '/' if @path == 'title'
     '/' + URLS[self.story_name] + '/' + self.name
+  end
+
+  def draft?
+    attrs['draft']
   end
 
   private

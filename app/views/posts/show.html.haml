@@ -4,9 +4,17 @@
   = render 'top-menu'
 
 - data = { title: @post.title, story: @post.story_title, url: @post.url }
+- data['draft'] = 1 if @post.draft?
 .post-page.page-content{ data: data }
   .paper
-    - if @post.date
+    - if @post.draft?
+      .draft-badge
+        .text
+          .rotated Черновик
+        .crop
+          .left-corner
+          .right-corner
+    - elsif @post.date
       .date-badge
         .year
           .hightlight( role="hightlight-year" )
@@ -28,4 +36,5 @@
           .text
             Следующая запись
   - else
-    .to-be-continue Продолжение следует
+    - unless @post.draft?
+      .to-be-continue Продолжение следует

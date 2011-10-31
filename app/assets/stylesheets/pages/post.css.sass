@@ -19,14 +19,45 @@
   p
     padding: 6px 0
 
-.post-page .date-badge
+.post-page .date-badge, .post-page .draft-badge
   position: absolute
-  top: 30px
   left: 25px
   width: 35px
   color: white
   text-align: center
   line-height: 1
+  .crop
+    height: 10px
+    overflow: hidden
+    position: relative
+  .left-corner, .right-corner
+    +box-shadow(rgba(0, 0, 0, 0.2) 0 0 5px)
+    height: 10px
+    position: absolute
+    top: -10px
+    width: 50px
+  .left-corner
+    left: -9px
+    +rotate(-25deg)
+  .right-corner
+    right: -9px
+    +rotate(25deg)
+
+.post-page .draft-badge
+  top: -1px
+  .text
+    height: 100px
+    text-shadow: rgba(0, 0, 0, 0.3) 0 1px 1px
+  .rotated
+    position: relative
+    +rotate(-90deg)
+    top: 60px
+    left: -2px
+  .text, .left-corner, .right-corner
+    background: #c00
+
+.post-page .date-badge
+  top: 30px
   .year
     background: #666
     font-size: 12px
@@ -54,23 +85,8 @@
   .day
     font-size: 18px
     padding-bottom: 6px
-  .crop
-    height: 10px
-    overflow: hidden
-    position: relative
   .left-corner, .right-corner
     background: #666
-    +box-shadow(rgba(0, 0, 0, 0.2) 0 0 5px)
-    height: 10px
-    position: absolute
-    top: -10px
-    width: 50px
-  .left-corner
-    left: -9px
-    +rotate(-25deg)
-  .right-corner
-    right: -9px
-    +rotate(25deg)
 
 .post-page .next-post
   width: 600px + 2 * 35px

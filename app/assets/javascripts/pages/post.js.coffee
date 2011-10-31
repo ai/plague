@@ -9,7 +9,7 @@ plague.on '.post-page', ($, $$, postPage) ->
   currentPost = prevPost = postPage
   $(window).bind 'load', ->
     immediate -> $(window).scrollTop(0)
-  plague.loader.start()
+  plague.loader.start() unless postPage.data('draft')
 
 plague.loader.ready ->
   win = $(window)

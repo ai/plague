@@ -17,6 +17,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.by_url params[:path]
+
+    draft = params[:draft]
+    raise Post::NotFound if @post.draft? and @post.attrs['draft'] != draft
   end
 
   private
