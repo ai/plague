@@ -30,10 +30,6 @@ class Post
     raise NotFound
   end
 
-  def self.first
-    self.new('hero/01')
-  end
-
   attr_reader :path, :source_code
 
   def initialize(path, file = nil)
@@ -82,6 +78,8 @@ class Post
 
   def prev
     @prev ||= begin
+      return self.class.new(attrs['prev']) if attrs['prev']
+
       posts = story_posts
       current = posts.find_index { |i| i == @filepath }
       return nil if current == 0
@@ -91,6 +89,8 @@ class Post
 
   def next
     @next ||= begin
+      return self.class.new(attrs['next']) if attrs['next']
+
       posts = story_posts
       current = posts.find_index { |i| i == @filepath }
       return nil if current == posts.length - 1

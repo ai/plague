@@ -23,6 +23,6 @@ class PostsController < ApplicationController
 
   def load_title
     @title = Post.new('title')
-    @first = Post.first
+    @first = @title.next
   end
 end
