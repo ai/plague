@@ -1,4 +1,4 @@
-worker_processes 12
+worker_processes 4
 
 listen "/home/ai/plague/shared/unicorn.sock", backlog: 64
 

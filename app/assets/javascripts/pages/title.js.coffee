@@ -45,6 +45,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
   # Закрытие книги
 
   titlePage.bind 'show-page', ->
+    $(window).scrollTop(0)
     plague.animation.start()
     plague.title()
     topMenu.animate(top: -40, 600)
