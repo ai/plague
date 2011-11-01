@@ -25,11 +25,23 @@
   %body.no-js
     :javascript
       document.body.className = 'js';
-      plague.detect3d()
+      plague.detect3d();
     .full-loader
       .center
         Загрузка…
         .ouroboros
     = yield
+    .old-browser-notice
+      В более современном браузере сайт гораздо удобнее.
+      Установите, например,
+      <a href="http://www.google.com/chrome?hl=ru">Google Chrome</a>.
+    .no3d-notice
+      .banner
+        .text 3D
+        .line
+      .description
+        В браузере с поддеркой 3D сайт будет красивее.
+        Например, можете скачайте
+        <a href="http://www.google.com/chrome?hl=ru">Google Chrome</a>.
     .disabled-js
       Если включить JavaScript, то сайт станет гораздо удобнее.

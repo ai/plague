@@ -1,0 +1,97 @@
+.disabled-js, .old-browser-notice
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  height: 30px
+  line-height: 30px
+  text-align: center
+  font-size: 14px
+  z-index: 102
+  +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
+
+.disabled-js
+  background: #af1109
+  color: white
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px
+  font-weight: bold
+body.js .disabled-js
+  display: none
+
+.old-browser-notice
+  display: none
+  background: black image-url("common/diagonal.png")
+  color: white
+  a
+    color: white
+    &:hover
+      text-decoration: none
+body.old-browser .old-browser-notice
+  display: block
+
+.no3d-notice .banner
+  position: fixed
+  bottom: 5px
+  left: 7px
+  font-weight: bold
+  font-size: 12px
+  width: 18px
+  height: 18px
+  line-height: 1
+  text-align: center
+  border: 2px solid #ccc
+  +border-radius(11px)
+  +box-shadow(#cc0000 0 0 0)
+  z-index: 101
+  cursor: default
+  &, .text, .line
+    +transition(all, 600ms)
+  .text
+    position: relative
+    z-index: 2
+    color: #888
+    line-height: 18px
+  .line
+    position: absolute
+    background: #ccc
+    width: 20px
+    height: 2px
+    position: absolute
+    left: -1px
+    top: 8px
+    +rotate(-45deg)
+  &.hightlighted
+    border-color: #cc0000
+    +box-shadow(#cc0000 0 0 3px)
+    .text
+      color: black
+    .line
+      background: #cc0000
+.no3d-notice .description
+  position: fixed
+  left: 0
+  background: black
+  color: white
+  bottom: -(22px + 10px + 7px)
+  height: 22px + 10px
+  line-height: 22px + 10px
+  +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
+  font-size: 15px
+  padding: 0 10px 0 37px
+  z-index: 100
+  +transition(bottom, 400ms)
+  a
+    color: white
+    &:hover
+      text-decoration: none
+.no3d-notice:hover
+  .banner
+    border-color: #888
+    .text
+      color: white
+    .line
+      background: #888
+  .description
+    bottom: 0
+body.transform3d .no3d-notice
+  display: none
