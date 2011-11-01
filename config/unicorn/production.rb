@@ -1,13 +1,17 @@
+shared_dir = '/home/ai/plague/shared'
+
 worker_processes 4
 
-listen "/home/ai/plague/shared/unicorn.sock", backlog: 64
+listen "#{shared_dir}/unicorn.sock", backlog: 64
 
 preload_app true
 
 timeout 30
 
-stderr_path "/home/ai/plague/shared/log/unicorn.stderr.log"
-stdout_path "/home/ai/plague/shared/log/unicorn.stdout.log"
+pid "#{shared_dir}/unicorn.pid"
+
+stderr_path "#{shared_dir}/log/unicorn.stderr.log"
+stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and
