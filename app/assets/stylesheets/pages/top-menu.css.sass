@@ -87,8 +87,8 @@
       height: 29px
       padding: 0 10px
       text-shadow: white 0 0 0
-      border: 1 solid black
       +box-shadow(white 0 0 13px -13px inset)
+      border-bottom: 1px solid black
       +transition(all, 200ms)
       &:hover
         text-shadow: white 0 0 2px
@@ -127,7 +127,7 @@
     &.open
       .button
         +box-shadow(white 0 -13px 13px -13px inset)
-        border-bottom: 1px solid white
+        border-bottom-color: white
         text-shadow: white 0 0 0
       .content
         opacity: 1

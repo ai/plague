@@ -1,15 +1,31 @@
 #= require jquery.cookie
 #= require core/loader
 
+startFromPost = false
+
 currentPost = prevPost = null
 
 recalculateScroll = ->
 
+hightlightYear = (delay) ->
+  return if $.cookie('hightlighted-year')
+  $.cookie('hightlighted-year', 1, expires: 365)
+
+  console.log(delay)
+  after delay, ->
+    console.log($('@hightlight-year'))
+    $('@hightlight-year').show().css(opacity: 0).
+      animate(opacity: 1, 400).
+      animate(opacity: 0, 2500, 'easeInQuad')
+
 plague.on '.post-page', ($, $$, postPage) ->
+  startFromPost = true
   currentPost = prevPost = postPage
-  $(window).bind 'load', ->
-    immediate -> $(window).scrollTop(0)
   plague.loader.start() unless postPage.data('draft')
+  $(window).bind 'load', ->
+    hightlightYear('300ms')
+    immediate ->
+      $(window).scrollTop(0)
 
 plague.loader.ready ->
   win = $(window)
@@ -37,9 +53,7 @@ plague.loader.ready ->
 
 plague.live '.post-page', ($, $$, postPage) ->
 
-  unless $.cookie('hightlighted-year')
-    $$('@hightlight-year').show().animate(opacity: 0, 2500, 'easeInQuad')
-    $.cookie('hightlighted-year', 1, expires: 365)
+  hightlightYear('2s') unless startFromPost
 
   postPage.bind 'show-page', (e, source) ->
     plague.title(postPage.data('title'), postPage.data('story'))
