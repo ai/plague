@@ -68,11 +68,11 @@ plague.live '.post-page', ($, $$, postPage) ->
 
     prev = postPage.prev('.post-page')
     prevNext.toggleClass('first', !prev.length)
-    prevNext.find('a.prev.post').attr(href: prev.data('url')) if prev.length
+    prevNext.find('a.prev.page').attr(href: prev.data('url')) if prev.length
 
     next = postPage.next('.post-page')
     prevNext.toggleClass('last', !next.length)
-    prevNext.find('a.next.post').attr(href: next.data('url')) if next.length
+    prevNext.find('a.next.page').attr(href: next.data('url')) if next.length
 
     prevPost = postPage
     currentPost = postPage
