@@ -30,6 +30,10 @@ class Post
     raise NotFound
   end
 
+  def self.update_repository!
+    `cd '#{self.story_root}'; git pull origin master`
+  end
+
   attr_reader :path, :source_code
 
   def initialize(path, file = nil)

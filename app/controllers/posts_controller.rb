@@ -22,6 +22,15 @@ class PostsController < ApplicationController
     raise Post::NotFound if @post.draft? and @post.attrs['draft'] != draft
   end
 
+  def update
+    if story['key'] == params['key']
+      Post.update_repository!
+      render text: 'updated'
+    else
+      render text: 'wrong key', status: :bad_request
+    end
+  end
+
   private
 
   def load_title
