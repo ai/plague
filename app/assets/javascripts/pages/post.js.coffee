@@ -8,13 +8,11 @@ currentPost = prevPost = null
 recalculateScroll = ->
 
 hightlightYear = (delay) ->
-  return if $.cookie('hightlighted-year')
-  $.cookie('hightlighted-year', 1, expires: 365)
-
-  after delay, ->
-    $('@hightlight-year').show().css(opacity: 0).
-      animate(opacity: 1, 400).
-      animate(opacity: 0, 2500, 'easeInQuad')
+  plague.ext.once 'hightlighted-year', ->
+    after delay, ->
+      $('@hightlight-year').show().css(opacity: 0).
+        animate(opacity: 1, 400).
+        animate(opacity: 0, 2500, 'easeInQuad')
 
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true

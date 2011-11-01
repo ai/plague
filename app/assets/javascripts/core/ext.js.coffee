@@ -16,3 +16,8 @@ plague.ext =
     return 'webkit' if $.browser.webkit
     return 'o'      if $.browser.opera
     return 'ms'     if $.browser.msie
+
+  once: (name, callback) ->
+    return if $.cookie(name) and location.hash != '#newvisit'
+    $.cookie(name, 1, expires: 365, path: '/')
+    callback()
