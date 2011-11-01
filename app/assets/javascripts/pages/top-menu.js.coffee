@@ -1,4 +1,23 @@
-plague.on '.top-menu', ($, $$) ->
+plague.on '.top-menu', ($, $$, topMenu) ->
+
+  fixed   = $$('.top-menu-fixed')
+  rotator = $$('.top-menu-rotator')
+
+  # Появление меню
+
+  topMenu.bind 'show-menu', ->
+    if plague.support.transform3d()
+      topMenu.removeClass('hidden')
+    else
+      fixed.show().animate(top: 0, 600)
+
+  # Сокрытие меню
+
+  topMenu.bind 'hide-menu', ->
+    if plague.support.transform3d()
+      topMenu.addClass('hidden')
+    else
+      fixed.animate(top: -40, 600, -> fixed.hide())
 
   # Выпадающие меню
 

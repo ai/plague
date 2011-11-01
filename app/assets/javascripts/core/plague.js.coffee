@@ -60,6 +60,10 @@ window.plague =
       else
         callback()
 
+   detect3d: ->
+    cls = if plague.support.transform3d() then 'transform3d' else 'transform2d'
+    $('body').addClass(cls)
+
   support:
 
     history: ->
@@ -70,3 +74,12 @@ window.plague =
         !!localStorage.getItem
       catch error
         false
+
+    _transform3d: ->
+      return false unless window.matchMedia?
+      result = matchMedia("all and (transform-3d)")
+      return true if result.matches
+      matchMedia("all and (-#{plague.ext.prefix()}-transform-3d)").matches
+
+    transform3d: ->
+      @transform3dCache ||= @_transform3d()

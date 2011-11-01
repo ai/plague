@@ -6,7 +6,7 @@ plague.on '.title-page', -> plague.loader.start()
 plague.live '.title-page', ($, $$, titlePage) ->
   title   = $$('.title')
   back    = $$('.back-side')
-  topMenu =  $('.top-menu-fixed')
+  topMenu =  $('.top-menu')
 
   # Шероховатость обложки
 
@@ -26,8 +26,12 @@ plague.live '.title-page', ($, $$, titlePage) ->
   # Открытие книги
 
   openBook = (callback) ->
-    title.animate(opacity: 0, 400)
-    back.fadeIn(400, callback)
+    if plague.support.transform3d()
+      titlePage.addClass('open-book')
+    else
+      title.animate(opacity: 0, 400)
+      back.fadeIn(400)
+    after '700ms', callback
 
   $$('@start-reading').click ->
     unless plague.loader.loaded
@@ -38,9 +42,8 @@ plague.live '.title-page', ($, $$, titlePage) ->
     plague.animation.start()
     $('.post-page').show()
     openBook ->
-      after '300ms', ->
-        topMenu.animate(top: 0, 600)
-        titlePage.fadeOut(600, -> plague.animation.end())
+      topMenu.trigger('show-menu')
+      titlePage.fadeOut(600, -> plague.animation.end())
 
   # Закрытие книги
 
@@ -48,9 +51,20 @@ plague.live '.title-page', ($, $$, titlePage) ->
     $(window).scrollTop(0)
     plague.animation.start()
     plague.title()
-    topMenu.animate(top: -40, 600)
+
+    if plague.support.transform3d()
+      titlePage.addClass('open-book')
+    else
+      title.css(opacity: 0)
+      back.show()
+
+    topMenu.trigger('hide-menu')
     titlePage.fadeIn 600, ->
-      after '300ms', ->
-        title.animate(opacity: 1, 400)
-        back.fadeOut(400, -> plague.animation.end())
-        $('.post-page').hide()
+      if plague.support.transform3d()
+        titlePage.removeClass('open-book')
+        after '500ms', -> plague.animation.end()
+      else
+        after '300ms', ->
+          title.animate(opacity: 1, 400)
+          back.fadeOut(400, -> plague.animation.end())
+      $('.post-page').hide()

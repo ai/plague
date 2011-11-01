@@ -17,6 +17,7 @@ $title-height: 1.4 * $title-width
     padding: 10px 0
   .book-wrap
     position: relative
+    height: $title-height
   .bottom
     position: absolute
     top: 11px
@@ -42,11 +43,16 @@ $title-height: 1.4 * $title-width
       z-index: #{14 - $i}
   .page1
     +box-shadow(rgba(0, 0, 0, 0.1) 15px 0 15px -15px inset)
+  .rotator
+    position: absolute
+    left: -$title-width
+    width: 2 * $title-width
+    height: $title-height
   .back-side
-    width: 100%
+    width: $title-width
     height: $title-height - 2px
     position: absolute
-    left: -100%
+    left: 0
     background: #f8f8f8
     border: 1px solid #cfcfcf
     border-right-color: #e8e8e8
@@ -62,10 +68,11 @@ $title-height: 1.4 * $title-width
       background: white
       +box-shadow(rgba(0, 0, 0, 0.1) -7px 0 7px -7px inset)
   .title
-    width: 100%
+    width: $title-width
     height: $title-height - 2px
     background: white
     position: relative
+    left: $title-width
     border: 1px solid #cfcfcf
     z-index: 2
     +border-left-radius(4px)
@@ -169,3 +176,35 @@ $title-height: 1.4 * $title-width
         +box-shadow(rgba(0, 0, 0, 0.4) 0 0 5px)
     &.new
       top: 160px
+
+.transform3d .title-page
+  +perspective(2000px)
+  .rotator
+    z-index: 30
+    +transition(all, 500ms)
+  .title, .back-side
+    +backface-visibility(hidden)
+    left: $title-width
+  .title
+    position: absolute
+  .back-side
+    display: block
+    +rotateY(180deg)
+  .back-side-shadow, .title-light
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    +transition(background, 500ms)
+  .back-side-shadow
+    background: rgba(0, 0, 0, 0.06)
+  .title-light
+    background: rgba(255, 255, 255, 0)
+  &.open-book
+    .rotator
+      +rotateY(-180deg)
+    .back-side-shadow
+      background: rgba(0, 0, 0, 0)
+    .title-light
+      background: rgba(255, 255, 255, 0.5)

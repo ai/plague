@@ -104,8 +104,12 @@ class Post
     File.dirname(@path).to_sym
   end
 
+  def title?
+    @path == 'title'
+  end
+
   def url
-    return '/' if @path == 'title'
+    return '/' if self.title?
     '/' + URLS[self.story_name] + '/' + self.name
   end
 
