@@ -11,9 +11,7 @@ hightlightYear = (delay) ->
   return if $.cookie('hightlighted-year')
   $.cookie('hightlighted-year', 1, expires: 365)
 
-  console.log(delay)
   after delay, ->
-    console.log($('@hightlight-year'))
     $('@hightlight-year').show().css(opacity: 0).
       animate(opacity: 1, 400).
       animate(opacity: 0, 2500, 'easeInQuad')
@@ -41,6 +39,7 @@ plague.loader.ready ->
 
   win.bind 'scroll', ->
     return if plague.animation.animating
+    return if location.pathname == '/'
     x = win.scrollTop()
     if x < before
       prev = currentPost.prev('.post-page:first')
