@@ -2,11 +2,17 @@ plague.loader =
 
     loaded: false
 
+    loading: false
+
     isSupported: ->
       plague.support.history() and plague.support.localStore()
 
     start: ->
       return unless @isSupported()
+
+      return if @loading
+      @loading = true
+
       $(window).bind 'load', ->
         after '0.5s', -> plague.loader._load()
 
