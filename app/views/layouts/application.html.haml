@@ -8,12 +8,16 @@
 
     = favicon_link_tag
     = enable_html5_for_ie
-    = stylesheet_link_tag :quick
-    = stylesheet_link_tag :application
+    - if Rails.env.production?
+      :css
+        #{Rails.root.join('public/assets/quick.css').read}
+    - else
+      = stylesheet_link_tag :quick
+    = stylesheet_link_tag :application, media: :all, type: nil
     = include_fonts
 
     = include_jquery
-    = javascript_include_tag :application
+    = javascript_include_tag :application, type: nil
 
     = yield :head
 

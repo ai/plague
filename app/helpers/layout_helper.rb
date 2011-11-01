@@ -7,7 +7,7 @@ module LayoutHelper
     else
       url = 'development/jquery-1.6.4.js'
     end
-    javascript_include_tag(url)
+    javascript_include_tag(url, type: nil)
   end
 
   def enable_html5_for_ie
@@ -17,10 +17,10 @@ module LayoutHelper
   end
 
   def include_fonts
-    stylesheet_link_tag(
-      '//fonts.googleapis.com/css?family=Philosopher&subset=cyrillic') +
-    stylesheet_link_tag(
-      '//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic,latin')
+    ['//fonts.googleapis.com/css?family=Philosopher&subset=cyrillic',
+     '//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic,latin'].
+      map { |i| stylesheet_link_tag(i, media: 'all', type: nil) }.
+      join("\n").html_safe
   end
 
   def title(*titles)
