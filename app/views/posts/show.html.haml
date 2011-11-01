@@ -5,7 +5,7 @@
 
 - data = { title: @post.title, story: @post.story_title, url: @post.url }
 - data['draft'] = 1 if @post.draft?
-%article.post-page.page-content{ data: data }
+%article.post-page{ data: data }
   .paper
     - if @post.draft?
       .draft-badge

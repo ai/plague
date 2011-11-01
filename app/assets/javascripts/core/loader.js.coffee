@@ -36,12 +36,12 @@ plague.loader =
       $.get '/posts', (html) =>
         plague.loader.loaded = true
 
-        current = $('.page-content')
+        current = $('article')
         before  = $('<div class="loaded-before" />')
         after   = $('<div class="loaded-after" />')
 
         beforeCurrent = true
-        for page in $(html).filter('.page-content')
+        for page in $(html).filter('article')
           if beforeCurrent
             if $(page).data('url') != current.data('url')
               before.append(page)
@@ -84,7 +84,7 @@ plague.loader =
       return if url == @_lastUrl
       @_lastUrl = url
 
-      page = $(".page-content[data-url='#{url}']")
+      page = $("article[data-url='#{url}']")
       if page.length
         plague.animation.wait ->
           page.trigger('show-page', data)
