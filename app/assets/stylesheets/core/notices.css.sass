@@ -22,6 +22,7 @@ body.js .disabled-js
   display: none
   background: black image-url("common/diagonal.png")
   color: white
+  text-shadow: black 1px 1px 1px
   a
     color: white
     &:hover
@@ -41,7 +42,7 @@ body.old-browser .old-browser-notice
   text-align: center
   border: 2px solid #ccc
   +border-radius(11px)
-  +box-shadow(#cc0000 0 0 0)
+  +box-shadow($red 0 0 0)
   z-index: 101
   cursor: default
   &, .text, .line
@@ -61,23 +62,24 @@ body.old-browser .old-browser-notice
     top: 8px
     +rotate(-45deg)
   &.hightlighted
-    border-color: #cc0000
-    +box-shadow(#cc0000 0 0 3px)
+    border-color: $red
+    +box-shadow($red 0 0 3px)
     .text
-      color: black
+      color: $red
     .line
-      background: #cc0000
+      background: $red
 .no3d-notice .description
   position: fixed
   left: 0
-  background: black
+  background: black image-url("common/diagonal.png")
   color: white
+  text-shadow: black 1px 1px 1px
   bottom: -(22px + 10px + 7px)
   height: 22px + 10px
   line-height: 22px + 10px
   +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
-  font-size: 15px
-  padding: 0 10px 0 37px
+  font-size: 14px
+  padding: 0 15px 0 37px
   z-index: 100
   +transition(bottom, 400ms)
   a
