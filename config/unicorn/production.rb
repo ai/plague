@@ -1,14 +1,13 @@
 shared_dir = '/home/ai/plague/shared'
 
-worker_processes 4
-
+pid    "#{shared_dir}/pids/unicorn.pid"
 listen "#{shared_dir}/unicorn.sock", backlog: 64
 
+worker_processes 4
 preload_app true
-
 timeout 30
 
-pid "#{shared_dir}/pids/unicorn.pid"
+set :use_sudo, false
 
 stderr_path "#{shared_dir}/log/unicorn.stderr.log"
 stdout_path "#{shared_dir}/log/unicorn.stdout.log"
