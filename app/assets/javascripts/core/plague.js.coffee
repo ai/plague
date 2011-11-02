@@ -64,6 +64,23 @@ window.plague =
     cls = if plague.support.transform3d() then 'transform3d' else 'transform2d'
     $('body').addClass(cls)
 
+  storage: (key, value) ->
+    if typeof(key) == 'object'
+      for name, value of key
+        plague.storage(name, value)
+    else
+      if value == undefined
+        if plague.support.localStore()
+          localStorage.getItem(key)
+        else
+          $.cookie(key)
+      else
+        if plague.support.localStore()
+          if value == null
+            localStorage.removeItem(key)
+          else
+            localStorage.setItem(key, value)
+
   support:
 
     history: ->

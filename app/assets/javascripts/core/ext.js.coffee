@@ -18,14 +18,7 @@ plague.ext =
     return 'ms'     if $.browser.msie
 
   once: (name, callback) ->
-    if plague.support.localStore()
-      remember = localStorage.getItem("once-#{name}")
-    else
-      remember = $.cookie(name)
-    return if remember and location.hash != '#newvisit'
-
-    if plague.support.localStore()
-      localStorage.setItem("once-#{name}", 1)
-    else
-      $.cookie(name, 1, expires: 365, path: '/')
+    name = "once-#{name}"
+    return if plague.storage(name) and location.hash != '#newvisit'
+    plague.storage(name, 1)
     callback()
