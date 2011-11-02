@@ -220,7 +220,7 @@ $title-height: 1.4 * $title-width
   .back-side
     display: block
     +rotateY(180deg)
-  .back-side-shadow, .title-light
+  .back-side-shadow
     position: absolute
     top: 0
     right: 0
@@ -229,12 +229,8 @@ $title-height: 1.4 * $title-width
     +transition(background, 500ms)
   .back-side-shadow
     background: rgba(0, 0, 0, 0.06)
-  .title-light
-    background: rgba(255, 255, 255, 0)
   &.open-book
     .rotator
       +rotateY(-180deg)
     .back-side-shadow
       background: rgba(0, 0, 0, 0)
-    .title-light
-      background: rgba(255, 255, 255, 0.5)
