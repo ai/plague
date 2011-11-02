@@ -5,6 +5,8 @@ set :scm, :git
 set :deploy_to, "/home/ai/#{application}"
 set :domain,    "46.182.27.210"
 
+set :use_sudo, false
+
 role :app, domain
 role :web, domain
 

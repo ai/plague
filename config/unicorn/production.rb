@@ -7,8 +7,6 @@ worker_processes 4
 preload_app true
 timeout 30
 
-set :use_sudo, false
-
 stderr_path "#{shared_dir}/log/unicorn.stderr.log"
 stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 
