@@ -60,9 +60,13 @@ window.plague =
       else
         callback()
 
-   detect3d: ->
-    cls = if plague.support.transform3d() then 'transform3d' else 'transform2d'
-    $('body').addClass(cls)
+   initBodyClasses: ->
+    classes  = 'js '
+    classes += if plague.support.transform3d()
+      ' transform3d'
+    else
+      ' transform2d'
+    $('body').removeClass('no-js').addClass(classes)
 
   storage: (key, value) ->
     if typeof(key) == 'object'

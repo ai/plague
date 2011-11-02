@@ -28,8 +28,7 @@
     = "<!-- #{hash} -->".html_safe
   %body.no-js
     :javascript
-      document.body.className = 'js';
-      plague.detect3d();
+      plague.initBodyClasses();
     .full-loader
       .center
         Загрузка…
