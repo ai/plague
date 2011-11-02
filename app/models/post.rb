@@ -1,7 +1,8 @@
 class Post
   class NotFound < StandardError; end
 
-  URLS = { hero: 'say-and-relax.com/hero' }
+  CACHE = { }
+  URLS  = { hero: '/say-and-relax.com/hero' }
 
   def self.story_root
     Rails.root.join(Rails.configuration.story['story_repo'])
@@ -10,7 +11,7 @@ class Post
   def self.by_file(filepath)
     path = Pathname(filepath).relative_path_from(self.story_root).
       to_s.gsub(/\.md$/, '')
-    self.new(path)
+    self.by_path(path)
   end
 
   def self.by_url(url)
@@ -23,23 +24,31 @@ class Post
     name = name[1]
 
     Dir.glob(story_root.join(story, '*.md')) do |file|
-      post = Post.new(story, File.basename(file, '.md'))
+      post = self.by_path(story, File.basename(file, '.md'))
       return post if post.name == name
     end
 
     raise NotFound
   end
 
+  def self.title
+    self.by_path('title')
+  end
+
   def self.update_repository!
     `cd '#{self.story_root}'; git pull origin master`
   end
 
+  def self.by_path(path, file = nil)
+    path += '/' + file if file
+    CACHE[path] ||= self.new(path)
+  end
+
   attr_reader :path, :source_code
 
-  def initialize(path, file = nil)
-    path += '/' + file if file
-    @path = path
-    @filepath = self.class.story_root.join(path + '.md')
+  def initialize(path)
+    @path        = path
+    @filepath    = self.class.story_root.join(path + '.md')
     @source_code = @filepath.read
   end
 
@@ -82,7 +91,7 @@ class Post
 
   def prev
     @prev ||= begin
-      return self.class.new(attrs['prev']) if attrs['prev']
+      return self.class.by_path(attrs['prev']) if attrs['prev']
 
       posts = story_posts
       current = posts.find_index { |i| i == @filepath }
@@ -93,7 +102,7 @@ class Post
 
   def next
     @next ||= begin
-      return self.class.new(attrs['next']) if attrs['next']
+      return self.class.by_path(attrs['next']) if attrs['next']
 
       posts = story_posts
       current = posts.find_index { |i| i == @filepath }
@@ -114,7 +123,7 @@ class Post
 
   def url
     return '/' if self.title?
-    '/' + URLS[self.story_name] + '/' + self.name
+    URLS[self.story_name] + '/' + self.name
   end
 
   def draft?

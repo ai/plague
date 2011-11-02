@@ -103,9 +103,38 @@ $title-height: 1.4 * $title-width
     strong
       display: block
       font-weight: bold
+  .wait, .restart
+    position: absolute
+    margin-left: 22px
+    width: 140px
+    text-align: center
+    font-size: 15px
+    text-shadow: white 1px 1px 1px
+    .or
+      font-size: 14px
+    a
+      color: $red
+      &:hover
+        text-decoration: none
+  .wait
+    top: 120px
+    left: 100%
+    .wait-title
+      font-size: 20px
+      margin-bottom: 23px
+    .or
+      margin: 5px 0 4px 0
+  .restart
+    top: 199px
+    left: 100%
+    .or
+      margin-bottom: 7px
+    &.with-new-post
+      width: 157px
   .open-badge
     display: block
     position: absolute
+    top: 160px
     left: 100%
     margin-left: -250px
     height: 30px
@@ -113,8 +142,11 @@ $title-height: 1.4 * $title-width
     color: white
     text-shadow: rgba(0, 0, 0, 0.5) 0 1px 0
     text-decoration: none
-    z-index: 14
+    z-index: 13
     padding: 0 6px 0 262px
+    &.continue
+      z-index: 6
+      margin-left: -243px
     &, .arrow
       background: $red
       +transition(background, 200ms, linear)
@@ -174,8 +206,6 @@ $title-height: 1.4 * $title-width
     &:active
       .shadow, .arrow
         +box-shadow(rgba(0, 0, 0, 0.4) 0 0 5px)
-    &.new
-      top: 160px
 
 .transform3d .title-page
   +perspective(2000px)

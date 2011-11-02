@@ -16,12 +16,27 @@
           .head
           = @title.html
           .title-light
-      %a.open-badge.new( href="#{@first.url}" role="start-reading" )
-        .border.no-right
-        .gradient
-        .crop-shadow
-          .shadow
-        .crop-arrow
-          .arrow
-            .border
-        Начать чтение
+      - if @reading and (@reading != @first or @new_post)
+        - if @reading_last
+          - if @new_post
+            = open_badge 'Открыть новую главу', @reading.next, :continue
+            .restart.with-new-post
+              .or или
+              %a( href="#{@first.url}" role="open-book" )
+                начать сначала
+          - else
+            .wait
+              .wait-title Продолжение скоро выйдет
+              %a( href="#{@reading.url}" role="open-book" )
+                последняя глава
+              .or или
+              %a( href="#{@first.url}" role="open-book" )
+                начать сначала
+        - else
+          = open_badge 'Продолжить чтение', @reading, :continue
+          .restart
+            .or или
+            %a( href="#{@first.url}" role="open-book" )
+              начать сначала
+      - else
+        = open_badge 'Начать чтение', @first, :start

@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.by_url params[:path]
+    @post = Post.by_url("/#{params[:path]}")
 
     draft = params[:draft]
     raise Post::NotFound if @post.draft? and @post.attrs['draft'] != draft
@@ -34,7 +34,18 @@ class PostsController < ApplicationController
   private
 
   def load_title
-    @title = Post.new('title')
+    @title = Post.title
     @first = @title.next
+    if cookies[:reading] and not @all_posts
+      begin
+        logger.debug cookies[:reading].inspect
+        @reading      = Post.by_url(cookies[:reading])
+        @reading_last = cookies['reading-last']
+        @new_post     = @reading.next if @reading_last
+      rescue Post::NotFound
+        cookies.delete('reading')
+        cookies.delete('reading-last')
+      end
+    end
   end
 end

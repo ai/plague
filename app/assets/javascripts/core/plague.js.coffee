@@ -84,6 +84,8 @@ window.plague =
             localStorage.removeItem(key)
           else
             localStorage.setItem(key, value)
+        else
+          $.cookie(key, value, expires: 365, path: '/')
 
   support:
 

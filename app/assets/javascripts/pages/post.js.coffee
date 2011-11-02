@@ -14,14 +14,22 @@ hightlightYear = (delay) ->
         animate(opacity: 1, 400).
         animate(opacity: 0, 2500, 'easeInQuad')
 
+rememberReading = (post) ->
+  return if post.data('draft')
+  last = post.hasClass('last-post')
+  $.cookie('reading', post.data('url'), expires: 365, path: '/')
+  $.cookie('reading-last', (if last then 1 else null), expires: 365, path: '/')
+
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true
   currentPost = prevPost = postPage
-  plague.loader.start() unless postPage.data('draft')
   $(window).bind 'load', ->
     hightlightYear('300ms')
     immediate ->
       $(window).scrollTop(0)
+
+  rememberReading(postPage)
+  plague.loader.start() unless postPage.data('draft')
 
 plague.loader.ready ->
   win = $(window)
@@ -60,11 +68,12 @@ plague.live '.post-page', ($, $$, postPage) ->
     topMenu  = $('.top-menu')
     prevNext = topMenu.find('.prev-next')
 
-    if source != 'scroll'
-      plague.animation.start()
-      top = postPage.offset().top - topMenu.height()
-      $('html, body').stop().animate scrollTop: top, 400, ->
-        plague.animation.end()
+    plague.animation.wait ->
+      if source != 'scroll'
+        plague.animation.start()
+        top = postPage.offset().top - topMenu.height()
+        $('html, body').stop().animate scrollTop: top, 400, ->
+          plague.animation.end()
 
     topTitle = topMenu.find('.current-title')
     slider   = topMenu.find('.top-title')
@@ -85,6 +94,8 @@ plague.live '.post-page', ($, $$, postPage) ->
     prevNext.toggleClass('last', !next.length)
     prevNext.find('a.next.page').attr(href: next.data('url')) if next.length
 
-    prevPost = postPage
+    prevPost    = postPage
     currentPost = postPage
     recalculateScroll()
+
+    rememberReading(postPage)

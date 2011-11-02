@@ -63,6 +63,7 @@ plague.loader =
             height += $(el).outerHeight()
           $(window).scrollTop(beforeScroll + height)
 
+        $('body').addClass('all-posts')
         @_watchUrl()
 
         for callack in @_readyCallbacks
