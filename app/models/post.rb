@@ -35,8 +35,12 @@ class Post
     self.by_path('title')
   end
 
+  def self.git(command)
+    `cd '#{self.story_root}'; git #{command}`
+  end
+
   def self.update_repository!
-    `cd '#{self.story_root}'; git pull origin master`
+    git 'pull origin master'
   end
 
   def self.by_path(path, file = nil)
@@ -128,6 +132,16 @@ class Post
 
   def draft?
     attrs['draft']
+  end
+
+  def updated_at
+    return @updated_at if @updated_at
+    time = self.class.git "log -1 --date=iso --pretty=format:%cD #{@filepath}"
+    if time.present?
+      @updated_at = Time.parse(time).utc
+    else
+      Time.now.utc
+    end
   end
 
   private

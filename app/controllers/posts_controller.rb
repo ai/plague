@@ -15,6 +15,17 @@ class PostsController < ApplicationController
     render :text => html
   end
 
+  def feed
+    @posts = []
+    post   = Post.title.next
+    while post
+      @posts << post
+      post = post.next
+    end
+    Haml::Template.options[:format] = :xhtml
+    render layout: false
+  end
+
   def show
     @post = Post.by_url("/#{params[:path]}")
 
@@ -38,7 +49,6 @@ class PostsController < ApplicationController
     @first = @title.next
     if cookies[:reading] and not @all_posts
       begin
-        logger.debug cookies[:reading].inspect
         @reading      = Post.by_url(cookies[:reading])
         @reading_last = cookies['reading-last']
         @new_post     = @reading.next if @reading_last

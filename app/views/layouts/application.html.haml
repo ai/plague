@@ -19,6 +19,8 @@
     = include_jquery
     = javascript_include_tag :application, type: nil
 
+    %link( rel="alternate" type="application/atom+xml" href="/posts.atom" )
+
     = yield :head
 
     - if Rails.env.production?
