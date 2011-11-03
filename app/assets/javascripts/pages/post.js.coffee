@@ -24,11 +24,11 @@ changeTopTitle = (title, isNext) ->
   slider   = $('@title-slider')
   height   = slider.height()
   if isNext
-    $('@prev-title-top').text(topTitle.text())
-    slider.stop().css(marginTop: 0).animate(marginTop: -height, 400)
-  else
     $('@prev-title-bottom').text(topTitle.text())
     slider.stop().css(marginTop: -2 * height).animate(marginTop: -height, 400)
+  else
+    $('@prev-title-top').text(topTitle.text())
+    slider.stop().css(marginTop: 0).animate(marginTop: -height, 400)
   topTitle.text(title)
 
 changePrev = (prev) ->

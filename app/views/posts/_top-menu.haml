@@ -1,7 +1,11 @@
 %header.top-menu{ class_if('hidden', @hide_top_menu), role: 'top-menu-slider' }
   .top-menu-rotator( role="top-menu-rotator" )
     .center
-
+      %a.story-title( href="/" role="home" )= story['title']
+      .post-title
+        .top-title( role="prev-title-top title-slider" )
+        .current-title( role="current-title" )= @post.try(:title)
+        .bottom-title( role="prev-title-bottom" )
       .slide-button.what-is-it
         %a.button( role="top-menu-open" href="#what-is-it" ) Что это такое?
         .content
@@ -34,7 +38,3 @@
         %a.prev.to-title( title="Обложка" href="#{root_path}" ) ↑
         %a.next.to-page( title="Следующая запись" href="#{nextPage.try(:url)}" role="next-page" ) ↓
         .next.waiting( title="Продолжение следует" ) ↓
-      .title
-        .top-title( role="prev-title-top title-slider" )
-        .current-title( role="current-title" )= @post.try(:title)
-        .bottom-title( role="prev-title-bottom" )
