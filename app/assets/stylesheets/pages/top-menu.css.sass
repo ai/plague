@@ -1,12 +1,10 @@
 .top-menu
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 50
   height: 30px
-  background: $gray-background
-  .top-menu-fixed
-    position: fixed
-    top: 0
-    left: 0
-    right: 0
-    z-index: 50
   .top-menu-rotator
     height: 30px
     background: black
@@ -21,14 +19,14 @@
     height: 20px
     position: relative
     &.first
-      .prev.page
+      .prev.to-page
         display: none
-      .prev.title
+      .prev.to-title
         display: block
     &.last
-      .next.page
+      .next.to-page
         display: none
-      .next.disabled
+      .next.waiting
         display: block
     .next, .prev
       display: block
@@ -43,18 +41,18 @@
       text-align: center
       text-shadow: white 0 0 0
       +transition(text-shadow, 200ms)
-      &.disabled, &.disabled:hover
+      &.waiting, &.waiting:hover
         color: #888
         text-shadow: white 0 0 0
       &:hover
         text-shadow: white 0 0 2px
     .prev
       left: 24px
-      &.title
+      &.to-title
         display: none
     .next
       left: 44px
-      &.disabled
+      &.waiting
         display: none
   .title
     position: absolute
@@ -68,7 +66,7 @@
     color: white
     overflow: hidden
     .top-title, .current-title, .bottom-title
-      height: 100%
+      height: 30px
     .top-title
       margin-top: -30px
   .subscribe-and-share
@@ -155,8 +153,7 @@
       right: 57px
 
 .transform3d .top-menu
-  .top-menu-fixed
-    +perspective(2000px)
+  +perspective(2000px)
   &.hidden .top-menu-rotator
     +rotateX(90deg)
   .top-menu-rotator
@@ -165,6 +162,6 @@
     top: -32px
     +transition(all, 600ms)
 
-.transform2d .top-menu.hidden .top-menu-fixed
+.transform2d .top-menu.hidden
   top: -40px
   display: none

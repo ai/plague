@@ -1,41 +1,40 @@
-%header.top-menu{ class_if('hidden', @hide_top_menu) }
-  .top-menu-fixed
-    .top-menu-rotator
-      .center
+%header.top-menu{ class_if('hidden', @hide_top_menu), role: 'top-menu-slider' }
+  .top-menu-rotator( role="top-menu-rotator" )
+    .center
 
-        .slide-button.what-is-it
-          %a.button( href="#what-is-it" ) Что это такое?
+      .slide-button.what-is-it
+        %a.button( role="top-menu-open" href="#what-is-it" ) Что это такое?
+        .content
+          .arrow
+            .rotated
+          %p
+            «Инсомнис» — книга в формате блога.
+          %p
+            Герой из фантастического мира пишет дневник
+            прямо по ходу развития событий.
+          %p
+            Вы можете написать комментарий герою или автору.
+      .subscribe-and-share
+        .slide-button.subscribe
+          %a.button( role="top-menu-open" href="#subscribe" ) Подписаться
           .content
             .arrow
               .rotated
-            %p
-              «Инсомнис» — книга в формате блога.
-            %p
-              Герой из фантастического мира пишет дневник
-              прямо по ходу развития событий.
-            %p
-              Вы можете написать комментарий герою или автору.
-        .subscribe-and-share
-          .slide-button.subscribe
-            %a.button( href="#subscribe" ) Подписаться
-            .content
-              .arrow
-                .rotated
-          .slide-button.share
-            %a.button( href="#share" ) Расскажи друзьям
-            .content
-              .arrow
-                .rotated
+        .slide-button.share
+          %a.button( role="top-menu-open" href="#share" ) Расскажи друзьям
+          .content
+            .arrow
+              .rotated
 
-        - prevPage = @post.try(:prev)
-        - nextPage = @post.try(:next)
-        - isFirst  = prevPage.nil? or prevPage.title?
-        .prev-next{ class_if('first', isFirst), class_if('last', !nextPage) }
-          %a.prev.page( title="Предыдущая запись" href="#{prevPage.try(:url)}" ) ↑
-          %a.prev.title( title="Обложка" href="#{root_path}" ) ↑
-          %a.next.page( title="Следующая запись" href="#{nextPage.try(:url)}" ) ↓
-          .next.disabled( title="Продолжение следует" ) ↓
-        .title
-          .top-title
-          .current-title= @post.try(:title)
-          .bottom-title
+      - prevPage = @post.try(:prev)
+      - nextPage = @post.try(:next)
+      - isFirst  = prevPage.nil? or prevPage.title?
+      .prev-next{ class_if('first', isFirst), class_if('last', !nextPage), :role => 'prev-next-page' }
+        %a.prev.to-page( title="Предыдущая запись" href="#{prevPage.try(:url)}" role="prev-page" ) ↑
+        %a.prev.to-title( title="Обложка" href="#{root_path}" ) ↑
+        %a.next.to-page( title="Следующая запись" href="#{nextPage.try(:url)}" role="next-page" ) ↓
+        .next.waiting( title="Продолжение следует" ) ↓
+      .title
+        .top-title( role="prev-title-top title-slider" )
+        .current-title( role="current-title" )= @post.try(:title)
+        .bottom-title( role="prev-title-bottom" )

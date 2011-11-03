@@ -2,8 +2,7 @@
 #= require core/loader
 
 startFromPost = false
-
-currentPost = prevPost = null
+currentPost   = prevPost = null
 
 recalculateScroll = ->
 
@@ -20,9 +19,29 @@ rememberReading = (post) ->
   $.cookie('reading', post.data('url'), expires: 365, path: '/')
   $.cookie('reading-last', (if last then 1 else null), expires: 365, path: '/')
 
+changeTopTitle = (title, isNext) ->
+  topTitle = $('@current-title')
+  slider   = $('@title-slider')
+  height   = slider.height()
+  if isNext
+    $('@prev-title-top').text(topTitle.text())
+    slider.stop().css(marginTop: 0).animate(marginTop: -height, 400)
+  else
+    $('@prev-title-bottom').text(topTitle.text())
+    slider.stop().css(marginTop: -2 * height).animate(marginTop: -height, 400)
+  topTitle.text(title)
+
+changePrev = (prev) ->
+  $('@prev-next-page').toggleClass('first', !prev.length)
+  $('@prev-page').attr(href: prev.data('url')) if prev.length
+
+changeNext = (next) ->
+  $('@prev-next-page').toggleClass('last', !next.length)
+  $('@next-page').attr(href: next.data('url')) if next.length
+
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true
-  currentPost = prevPost = postPage
+  currentPost   = prevPost = postPage
   $(window).bind 'load', ->
     hightlightYear('300ms')
     immediate ->
@@ -31,15 +50,16 @@ plague.on '.post-page', ($, $$, postPage) ->
   rememberReading(postPage)
   plague.loader.start() unless postPage.data('draft')
 
+# Переключение постов по скроллу
+
 plague.loader.ready ->
   win = $(window)
 
   currentPost = prevPost = $('.post-page:first') unless currentPost
   before = after = null
   recalculateScroll = ->
-    paper  = currentPost.find('.paper')
-    before = paper.offset().top - (2 * $('.top-menu').height())
-    after  = before + paper.outerHeight(true)
+    before = currentPost.offset().top - $('.top-menu').height()
+    after  = before + currentPost.outerHeight(true)
   win.resize(recalculateScroll)
   recalculateScroll()
 
@@ -57,11 +77,14 @@ plague.loader.ready ->
         plague.loader.openUrl(next.data('url'), 'scroll')
 
 plague.live '.post-page', ($, $$, postPage) ->
-
   hightlightYear('2s') unless startFromPost
 
+  # Открытие поста
+
   postPage.bind 'show-page', (e, source) ->
-    plague.title(postPage.data('title'), postPage.data('story'))
+    currentPost = postPage
+
+    plague.title(postPage.data('title'), currentPost.data('story'))
     titlePage = $('.title-page')
     titlePage.trigger('hide-page') if titlePage.is(':visible')
 
@@ -71,31 +94,15 @@ plague.live '.post-page', ($, $$, postPage) ->
     plague.animation.wait ->
       if source != 'scroll'
         plague.animation.start()
-        top = postPage.offset().top - topMenu.height()
+        top = postPage.offset().top - topMenu.height() + 30
         $('html, body').stop().animate scrollTop: top, 400, ->
           plague.animation.end()
 
-    topTitle = topMenu.find('.current-title')
-    slider   = topMenu.find('.top-title')
-    height   = topMenu.height()
-    if postPage.nextAll('.post-page').is(prevPost)
-      topMenu.find('.bottom-title').text(topTitle.text())
-      slider.stop().css(marginTop: -2 * height).animate(marginTop: -height, 400)
-    else
-      topMenu.find('.top-title').text(topTitle.text())
-      slider.stop().css(marginTop: 0).animate(marginTop: -height, 400)
-    topTitle.text(postPage.data('title'))
+    changePrev(prev = postPage.prev('.post-page'))
+    changeNext(next = postPage.next('.post-page'))
+    changeTopTitle(postPage.data('title'), next.is(prevPost))
 
-    prev = postPage.prev('.post-page')
-    prevNext.toggleClass('first', !prev.length)
-    prevNext.find('a.prev.page').attr(href: prev.data('url')) if prev.length
-
-    next = postPage.next('.post-page')
-    prevNext.toggleClass('last', !next.length)
-    prevNext.find('a.next.page').attr(href: next.data('url')) if next.length
-
-    prevPost    = postPage
-    currentPost = postPage
+    prevPost = postPage
     recalculateScroll()
 
-    rememberReading(postPage)
+    rememberReading(currentPost)

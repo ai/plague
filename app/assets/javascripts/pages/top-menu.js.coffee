@@ -1,7 +1,7 @@
 plague.on '.top-menu', ($, $$, topMenu) ->
 
-  fixed   = $$('.top-menu-fixed')
-  rotator = $$('.top-menu-rotator')
+  slider  =  $('@top-menu-slider')
+  rotator = $$('@top-menu-rotator')
 
   # Появление меню
 
@@ -9,7 +9,7 @@ plague.on '.top-menu', ($, $$, topMenu) ->
     if plague.support.transform3d()
       topMenu.removeClass('hidden')
     else
-      fixed.show().animate(top: 0, 600)
+      slider.show().animate(top: 0, 600)
 
   # Сокрытие меню
 
@@ -17,11 +17,11 @@ plague.on '.top-menu', ($, $$, topMenu) ->
     if plague.support.transform3d()
       topMenu.addClass('hidden')
     else
-      fixed.animate(top: -40, 600, -> fixed.hide())
+      slider.animate(top: -40, 600, -> slider.hide())
 
   # Выпадающие меню
 
-  $$('.slide-button .button').click ->
+  $$('@top-menu-open').click ->
     link   = $(@)
     hash   = link.attr('href')
     slide  = link.closest('.slide-button')
