@@ -12,7 +12,7 @@
       :css
         #{Rails.root.join('public/assets/quick.css').read}
     - else
-      = stylesheet_link_tag :quick
+      = stylesheet_link_tag :quick, media: :all, type: nil
     = stylesheet_link_tag :application, media: :all, type: nil
     = include_fonts
 

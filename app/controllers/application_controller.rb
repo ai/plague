@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from Post::NotFound do
-    raise ActionController::RoutingError.new('Not Found')
+    path = Rails.root.join('public/404.html')
+    render file: path, layout: false, status: :not_found
   end
 
   protected
