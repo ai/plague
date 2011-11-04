@@ -38,7 +38,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
       openBook => location.href = @href
       false
 
-  titlePage.bind 'hide-page', ->
+  titlePage.on 'hide-page', ->
     plague.animation.start()
     $('.post-page').show()
     openBook ->
@@ -47,7 +47,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
 
   # Закрытие книги
 
-  titlePage.bind 'show-page', ->
+  titlePage.on 'show-page', ->
     plague.animation.start()
     plague.title()
 

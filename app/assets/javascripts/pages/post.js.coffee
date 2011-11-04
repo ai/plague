@@ -42,7 +42,7 @@ changeNext = (next) ->
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true
   currentPost   = prevPost = postPage
-  $(window).bind 'load', ->
+  $(window).on 'load', ->
     hightlightYear('300ms')
     immediate ->
       $(window).scrollTop(0)
@@ -63,7 +63,7 @@ plague.loader.ready ->
   win.resize(recalculateScroll)
   recalculateScroll()
 
-  win.bind 'scroll', ->
+  win.on 'scroll', ->
     return if plague.animation.animating
     return if location.pathname == '/'
     x = win.scrollTop()
@@ -81,7 +81,7 @@ plague.live '.post-page', ($, $$, postPage) ->
 
   # Открытие поста
 
-  postPage.bind 'show-page', (e, source) ->
+  postPage.on 'show-page', (e, source) ->
     currentPost = postPage
 
     plague.title(postPage.data('title'), currentPost.data('story'))

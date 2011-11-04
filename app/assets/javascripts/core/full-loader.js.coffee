@@ -16,7 +16,7 @@ plague.fullLoader =
 
   hideOnLoad: ->
     startLoading = new Date()
-    $(window).bind 'load', ->
+    $(window).on 'load', ->
       loadingTime = new Date() - startLoading
       if loadingTime < 500
         plague.fullLoader.quickHide()

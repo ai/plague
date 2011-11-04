@@ -3,9 +3,9 @@ module LayoutHelper
 
   def include_jquery
     if Rails.env.production?
-      url = 'http://yandex.st/jquery/1.6.4/jquery.min.js'
+      url = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'
     else
-      url = 'development/jquery-1.6.4.js'
+      url = 'development/jquery-1.7.js'
     end
     javascript_include_tag(url, type: nil)
   end

@@ -13,7 +13,7 @@ plague.loader =
       return if @loading
       @loading = true
 
-      $(window).bind 'load', ->
+      $(window).on 'load', ->
         after '0.5s', -> plague.loader._load()
 
     ready: (callback) ->
@@ -73,10 +73,10 @@ plague.loader =
     _watchUrl: ->
       @_lastUrl = location.pathname
 
-      $(window).bind 'popstate', =>
+      $(window).on 'popstate', =>
         plague.loader._openPage(location.pathname)
 
-      $('a').live 'click', ->
+      $(document).on 'click', 'a', ->
         href = $(@).attr('href')
         plague.loader.openUrl(href) if href[0] == '/'
         false

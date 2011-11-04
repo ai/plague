@@ -5,7 +5,7 @@ plague.on '.top-menu', ($, $$, topMenu) ->
 
   # Появление меню
 
-  topMenu.bind 'show-menu', ->
+  topMenu.on 'show-menu', ->
     if plague.support.transform3d()
       topMenu.removeClass('hidden')
     else
@@ -13,7 +13,7 @@ plague.on '.top-menu', ($, $$, topMenu) ->
 
   # Сокрытие меню
 
-  topMenu.bind 'hide-menu', ->
+  topMenu.on 'hide-menu', ->
     if plague.support.transform3d()
       topMenu.addClass('hidden')
     else
@@ -28,7 +28,7 @@ plague.on '.top-menu', ($, $$, topMenu) ->
     opened = slide.hasClass('open')
     if opened
       slide.removeClass('open')
-      $('body').unbind('click.hide-top-slide')
+      $('body').off('click.hide-top-slide')
       after '200ms', -> slide.find('.content').hide()
       plague.ext.hash('') if location.hash == hash
     else
@@ -39,12 +39,12 @@ plague.on '.top-menu', ($, $$, topMenu) ->
       immediate ->
         slide.addClass('open')
         link.data(opening: null)
-      $('body').bind 'click.hide-top-slide', (e) ->
+      $('body').on 'click.hide-top-slide', (e) ->
         unless $(e.target).closest('.top-menu').length
           slide.find('.button').click()
     false
 
-  $(window).bind 'hashchange', ->
+  $(window).on 'hashchange', ->
     if location.hash == ''
       $('body').trigger('click.hide-top-slide')
     else
