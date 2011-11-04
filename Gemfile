@@ -24,6 +24,7 @@ group :development do
   gem 'thin'
   gem 'capistrano'
   gem 'capistrano-unicorn'
+  gem 'capistrano_colors'
 end
 
 group :production do

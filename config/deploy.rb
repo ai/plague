@@ -1,3 +1,5 @@
+require 'capistrano_colors'
+
 set :application, "plague"
 set :repository,  "git@github.com:ai/plague.git"
 set :scm, :git
@@ -6,6 +8,7 @@ set :deploy_to, "/home/ai/#{application}"
 set :domain,    "46.182.27.210"
 
 set :use_sudo, false
+set :normalize_asset_timestamps, false
 
 role :app, domain
 role :web, domain

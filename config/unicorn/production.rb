@@ -11,7 +11,7 @@ stderr_path "#{shared_dir}/log/unicorn.stderr.log"
 stdout_path "#{shared_dir}/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
-  old_pid = "#{shared_dir}/pids/unicorn.pid"
+  old_pid = "#{shared_dir}/pids/unicorn.pid.oldbin"
   if File.exists?(old_pid) and server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
