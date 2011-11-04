@@ -43,6 +43,13 @@ $title-height: 1.4 * $title-width
       z-index: #{14 - $i}
   .page1
     +box-shadow(rgba(0, 0, 0, 0.1) 15px 0 15px -15px inset)
+    .text
+      margin: 30px 40px
+      font-size: 15px
+      height: $title-height - 6px - 60px
+      overflow: hidden
+      p
+        padding: 5px 0
   .rotator
     position: absolute
     left: -$title-width
@@ -79,30 +86,30 @@ $title-height: 1.4 * $title-width
     +box-shadow(rgba(0, 0, 0, 0.15) 6px 0 6px -6px inset)
     z-index: 20
     overflow: hidden
-  .head
-    position: absolute
-    background: image-url("title/vessels-and-nerves.png")
-    +image-size("title/vessels-and-nerves.png")
-    top: 165px
-    left: 50%
-    margin-left: image-width("title/vessels-and-nerves.png") / -2
-    +scale(0.86)
-  h1
-    position: absolute
-    top: 15px
-    left: 20px
-    font-size: 46px
-    font-family: Philosopher, serif
-  p
-    position: absolute
-    top: 27px
-    right: 0
-    width: 230px
-    font-size: 15px
-    line-height: 1.2
-    strong
-      display: block
-      font-weight: bold
+    .head
+      position: absolute
+      background: image-url("title/vessels-and-nerves.png")
+      +image-size("title/vessels-and-nerves.png")
+      top: 165px
+      left: 50%
+      margin-left: image-width("title/vessels-and-nerves.png") / -2
+      +scale(0.86)
+    h1
+      position: absolute
+      top: 15px
+      left: 20px
+      font-size: 46px
+      font-family: Philosopher, serif
+    p
+      position: absolute
+      top: 27px
+      right: 0
+      width: 230px
+      font-size: 15px
+      line-height: 1.2
+      strong
+        display: block
+        font-weight: bold
   .wait-new-post, .restart
     position: absolute
     margin-left: 22px
