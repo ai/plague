@@ -19,6 +19,17 @@ rememberReading = (post) ->
   $.cookie('reading', post.data('url'), expires: 365, path: '/')
   $.cookie('reading-last', (if last then 1 else null), expires: 365, path: '/')
 
+changeTitleLinks = (post) ->
+  controls = $('.title-page .controls')
+  controls.find('> div').hide()
+  unless post.prev('.post-page').length
+    controls.find('.start-reading').show()
+  else unless post.next('.post-page').length
+    controls.find('.wait-new-post').show()
+  else
+    controls.find('.continue-reading').show().
+      find('a.open-badge').attr(href: post.data('url'))
+
 changeTopTitle = (title, isNext) ->
   topTitle = $('@current-title')
   slider   = $('@title-slider')
@@ -92,6 +103,7 @@ plague.live '.post-page', ($, $$, postPage) ->
     prevNext = topMenu.find('.prev-next')
 
     plague.animation.wait ->
+      changeTitleLinks(currentPost)
       if source != 'scroll'
         plague.animation.start()
         top = postPage.offset().top - topMenu.height() + 30

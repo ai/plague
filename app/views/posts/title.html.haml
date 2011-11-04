@@ -15,27 +15,34 @@
         .title
           .head
           = @title.html
-      - if @reading and (@reading != @first or @new_post)
-        - if @reading_last
-          - if @new_post
-            = open_badge 'Открыть новую главу', @reading.next, :continue
-            .restart.with-new-post
-              .or или
-              %a( href="#{@first.url}" role="open-book" )
-                начать сначала
-          - else
-            .wait
-              .wait-title Продолжение скоро выйдет
-              %a( href="#{@reading.url}" role="open-book" )
-                последняя глава
-              .or или
-              %a( href="#{@first.url}" role="open-book" )
-                начать сначала
-        - else
+
+      .controls
+        - @start = (not @reading or (@reading == @first and not @new_post))
+        .start-reading{ class_if('hide', !@start) }
+          = open_badge 'Начать чтение', @first, :start
+
+        - @continue = (not @start and not @reading_last)
+        .continue-reading{ class_if('hide', !@continue) }
           = open_badge 'Продолжить чтение', @reading, :continue
           .restart
             .or или
             %a( href="#{@first.url}" role="open-book" )
               начать сначала
-      - else
-        = open_badge 'Начать чтение', @first, :start
+
+        - @wait = (@reading_last and not @new_post)
+        .wait-new-post{ class_if('hide', !@wait) }
+          .wait-title Продолжение скоро выйдет
+          %a( href="#{@last.url}" role="open-book" )
+            последняя глава
+          .or или
+          %a( href="#{@first.url}" role="open-book" )
+            начать сначала
+
+        - @new = (@reading_last and @new_post)
+        - if @new
+          .new-post
+            = open_badge 'Открыть новую главу', @new_post, :continue
+            .restart.with-new-post
+              .or или
+              %a( href="#{@first.url}" role="open-book" )
+                начать сначала

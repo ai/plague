@@ -17,7 +17,7 @@ class PostsController < ApplicationController
 
   def feed
     @posts = []
-    post   = Post.title.next
+    post   = Post.first
     while post
       @posts << post
       post = post.next
@@ -43,7 +43,8 @@ class PostsController < ApplicationController
 
   def load_title
     @title = Post.title
-    @first = @title.next
+    @first = Post.first
+    @last  = Post.last
     if cookies[:reading] and not @all_posts
       begin
         @reading      = Post.by_url(cookies[:reading])

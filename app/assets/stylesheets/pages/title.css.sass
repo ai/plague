@@ -103,7 +103,7 @@ $title-height: 1.4 * $title-width
     strong
       display: block
       font-weight: bold
-  .wait, .restart
+  .wait-new-post, .restart
     position: absolute
     margin-left: 22px
     width: 140px
@@ -116,7 +116,9 @@ $title-height: 1.4 * $title-width
       color: $red
       &:hover
         text-decoration: none
-  .wait
+  .controls .hide
+    display: none
+  .wait-new-post
     top: 120px
     left: 100%
     .wait-title

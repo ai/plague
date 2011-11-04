@@ -35,6 +35,16 @@ class Post
     self.by_path('title')
   end
 
+  def self.first
+    self.title.next
+  end
+
+  def self.last
+    post = self.first
+    post = post.next while post.next
+    post
+  end
+
   def self.git(command)
     `cd '#{self.story_root}'; git #{command}`
   end
