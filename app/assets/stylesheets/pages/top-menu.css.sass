@@ -1,3 +1,5 @@
+$top-menu: sprite-map("top-menu/*.png")
+
 .top-menu
   position: fixed
   top: 0
@@ -14,6 +16,8 @@
     margin: 0 auto
     position: relative
   .story-title, .post-title
+    height: 30px
+    line-height: 30px
     font-size: 20px
     font-family: Philosopher, serif
     color: white
@@ -23,8 +27,6 @@
     top: 0
     right: 100%
     text-decoration: none
-    height: 30px
-    line-height: 30px
     &:hover
       text-shadow: white 0 0 2px
   .prev-next
@@ -73,11 +75,6 @@
     top: 0
     left: 80px
     right: 250px
-    height: 30px
-    line-height: 29px
-    font-size: 19px
-    font-family: Philosopher, serif
-    color: white
     overflow: hidden
     .top-title, .current-title, .bottom-title
       height: 30px
@@ -97,13 +94,18 @@
       font-size: 14px
       line-height: 30px
       height: 29px
-      padding: 0 10px
+      padding: 0 6px 0 26px
       text-shadow: white 0 0 0
       +box-shadow(white 0 0 13px -13px inset)
       border-bottom: 1px solid black
       +transition(all, 200ms)
+      position: relative
       &:hover
         text-shadow: white 0 0 2px
+      .icon
+        position: absolute
+        top: 8px
+        left: 6px
     .content
       display: none
       position: absolute
@@ -148,12 +150,17 @@
     position: absolute
     top: 0
     left: 100%
-    margin-left: 5px
+    margin-left: 7px
     &.open .button, & .button:hover
       color: white
     .button
       font-size: 12px
       color: #d8d8d8
+      padding: 0 8px 0 22px
+      .icon
+        left: 5px
+        top: 9px
+        +sized-sprite($top-menu, what-is-it)
     .content
       left: auto
       right: 0
@@ -161,7 +168,14 @@
       .arrow
         right: 37px
         left: auto
+    .button
+  .slide-button.subscribe
+    margin-right: 2px
+    .icon
+      +sized-sprite($top-menu, subscribe)
   .slide-button.share
+    .icon
+      +sized-sprite($top-menu, share)
     .arrow
       left: 65px
 

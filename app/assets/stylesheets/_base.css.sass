@@ -7,6 +7,10 @@ $gray-background: #f2f2f2
   width: image-width($path)
   height: image-height($path)
 
+@mixin sized-sprite($map, $sprite)
+  +image-size(sprite-file($map, $sprite))
+  background: sprite($map, $sprite) no-repeat
+
 $animation-vendors: "" "-webkit-" "-moz-" "-ms-"
 @mixin animation($name, $duration, $timing: linear, $count: infinite)
   @each $vendor in $animation-vendors

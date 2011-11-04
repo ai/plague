@@ -6,8 +6,25 @@
         .top-title( role="prev-title-top title-slider" )
         .current-title( role="current-title" )= @post.try(:title)
         .bottom-title( role="prev-title-bottom" )
+      .subscribe-and-share
+        .slide-button.subscribe
+          %a.button( role="top-menu-open" href="#subscribe" )
+            .icon
+            Подписаться
+          .content
+            .arrow
+              .rotated
+        .slide-button.share
+          %a.button( role="top-menu-open" href="#share" )
+            .icon
+            Расскажи друзьям
+          .content
+            .arrow
+              .rotated
       .slide-button.what-is-it
-        %a.button( role="top-menu-open" href="#what-is-it" ) Что это такое?
+        %a.button( role="top-menu-open" href="#what-is-it" )
+          .icon
+          Что это такое?
         .content
           .arrow
             .rotated
@@ -18,17 +35,6 @@
             прямо по ходу развития событий.
           %p
             Вы можете написать комментарий герою или автору.
-      .subscribe-and-share
-        .slide-button.subscribe
-          %a.button( role="top-menu-open" href="#subscribe" ) Подписаться
-          .content
-            .arrow
-              .rotated
-        .slide-button.share
-          %a.button( role="top-menu-open" href="#share" ) Расскажи друзьям
-          .content
-            .arrow
-              .rotated
 
       - prevPage = @post.try(:prev)
       - nextPage = @post.try(:next)
