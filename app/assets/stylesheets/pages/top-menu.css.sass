@@ -185,16 +185,19 @@ $top-menu: sprite-map("top-menu/*.png")
     .arrow
       left: 65px
 
+.top-menu.hidden
+  top: -40px
+  display: none
+
 .transform3d .top-menu
   +perspective(2000px)
-  &.hidden .top-menu-rotator
-    +rotateX(90deg)
+  &.hidden
+    display: block
+    top: 0
+    .top-menu-rotator
+      +rotateX(90deg)
   .top-menu-rotator
     padding-top: 32px
     position: relative
     top: -32px
     +transition(all, 600ms)
-
-.transform2d .top-menu.hidden
-  top: -40px
-  display: none
