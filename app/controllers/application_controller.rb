@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter do
+    Post::CACHE = { }
+  end
+
   rescue_from Post::NotFound do
     path = Rails.root.join('public/404.html')
     render file: path, layout: false, status: :not_found
