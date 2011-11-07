@@ -31,7 +31,7 @@
             %a( href="#{@first.url}" role="open-book" )
               начать сначала
 
-        - @wait = (@reading_last and not @new_post)
+        - @wait = (@reading_last and @reading != @first and not @new_post)
         .wait-new-post{ class_if('hide', !@wait) }
           .wait-title Продолжение скоро выйдет
           %a( href="#{@last.url}" role="open-book" )
