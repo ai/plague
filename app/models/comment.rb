@@ -17,6 +17,22 @@ class Comment
   validates :text,    presence: true
   validates :chapter, exists_chapter: true
 
+  def self.important
+    where(important: true)
+  end
+
+  def self.unimportant
+    where(important: false)
+  end
+
+  def self.published
+    excludes(published_at: nil)
+  end
+
+  def self.recent
+    asc(:published_at)
+  end
+
   def real_life?
     comment_for == 'hero'   and answer.try(:answer_from) == 'hero'
   end
@@ -28,5 +44,9 @@ class Comment
   def author_name
     name = super
     name.present? ? name : 'Аноним'
+  end
+
+  def post
+    @post ||= Post.by_path(self.post_path)
   end
 end

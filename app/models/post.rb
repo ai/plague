@@ -154,6 +154,18 @@ class Post
     end
   end
 
+  def comments
+    @comments ||= Comment.where(post_path: @path).published.recent
+  end
+
+  def important_comments
+    @important_comments ||= self.comments.important
+  end
+
+  def unimportant_comments
+    @unimportant_comments ||= self.comments.unimportant
+  end
+
   private
 
   def story_posts
