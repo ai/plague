@@ -17,10 +17,15 @@ module LayoutHelper
   end
 
   def include_fonts
-    ['//fonts.googleapis.com/css?family=Philosopher&subset=cyrillic',
-     '//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic,latin'].
-      map { |i| stylesheet_link_tag(i, media: 'all', type: nil) }.
-      join("\n").html_safe
+    if Rails.env.production?
+      ['Philosopher&subset=cyrillic', 'PT+Sans:400,700&subset=cyrillic,latin'].
+        map { |font|
+          url = '//fonts.googleapis.com/css?family=' + font
+          stylesheet_link_tag(url, media: 'all', type: nil)
+        }.join("\n").html_safe
+    else
+      stylesheet_link_tag('philosopher') + stylesheet_link_tag('ptsans')
+    end
   end
 
   def title(*titles)
