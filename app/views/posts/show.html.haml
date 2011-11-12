@@ -6,35 +6,38 @@
 - data = { title: @post.title, story: @post.story_title, url: @post.url }
 - data['draft'] = 1 if @post.draft?
 %article.post-page{ class_if('last-post', !@post.next), data: data }
-  .paper
-    - if @post.draft?
-      .draft-badge
-        .text
-          .rotated Черновик
-        .crop
-          .left-corner
-          .right-corner
-    - elsif @post.date
-      .date-badge
-        .year
-          .hightlight( role="hightlight-year" )
-          .text= @post.date.year
-        .date
-          .month= R18n.l @post.date, '%b'
-          .day= @post.date.mday
-        .crop
-          .left-corner
-          .right-corner
-    = @post.html
-
-  - if @post.next
-    - unless @all_posts
-      .next-post
-        %a( href="#{@post.next.url}" )
-          .border
-          .arrow ↓
+  .post-center
+    .paper
+      - if @post.draft?
+        .draft-badge
           .text
-            Следующая запись
-  - else
-    - unless @post.draft?
-      .to-be-continue Продолжение следует
+            .rotated Черновик
+          .crop
+            .left-corner
+            .right-corner
+      - elsif @post.date
+        .date-badge
+          .year
+            .hightlight( role="hightlight-year" )
+            .text= @post.date.year
+          .date
+            .month= R18n.l @post.date, '%b'
+            .day= @post.date.mday
+          .crop
+            .left-corner
+            .right-corner
+      = @post.html
+
+    = render 'comments'
+
+    - if @post.next
+      - unless @all_posts
+        .next-post
+          %a( href="#{@post.next.url}" )
+            .border
+            .arrow ↓
+            .text
+              Следующая запись
+    - else
+      - unless @post.draft?
+        .to-be-continue Продолжение следует

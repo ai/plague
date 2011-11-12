@@ -6,12 +6,15 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.new
-    comment.chapter      = params[:chapter]
-    comment.author_name  = params[:name]
-    comment.author_email = params[:email]
+    comment.post_path    = params[:post_path]
+    comment.author_name  = params[:author_name]
+    comment.author_email = params[:author_email]
     comment.author_ip    = request.remote_ip
     comment.text         = params[:text]
     comment.comment_for  = params[:for_author] ? 'author' : 'hero'
+
+    session['author_name']  = params[:author_name]
+    session['author_email'] = params[:author_email]
 
     if comment.save
       respond_to do |format|

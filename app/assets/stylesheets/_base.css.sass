@@ -3,6 +3,11 @@
 $red: #e3591a
 $gray-background: #f2f2f2
 
+$paper-width: 600px
+
+@mixin shadow()
+  +box-shadow(rgba(0, 0, 0, 0.15) 0px 0px 2px 1px)
+
 @mixin image-size($path)
   width: image-width($path)
   height: image-height($path)

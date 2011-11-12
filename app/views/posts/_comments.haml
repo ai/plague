@@ -1,0 +1,41 @@
+.post-comments
+  %a.show-more-comments( href="#" role="show-more-comments" )
+    - if @post.comments.empty?
+      Комментариев ещё нет
+    - elsif @post.important_comments.present?
+      Больше комментариев нет
+    - else
+      - if @post.important_comments.empty?
+        Показать
+      - else
+        Показать ещё
+      - count = @post.unimportant_comments.count
+      = pl count, 'комментарий', 'комментария', 'комментариев'
+    .crop
+      .arrow
+  %a.add-comment( href="#" role="add-comment" )
+    Добавить комментарий
+    .crop
+      .arrow
+
+.new-comment
+  = form_tag comments_path do
+    .postcard
+      %input( type="hidden" name="return_to" value="#{@post.url}" )
+      %input( type="hidden" name="post_path" value="#{@post.path}" )
+
+      .text
+        %label( for="new_comment_text" ) Текст нового комментария
+        %textarea#new_comment_text( name="text" )
+      .row
+        %label( for="new_comment_name" ) Имя:
+        %input#new_comment_name( type="text" name="author_name" value="#{session['author_name'] || 'Аноним'}" )
+      .row
+        %label( for="new_comment_email" ) Эл. почта:
+        %input#new_comment_email( type="email" name="author_email" value="#{session['author_email']}" )
+      .email-note
+        Ваша эл. почта нужна, чтобы отправить вам ответ
+        (в том числе, если его нельзя опубликовать на сайте).
+    .submits
+      %input.hero( type="submit" value="Отправить герою" )
+      %input.author( type="submit" name="for_author" value="Отправить автору" )
