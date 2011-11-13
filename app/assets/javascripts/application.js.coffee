@@ -1,5 +1,6 @@
 #= require core/plague
 #= require core/ext
+#= require core/flash
 #= require core/full-loader
 #= require core/notices
 

@@ -1,0 +1,22 @@
+.flash-messages
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  text-align: center
+  .flash
+    display: inline-block
+    position: relative
+    top: 30px
+    margin: 0 5px
+    padding: 0 20px
+    height: 36px + 30px
+    line-height: 36px
+    +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
+    color: white
+    text-shadow: rgba(0, 0, 0, 0.6) 0 1px 1px
+    background-image: image-url("common/diagonal.png")
+    &.error
+      background-color: #af1109
+    &.notice
+      background-color: #0f830d
