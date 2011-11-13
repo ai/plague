@@ -21,7 +21,7 @@ plague.on '.top-menu', ($, $$, topMenu) ->
 
   # Выпадающие меню
 
-  $$('@top-menu-open').click ->
+  openLinks = $$('@top-menu-open').click ->
     link   = $(@)
     hash   = link.attr('href')
     slide  = link.closest('.slide-button')
@@ -48,6 +48,11 @@ plague.on '.top-menu', ($, $$, topMenu) ->
     if location.hash == ''
       $('body').trigger('click.hide-top-slide')
     else
-      link = $$("a[href=#{location.hash}]")
+      link = openLinks.filter("[href=#{location.hash}]")
       link.click() unless link.data('opening')
   $(window).trigger('hashchange')
+
+  $$('@subscribe-on-last').click ->
+    hash = $(@).attr('href')
+    openLinks.filter("[href=#{hash}]").click()
+    false
