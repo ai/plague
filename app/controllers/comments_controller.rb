@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
   end
 
   def create
+    params[:author_name] = 'Аноним' if params[:author_name].strip.empty?
+
     comment = Comment.new
     comment.post_path    = params[:post_path]
     comment.author_name  = params[:author_name]
