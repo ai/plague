@@ -14,8 +14,8 @@ class Comment
 
   embeds_one :answer
 
-  validates :text,    presence: true
-  validates :chapter, exists_chapter: true
+  validates :post_path, exists_post: true
+  validates :text,      presence: true
 
   def self.important
     where(important: true)

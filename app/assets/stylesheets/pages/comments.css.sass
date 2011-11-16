@@ -53,8 +53,26 @@
 
 .new-comment
   display: none
-  margin: 15px 60px 5px 60px
-  padding: 5px
+  margin: 28px 60px 5px 60px
+  position: relative
+  .mailbox
+    position: absolute
+    top: -22px
+    left: 0
+    right: 0
+    height: 30px
+    line-height: 15px
+    font-size: 12px
+    color: #777
+    text-align: center
+    text-shadow: white 0 1px 1px
+    +background( linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 18px, black 18px, #888 19px, rgba(255, 255, 255, 0)) )
+    display: none
+  .crop
+    padding: 24px 5px 10px 5px
+    overflow: hidden
+    position: relative
+    top: -3px
   .postcard
     background: white
     padding: 15px
@@ -70,7 +88,8 @@
       position: absolute
       top: 7px
       left: 5px
-      color: #666
+      color: #777
+      cursor: text
   textarea
     border: none
     color: black
@@ -101,19 +120,23 @@
         border-bottom-color: #999
     label
       padding-right: 5px
-  .email-note
+  .email-notice
     width: 240px
     font-size: 13px
-    color: #666
+    color: #777
     margin-top: 15px
     position: absolute
     left: 13px
     bottom: 22px
+    +transition(color, 200ms)
+    &.highlighted
+      color: black
   .submits
     height: 30px
     position: relative
     width: 2 * 165px + 3px
-    margin: 10px auto 0 auto
+    margin: 15px auto 0 auto
+    +transition(width, 400ms)
     input
       display: block
       height: 30px
@@ -138,3 +161,25 @@
       float: right
       text-align: left
       padding-left: 12px
+    .loader
+      position: absolute
+      top: 15px
+      left: 50%
+      width: 0
+      height: 0
+      margin-left: 0
+      +transition(all, 400ms)
+      +border-radius(50%)
+  .sending .submits
+    width: 2 * 165px + 60px
+    .loader
+      top: -7px
+      margin-left: -24px
+      width: 46px
+      height: 46px
+  form.sent
+    position: absolute
+    top: 17px
+    z-index: 3
+    .submits
+      display: none

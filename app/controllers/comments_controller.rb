@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CommentsController < ApplicationController
   before_filter :only_for_author, only: :index
 
@@ -19,9 +20,10 @@ class CommentsController < ApplicationController
     session['author_email'] = params[:author_email]
 
     if comment.save
-      respond_to do |format|
-        format.html { redirect_to params[:return_to] }
-        format.json { head :ok }
+      if request.xhr?
+        head :ok
+      else
+        redirect_to params[:return_to]
       end
     else
       render text: comment.errors.full_messages.join("\n"), status: :bad_request
