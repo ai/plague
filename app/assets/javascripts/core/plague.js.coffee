@@ -6,8 +6,8 @@ vitality = (root, selector, callback) ->
   content = content.add(root.filter(selector))
 
   if content.length
-    $$ = (selector) -> $(selector, content)
     for i in content
+      $$ = (selector) -> $(selector, i)
       el = $(i)
       callback.apply(el, [$, $$, el])
 
