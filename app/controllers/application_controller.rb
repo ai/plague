@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter do
-    Post::CACHE = { }
+    Post.cache = { }
   end
 
   rescue_from Post::NotFound do

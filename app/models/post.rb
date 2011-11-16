@@ -1,8 +1,10 @@
 class Post
   class NotFound < StandardError; end
 
-  CACHE = { }
   URLS  = { hero: '/say-and-relax.com/hero' }
+
+  @@cache = { }
+  cattr_accessor :cache
 
   def self.story_root
     Rails.root.join(Rails.configuration.story['story_repo'])
@@ -55,7 +57,7 @@ class Post
 
   def self.by_path(path, file = nil)
     path += '/' + file if file
-    CACHE[path] ||= self.new(path)
+    @@cache[path] ||= self.new(path)
   end
 
   attr_reader :path, :source_code
