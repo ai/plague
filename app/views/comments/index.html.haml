@@ -2,6 +2,8 @@
   %title Модерация комментариев — #{story['title']}
   = stylesheet_link_tag :comments
 
+= form_tag session_path, method: :delete, class: 'exit' do
+  = submit_tag 'Выход'
 .comments-moderation
   - @posts.reverse_each do |post|
     - next if post.unmoderated_comments.empty?

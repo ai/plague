@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       html += render_to_string 'show', layout: false
       @post = @post.next
     end
-    render :text => html
+    render text: html
   end
 
   def feed

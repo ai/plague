@@ -8,7 +8,7 @@
       - prevPage = @post.try(:prev)
       - nextPage = @post.try(:next)
       - isFirst  = prevPage.nil? or prevPage.title?
-      .prev-next{ class_if('first', isFirst), class_if('last', !nextPage), :role => 'prev-next-page' }
+      .prev-next{ class_if('first', isFirst), class_if('last', !nextPage), role: 'prev-next-page' }
         %a.prev.to-page( title="Предыдущая запись" href="#{prevPage.try(:url)}" role="prev-page" ) ↑
         %a.prev.to-title( title="Обложка" href="#{root_path}" ) ↑
         %a.next.to-page( title="Следующая запись" href="#{nextPage.try(:url)}" role="next-page" ) ↓
