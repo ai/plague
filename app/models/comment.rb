@@ -10,6 +10,7 @@ class Comment
   field :comment_for
   field :published_at, type: Time
   field :important
+  field :moderated
   include Mongoid::Timestamps
 
   embeds_one :answer
@@ -27,6 +28,10 @@ class Comment
 
   def self.published
     excludes(published_at: nil)
+  end
+
+  def self.unmoderated
+    where(moderated: nil)
   end
 
   def self.recent

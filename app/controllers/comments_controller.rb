@@ -3,6 +3,8 @@ class CommentsController < ApplicationController
   before_filter :only_for_author, only: :index
 
   def index
+    @posts = Post.all
+    render layout: 'simple'
   end
 
   def create

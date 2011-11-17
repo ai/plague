@@ -16,12 +16,7 @@ class PostsController < ApplicationController
   end
 
   def feed
-    @posts = []
-    post   = Post.first
-    while post
-      @posts << post
-      post = post.next
-    end
+    @posts = Post.all
     Haml::Template.options[:format] = :xhtml
     render layout: false
   end

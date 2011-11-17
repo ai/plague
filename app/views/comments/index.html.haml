@@ -1,0 +1,12 @@
+- content_for :head do
+  %title Модерация комментариев — #{story['title']}
+  = stylesheet_link_tag :comments
+
+.comments-moderation
+  - @posts.reverse_each do |post|
+    - next if post.unmoderated_comments.empty?
+    %section
+      %h1
+        %a{ href: post.url }
+          = post.title
+          .count= post.unmoderated_comments.count

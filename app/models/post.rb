@@ -47,6 +47,16 @@ class Post
     post
   end
 
+  def self.all
+    posts = []
+    post   = Post.first
+    while post
+      posts << post
+      post = post.next
+    end
+    posts
+  end
+
   def self.git(command)
     `cd '#{self.story_root}'; git #{command}`
   end
@@ -167,6 +177,10 @@ class Post
 
   def unimportant_comments
     @unimportant_comments ||= self.comments.unimportant
+  end
+
+  def unmoderated_comments
+    @unmoderated_comments ||= Comment.where(post_path: @path).unmoderated
   end
 
   private

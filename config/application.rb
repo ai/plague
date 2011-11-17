@@ -25,7 +25,7 @@ module Plague
     config.assets.enabled = true
     config.assets.version = '1.0'
 
-    config.assets.precompile += %w( quick.css sessions.css error.css )
+    config.assets.precompile += %w( quick.css sessions.css error.css comments.css )
 
     config.autoload_paths << "#{config.root}/lib/validators/"
 
