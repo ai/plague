@@ -65,6 +65,7 @@ class Post
   def initialize(path)
     @path        = path
     @filepath    = self.class.story_root.join(path + '.md')
+    raise NotFound unless @filepath.exist?
     @source_code = @filepath.read
   end
 
