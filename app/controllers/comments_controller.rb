@@ -1,6 +1,7 @@
 # encoding: utf-8
 class CommentsController < ApplicationController
   before_filter :only_for_author, only: :index
+  before_filter :spam_defence,    only: :create
 
   def index
     @posts = Post.all
@@ -29,6 +30,15 @@ class CommentsController < ApplicationController
       end
     else
       render text: comment.errors.full_messages.join("\n"), status: :bad_request
+    end
+  end
+
+private
+
+  def spam_defence
+    if params[:shibboleth].present?
+      render text: 'Auto spam is not allowed', status: :bad_request
+      return
     end
   end
 

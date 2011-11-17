@@ -49,14 +49,13 @@ plague.live '.new-comment', ($, $$, newComment) ->
     ajax.success ->
       sent = form.clone().addClass('sent').insertBefore(form)
       text.add(inputs).each -> $(@).val($(@).data('default')).change()
-
-      top  = sent.outerHeight() + 3
-      sent.animate top: -top, 500, 'easeInQuad', ->
-        after '1.5s', -> mailbox.fadeOut(200)
+      sent.animate top: -sent.outerHeight() - 3, 500, 'easeInQuad', ->
+        after '1s', -> mailbox.fadeOut(400)
     ajax.error (e) ->
       if e.status == 500
         plague.flash.error('Ошибка сервера')
       else
         plague.flash.error(e.responseText)
+      mailbox.fadeOut(200)
 
     false
