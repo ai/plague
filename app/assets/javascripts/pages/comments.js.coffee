@@ -33,7 +33,11 @@ plague.live '.new-comment', ($, $$, newComment) ->
     focus( -> emailNotice.addClass('highlighted')).
     blur( -> emailNotice.removeClass('highlighted'))
 
-  form.submit ->
+  $$(':submit[name]').click ->
+    $(@).closest('form').trigger('submit', $(@).attr('name'))
+    false
+
+  form.submit (e, submiter) ->
     if $.trim(text.val()) == ''
       plague.flash.error('Введите текст комментария')
       text.focus()
@@ -43,7 +47,10 @@ plague.live '.new-comment', ($, $$, newComment) ->
     form.addClass('sending')
     mailbox.fadeIn(200)
 
-    ajax = $.post(form.attr('action'), form.serialize())
+    data = form.serialize()
+    data += "&#{submiter}=1" if submiter
+
+    ajax = $.post(form.attr('action'), data)
     ajax.complete ->
       form.removeClass('sending')
     ajax.success ->

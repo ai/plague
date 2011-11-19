@@ -84,7 +84,7 @@ class Post
   end
 
   def story_title
-    @filepath.dirname.join('title').read.strip
+    @story_title ||= @filepath.dirname.join('title').read.strip
   end
 
   def attrs

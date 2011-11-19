@@ -1,7 +1,8 @@
 # encoding: utf-8
 class CommentsController < ApplicationController
-  before_filter :only_for_author, only: :index
-  before_filter :spam_defence,    only: :create
+  before_filter :only_for_author, expect: :create
+  before_filter :spam_defence,    only:   :create
+  before_filter :load_comment,    only:  [:destroy, :publish]
 
   def index
     @posts = Post.all
@@ -33,6 +34,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment.destroy
+    redirect_to comments_path
+  end
+
+  def publish
+    @comment.important = true if params[:important]
+    @comment.publish!
+    redirect_to comments_path
+  end
+
 private
 
   def spam_defence
@@ -40,6 +52,10 @@ private
       render text: 'Auto spam is not allowed', status: :bad_request
       return
     end
+  end
+
+  def load_comment
+    @comment = Comment.find(params[:id])
   end
 
 end

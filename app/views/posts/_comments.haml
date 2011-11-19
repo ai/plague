@@ -2,7 +2,7 @@
   %a.show-more-comments( href="#" role="show-more-comments" )
     - if @post.comments.empty?
       Комментариев ещё нет
-    - elsif @post.important_comments.present?
+    - elsif @post.unimportant_comments.empty?
       Больше комментариев нет
     - else
       - if @post.important_comments.empty?

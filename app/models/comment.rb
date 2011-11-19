@@ -9,8 +9,8 @@ class Comment
   field :text
   field :comment_for
   field :published_at, type: Time
-  field :important
-  field :moderated
+  field :important,    type: Boolean
+  field :moderated,    type: Boolean
   include Mongoid::Timestamps
 
   embeds_one :answer
@@ -23,7 +23,7 @@ class Comment
   end
 
   def self.unimportant
-    where(important: false)
+    excludes(important: true)
   end
 
   def self.published
@@ -38,12 +38,12 @@ class Comment
     asc(:published_at)
   end
 
-  def real_life?
-    comment_for == 'hero'   and answer.try(:answer_from) == 'hero'
+  def fictional?
+    answer.try(:answer_from) == 'hero' or comment_for == 'hero'
   end
 
-  def fictional?
-    comment_for == 'author' and answer.try(:answer_from) == 'author'
+  def real_life?
+    answer.try(:answer_from) == 'author' or comment_for == 'author'
   end
 
   def author_name
@@ -53,5 +53,11 @@ class Comment
 
   def post
     @post ||= Post.by_path(self.post_path)
+  end
+
+  def publish!
+    self.published_at = Time.now
+    self.moderated    = true
+    self.save!
   end
 end

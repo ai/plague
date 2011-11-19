@@ -1,14 +1,41 @@
 - content_for :head do
   %title Модерация комментариев — #{story['title']}
-  = stylesheet_link_tag :comments
+  = stylesheet_link_tag :comments_moderation
 
 = form_tag session_path, method: :delete, class: 'exit' do
   = submit_tag 'Выход'
 .comments-moderation
+  - unmoderated = false
   - @posts.reverse_each do |post|
     - next if post.unmoderated_comments.empty?
+    - unmoderated = true
     %section
       %h1
         %a{ href: post.url }
           = post.title
+          —
+          = post.story_title
           .count= post.unmoderated_comments.count
+      - post.unmoderated_comments.each do |comment|
+        %article.comment{ class_if('author', comment.real_life?) }
+          - if comment.real_life?
+            .to-author комментарий автору
+          = comment.text
+          .info
+            —
+            .author
+              = comment.author_name + ','
+              - if comment.author_email.present?
+                = comment.author_email + ', '
+            .time{ title: R18n.l(comment.created_at, :full) }
+              = R18n.l comment.created_at, :human
+          .buttons
+            = form_tag comment_path(comment), method: :delete do
+              %input( type="submit" title="Удалить" value="×" )
+            = form_tag publish_comment_path(comment) do
+              %input( type="submit" title="Опубликовать" value="↑" )
+            = form_tag publish_comment_path(comment) do
+              %input( type="hidden" name="important" value="1" )
+              %input( type="submit" title="Опубликовать, как важный" value="*" )
+  - unless unmoderated
+    .empty Все комментарии проверены
