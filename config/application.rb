@@ -32,5 +32,7 @@ module Plague
     config.autoload_paths << "#{config.root}/lib/validators/"
 
     config.story = YAML.load_file("#{config.root}/config/story.yml")
+
+    config.action_controller.page_cache_directory = (Rails.root + 'cache').to_s
   end
 end

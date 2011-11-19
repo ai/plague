@@ -2,7 +2,7 @@
 class CommentsController < ApplicationController
   before_filter :only_for_author, expect: :create
   before_filter :spam_defence,    only:   :create
-  before_filter :load_comment,    only:  [:destroy, :publish]
+  before_filter :load_comment,    only:   %w(destroy publish)
 
   def index
     @posts = Post.all
@@ -42,6 +42,7 @@ class CommentsController < ApplicationController
   def publish
     @comment.important = true if params[:important]
     @comment.publish!
+    expire_post(@comment.post.url)
     redirect_to comments_path
   end
 

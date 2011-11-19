@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_filter :load_title, only: %w(title all)
 
+  caches_page :feed, :show
+
   def title
   end
 
@@ -28,6 +30,7 @@ class PostsController < ApplicationController
   def update
     if story['key'] == params['key']
       Post.update_repository!
+      expire_all
       render text: 'updated'
     else
       render text: 'wrong key', status: :bad_request

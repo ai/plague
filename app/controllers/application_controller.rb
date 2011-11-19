@@ -30,4 +30,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :story
 
+  def expire_all
+    config = Rails.application.config
+    FileUtils.rm_rf(config.action_controller.page_cache_directory)
+  end
+
+  def expire_post(url)
+    expire_page('/post.atom')
+    expire_page(url)
+  end
+
 end
