@@ -82,7 +82,7 @@ plague.live '.new-comment', ($, $$, newComment) ->
       sent.animate top: -sent.outerHeight() - 3, 500, 'easeInQuad', ->
         after '1s', -> mailbox.fadeOut(400)
     ajax.error (e) ->
-      if e.status == 500
+      if 500 <= e.status <= 599
         plague.flash.error('Ошибка сервера')
       else
         plague.flash.error(e.responseText)
