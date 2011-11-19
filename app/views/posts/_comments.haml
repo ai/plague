@@ -1,22 +1,26 @@
 .post-comments
-  %a.show-more-comments( href="#" role="show-more-comments" )
-    - if @post.comments.empty?
-      Комментариев ещё нет
-    - elsif @post.unimportant_comments.empty?
-      Больше комментариев нет
-    - else
-      - if @post.important_comments.empty?
-        Показать
+  = render partial: 'comments_list', locals: { comments: @post.important_comments }
+  .unimportant-comments
+    = render partial: 'comments_list', locals: { comments: @post.unimportant_comments }
+  .comments-controls
+    %a.show-more-comments( href="#" role="show-more-comments" )
+      - if @post.comments.empty?
+        Комментариев ещё нет
+      - elsif @post.unimportant_comments.empty?
+        Больше комментариев нет
       - else
-        Показать ещё
-      - count = @post.unimportant_comments.count
-      = pl count, 'комментарий', 'комментария', 'комментариев'
-    .crop
-      .arrow
-  %a.add-comment( href="#" role="add-comment" )
-    Добавить комментарий
-    .crop
-      .arrow
+        - if @post.important_comments.empty?
+          Показать
+        - else
+          Показать ещё
+        - count = @post.unimportant_comments.count
+        = pl count, 'комментарий', 'комментария', 'комментариев'
+      .crop
+        .arrow
+    %a.add-comment( href="#" role="add-comment" )
+      Добавить комментарий
+      .crop
+        .arrow
 
 .new-comment
   .mailbox

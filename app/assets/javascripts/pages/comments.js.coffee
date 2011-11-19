@@ -1,15 +1,21 @@
 #= require jquery.elastic
 
 plague.live '.post-comments', ($, $$, comments) ->
+  newComment = comments.parent().find('.new-comment')
+
+  $$('@show-more-comments').click ->
+    $$('.unimportant-comments').slideDown()
+
   $$('@add-comment').click ->
-    newComment = $(@).closest('.post-page').find('.new-comment')
     if newComment.is(':visible')
       newComment.slideUp()
     else
+      height = newComment.outerHeight()
+      scroll = $(window).scrollTop()
       newComment.slideDown ->
         $(@).find('textarea').focus()
-      top = newComment.offset().top - 67
-      $('html, body').stop().animate scrollTop: top, 400
+      if newComment.offset().top + height > scroll + $(window).height()
+        $('html, body').stop().animate scrollTop: height + scroll, 400
 
 plague.live '.new-comment', ($, $$, newComment) ->
   postcard  = $$('.postcard')
@@ -19,9 +25,8 @@ plague.live '.new-comment', ($, $$, newComment) ->
   inputs    = $$('.row input')
   mailbox   = $$('.mailbox')
 
-  text.add(inputs).each( -> $(@).data(default: $(@).val()) ).
-    focus( -> postcard.addClass('focus')).
-    blur( -> postcard.removeClass('focus'))
+  text.add(inputs).focus( -> postcard.addClass('focus')).
+                   blur( -> postcard.removeClass('focus'))
 
   text.elastic()
   text.on 'keyup change', -> textLabel.toggle(text.val() == '')
@@ -55,7 +60,7 @@ plague.live '.new-comment', ($, $$, newComment) ->
       form.removeClass('sending')
     ajax.success ->
       sent = form.clone().addClass('sent').insertBefore(form)
-      text.add(inputs).each -> $(@).val($(@).data('default')).change()
+      text.val('').change()
       sent.animate top: -sent.outerHeight() - 3, 500, 'easeInQuad', ->
         after '1s', -> mailbox.fadeOut(400)
     ajax.error (e) ->

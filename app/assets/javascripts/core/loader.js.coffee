@@ -36,12 +36,12 @@ plague.loader =
       $.get '/posts', (html) =>
         plague.loader.loaded = true
 
-        current = $('article')
+        current = $('article.page')
         before  = $('<div class="loaded-before" />')
         after   = $('<div class="loaded-after" />')
 
         beforeCurrent = true
-        for page in $(html).filter('article')
+        for page in $(html).filter('article.page')
           if beforeCurrent
             if $(page).data('url') != current.data('url')
               before.append(page)

@@ -1,0 +1,11 @@
+- comments.each do |comment|
+  %article.comment{ class_if('real-life', comment.real_life?) }
+    - if comment.real_life?
+      .to-author комментарий для автора
+    = comment.html
+    .quote-arrow
+      .rotate
+    .info
+      —
+      = comment.author_name + ','
+      %span.time= R18n.l comment.created_at, :full

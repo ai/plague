@@ -60,4 +60,10 @@ class Comment
     self.moderated    = true
     self.save!
   end
+
+  def html
+    self.text.split("\n").inject(''.html_safe) do |html, i|
+      html + '<p>'.html_safe + i + '</p>'.html_safe
+    end
+  end
 end

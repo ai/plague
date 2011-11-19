@@ -1,11 +1,15 @@
 .post-comments
   width: 600px + 160px
   margin: 30px auto 0 auto
-  height: 30px
   position: relative
+  .unimportant-comments
+    display: none
+  .comments-controls
+    height: 30px
+    position: relative
   .show-more-comments, .add-comment
     position: absolute
-    top: 0
+    bottom: 0
     height: 30px
     line-height: 30px
     background: black
@@ -53,7 +57,7 @@
 
 .new-comment
   display: none
-  margin: 28px 60px 5px 60px
+  margin: 28px 110px 5px 60px
   position: relative
   .shibboleth
     display: none
@@ -95,7 +99,7 @@
   textarea
     border: none
     color: black
-    width: 600px
+    width: 550px
     height: 60px
     padding: 5px
     resize: none
