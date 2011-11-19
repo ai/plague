@@ -31,6 +31,7 @@ module Plague
 
     config.story = YAML.load_file("#{config.root}/config/story.yml")
 
-    config.action_controller.page_cache_directory = (Rails.root + 'cache').to_s
+    config.action_controller.page_cache_directory = Rails.root.
+      join('public/cache').to_s
   end
 end
