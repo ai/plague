@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.2'
+gem 'rails', '3.1.1'
 
 gem 'mongoid'
 gem 'bson_ext'
@@ -12,7 +12,7 @@ gem 'r18n-core'
 gem 'oa-openid'
 
 group :assets do
-  gem 'compass', '~> 0.12.alpha'
+  gem 'compass', '0.12.alpha.0'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
