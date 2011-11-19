@@ -1,6 +1,6 @@
 .post-comments
   = render partial: 'comments_list', locals: { comments: @post.important_comments }
-  .unimportant-comments
+  .unimportant-comments( role="more-comments" )
     = render partial: 'comments_list', locals: { comments: @post.unimportant_comments }
   .comments-controls
     %a.show-more-comments( href="#" role="show-more-comments" )

@@ -1,16 +1,17 @@
 #= require jquery.elastic
 
 plague.live '.post-comments', ($, $$, comments) ->
-  newComment = comments.parent().find('.new-comment')
 
   # Отображение остальных комментариев
 
   $$('@show-more-comments').click ->
-    $$('.unimportant-comments').slideDown()
+    $$('@more-comments').slideDown()
+    false
 
   # Появление формы добавления комментария
 
   $$('@add-comment').click ->
+    newComment = comments.parent().find('.new-comment')
     if newComment.is(':visible')
       newComment.slideUp()
     else
@@ -20,6 +21,7 @@ plague.live '.post-comments', ($, $$, comments) ->
         $(@).find('textarea').focus()
       if newComment.offset().top + height > scroll + $(window).height()
         $('html, body').stop().animate scrollTop: height + scroll, 400
+    false
 
 plague.live '.new-comment', ($, $$, newComment) ->
   postcard  = $$('.postcard')

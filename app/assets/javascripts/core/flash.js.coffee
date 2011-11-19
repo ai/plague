@@ -15,7 +15,8 @@ plague.flash =
         @_hide(flash)
 
   _div: (type, html) ->
-    $("<div class=\"flash #{type}\" />").html(html).appendTo('.flash-messages')
+    $("<div class=\"flash diagonal-background #{type}\" />").
+      html(html).appendTo('.flash-messages')
 
   _show: (flash) ->
     top = 36 + 30 + 7
