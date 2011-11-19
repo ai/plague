@@ -1,6 +1,3 @@
-#= require core/loader
-#= require jquery.noisy
-
 plague.on '.title-page', -> plague.loader.start()
 
 plague.live '.title-page', ($, $$, titlePage) ->

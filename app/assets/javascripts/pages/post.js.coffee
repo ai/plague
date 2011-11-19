@@ -1,6 +1,3 @@
-#= require jquery.cookie
-#= require core/loader
-
 startFromPost = false
 currentPost   = prevPost = null
 

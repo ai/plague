@@ -1,5 +1,6 @@
 #= require jquery.role
 #= require jquery.easing
+#= require jquery.cookie
 
 vitality = (root, selector, callback) ->
   content = $(selector, root)
