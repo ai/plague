@@ -106,8 +106,8 @@ class Post
 
   def date
     @date ||= begin
-      return nil unless attrs['date']
-      Date.parse(attrs['date'])
+      return nil if draft?
+      self.published_at.to_date + 17.years
     end
   end
 
@@ -154,7 +154,7 @@ class Post
   end
 
   def draft?
-    attrs['draft']
+    attrs['published'].nil?
   end
 
   def updated_at
@@ -165,6 +165,10 @@ class Post
     else
       Time.now.utc
     end
+  end
+
+  def published_at
+    Time.parse(attrs['published'])
   end
 
   def comments
