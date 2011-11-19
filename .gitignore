@@ -4,5 +4,7 @@ tmp/
 .sass-cache/
 public/assets/
 
+cache/
+
 config/mongoid.yml
 config/story.yml
