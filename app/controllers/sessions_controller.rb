@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   def destroy
     Session.author_session.generate_token!
     session.delete :session_token
-    redirect_to root_path
+    redirect_to request.referer || root_path
   end
 
 end
