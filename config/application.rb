@@ -12,9 +12,8 @@ end
 
 module Plague
   class Application < Rails::Application
-    if Rails.env.development? and !defined? Rake and !defined? Rails::Console
-      config.mongoid.logger = Logger.new($stdout, :debug)
-      config.mongoid.persist_in_safe_mode = true
+    if defined? Uglifier
+      config.assets.js_compressor = Uglifier.new(:copyright => false)
     end
 
     config.encoding = "utf-8"
@@ -24,7 +23,6 @@ module Plague
 
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.assets.js_compressor = Uglifier.new(:copyright => false)
 
     config.assets.precompile += %w( quick.css sessions.css error.css
                                     comments_moderation.css )

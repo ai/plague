@@ -27,4 +27,10 @@ Plague::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Mongoid requests logger
+  if not defined? Rake and not defined? Rails::Console
+    config.mongoid.logger = Logger.new($stdout, :debug)
+    config.mongoid.persist_in_safe_mode = true
+  end
 end
