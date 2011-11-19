@@ -3,8 +3,12 @@
 plague.live '.post-comments', ($, $$, comments) ->
   newComment = comments.parent().find('.new-comment')
 
+  # Отображение остальных комментариев
+
   $$('@show-more-comments').click ->
     $$('.unimportant-comments').slideDown()
+
+  # Появление формы добавления комментария
 
   $$('@add-comment').click ->
     if newComment.is(':visible')
@@ -25,22 +29,34 @@ plague.live '.new-comment', ($, $$, newComment) ->
   inputs    = $$('.row input')
   mailbox   = $$('.mailbox')
 
+  # Эффект при выборе поля ввода
+
   text.add(inputs).focus( -> postcard.addClass('focus')).
                    blur( -> postcard.removeClass('focus'))
 
-  text.elastic()
-  text.on 'keyup change', -> textLabel.toggle(text.val() == '')
+  # Автоувеличение формы для текста комментария
 
+  text.elastic()
+
+  # Название поля повверх поля
+
+  text.on 'keyup change', -> textLabel.toggle(text.val() == '')
   textLabel.click -> text.focus()
+
+  # Привлекаем внимание к описанию, зачем нам эл. почта
 
   emailNotice = $$('.email-notice')
   inputs.filter('[type=email]').
     focus( -> emailNotice.addClass('highlighted')).
     blur( -> emailNotice.removeClass('highlighted'))
 
+  # Хак, чтобы при AJAX-отправке сохранялось имя submit-кнопки
+
   $$(':submit[name]').click ->
     $(@).closest('form').trigger('submit', $(@).attr('name'))
     false
+
+  # Отправка комментария
 
   form.submit (e, submiter) ->
     if $.trim(text.val()) == ''
