@@ -82,7 +82,7 @@ body
   .title
     width: $title-width
     height: $title-height - 2px
-    background: white
+    background: white image-url("title/head-with-noise.jpg") no-repeat
     position: relative
     left: $title-width
     border: 1px solid #cfcfcf
@@ -91,14 +91,6 @@ body
     +box-shadow(rgba(0, 0, 0, 0.15) 6px 0 6px -6px inset)
     z-index: 20
     overflow: hidden
-    .head
-      position: absolute
-      background: image-url("title/vessels-and-nerves.png")
-      +image-size("title/vessels-and-nerves.png")
-      top: 165px
-      left: 50%
-      margin-left: image-width("title/vessels-and-nerves.png") / -2
-      +scale(0.86)
     h1
       position: absolute
       top: 15px

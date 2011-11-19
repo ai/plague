@@ -14,9 +14,7 @@
         .back-side
           .paper
           .back-side-shadow
-        .title
-          .head
-          = @title.html
+        .title= @title.html
 
       .controls
         - @start = (not @reading or (@reading == @first and not @new_post))

@@ -8,10 +8,6 @@ plague.live '.title-page', ($, $$, titlePage) ->
   back    = $$('.back-side')
   topMenu =  $('.top-menu')
 
-  # Шероховатость обложки
-
-  title.noisy()
-
   # Центрирование обложки по вертикале
 
   bookHeight = title.outerHeight()
