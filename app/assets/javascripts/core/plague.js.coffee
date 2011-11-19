@@ -8,9 +8,10 @@ vitality = (root, selector, callback) ->
 
   if content.length
     for i in content
-      $$ = (selector) -> $(selector, i)
-      el = $(i)
-      callback.apply(el, [$, $$, el])
+      do ->
+        $$ = (selector) -> $(selector, i)
+        el = $(i)
+        callback.apply(el, [$, $$, el])
 
 window.plague =
 
