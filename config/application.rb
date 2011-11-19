@@ -24,6 +24,7 @@ module Plague
 
     config.assets.enabled = true
     config.assets.version = '1.0'
+    config.assets.js_compressor = Uglifier.new(:copyright => false)
 
     config.assets.precompile += %w( quick.css sessions.css error.css
                                     comments_moderation.css )
