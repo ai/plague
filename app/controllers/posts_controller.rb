@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_filter :load_title, only: %w(title all)
 
   caches_page_with_gzip :all, :feed, :show
+  caches_page_with_gzip :title, if: :new_reader?
 
   def title
   end
@@ -53,5 +54,9 @@ class PostsController < ApplicationController
         cookies.delete('reading-last')
       end
     end
+  end
+
+  def new_reader?
+    cookies[:reading].nil?
   end
 end
