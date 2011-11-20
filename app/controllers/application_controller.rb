@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
   def self.caches_page_with_gzip(*args)
     actions, options = args, {}
     actions, options = args[0..-2], args.last if args.last.is_a?(::Hash)
-    after_filter :gzip_cache, { only: actions }.merge(options)
-    caches_page  *args
+    after_filter({ only: actions }.merge(options)) { |c| c.gzip_cache }
+    caches_page *args
   end
 
   def author_signed_in?
