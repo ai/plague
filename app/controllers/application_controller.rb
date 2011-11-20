@@ -12,6 +12,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def self.caches_page_with_gzip(*actions)
+    after_filter :gzip_cache, only: actions
+    caches_page  *actions
+  end
+
   def author_signed_in?
     @author_signed_in ||= begin
       return false unless session[:session_token]
@@ -40,4 +45,27 @@ class ApplicationController < ActionController::Base
     expire_page(url)
   end
 
+  def gzip_cache
+    return unless perform_caching
+
+    path = request.path
+    file = if path.empty? or path == "/"
+      "/index"
+    else
+      URI.parser.unescape(path.chomp('/'))
+    end
+    unless (file.split('/').last || file).include? '.'
+      file << self.page_cache_extension
+    end
+    file = page_cache_directory.to_s + file
+
+    File.open(file, 'rb') do |text|
+      File.open(file + '.gz', 'wb') do |gziped|
+        buf = ""
+        gz  = Zlib::GzipWriter.new(gziped, Zlib::BEST_COMPRESSION)
+        gz.write(buf) while text.read(16384, buf)
+        gz.close
+      end
+    end
+  end
 end
