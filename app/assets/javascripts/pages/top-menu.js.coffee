@@ -40,7 +40,7 @@ plague.on '.top-menu', ($, $$, topMenu) ->
         slide.addClass('open')
         link.data(opening: null)
       $('body').on 'click.hide-top-slide', (e) ->
-        unless $(e.target).closest('.top-menu').length
+        unless $(e.target).is('@top-menu-open')
           slide.find('.button').click()
     false
 

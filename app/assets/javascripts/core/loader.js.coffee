@@ -17,10 +17,7 @@ plague.loader =
         after '0.5s', -> plague.loader._load()
 
     ready: (callback) ->
-      if @loaded
-        callback()
-      else
-        @_readyCallbacks.push(callback)
+      @_readyCallbacks.add(callback)
 
     openUrl: (url, data) ->
       history.pushState({ }, '', url)
@@ -28,7 +25,7 @@ plague.loader =
 
     _lastUrl: null
 
-    _readyCallbacks: []
+    _readyCallbacks: jQuery.Callbacks('once memory')
 
     _load: ->
       return if @loaded
@@ -66,9 +63,7 @@ plague.loader =
         $('body').addClass('all-posts')
         @_watchUrl()
 
-        for callack in @_readyCallbacks
-          callack()
-        @_readyCallbacks = []
+        @_readyCallbacks.fire()
 
     _watchUrl: ->
       @_lastUrl = location.pathname
