@@ -41,8 +41,12 @@ class ApplicationController < ActionController::Base
   end
 
   def expire_post(url)
-    expire_page('/post.atom')
+    expire_page('/posts.atom')
+    expire_page('/posts.atom.gz')
+    expire_page('/posts.html')
+    expire_page('/posts.html.gz')
     expire_page(url)
+    expire_page(url + '.html.gz')
   end
 
   def gzip_cache
