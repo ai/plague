@@ -8,11 +8,6 @@
 
     = favicon_link_tag
     = enable_html5_for_ie
-    - if Rails.env.production?
-      :css
-        #{Rails.root.join('public/assets/quick.css').read}
-    - else
-      = stylesheet_link_tag :quick, media: :all, type: nil
     = stylesheet_link_tag :application, media: :all, type: nil
     = include_fonts
 
@@ -21,6 +16,12 @@
     = javascript_include_tag :application, type: nil
 
     %link( rel="alternate" type="application/atom+xml" href="/posts.atom" )
+
+    - if Rails.env.production?
+      :css
+        #{Rails.root.join('public/assets/quick.css').read}
+    - else
+      = stylesheet_link_tag :quick, media: :all, type: nil
 
     = yield :head
 
