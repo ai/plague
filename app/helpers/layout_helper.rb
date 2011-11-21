@@ -17,7 +17,7 @@ module LayoutHelper
   end
 
   def include_fonts
-    if Rails.env.production? or true
+    if Rails.env.production?
       fonts = 'PT+Sans:r,b|Philosopher'
       url   = "//fonts.googleapis.com/css?family=#{fonts}&subset=cyrillic"
       stylesheet_link_tag(url, media: 'all', type: nil)

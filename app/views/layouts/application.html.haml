@@ -26,12 +26,9 @@
 
     = yield :head
 
-    - if Rails.env.production?
-      = render 'shared/counter'
-
     - hash = Digest::SHA1.hexdigest "Автор: Андрей Ситник <andrey@sitnik.ru>\n"
     = "<!-- #{hash} -->".html_safe
-  %body.no-js
+  %body.no-js{ class_if('development', !Rails.env.production?) }
     :javascript
       plague.initBodyClasses();
     .full-loader

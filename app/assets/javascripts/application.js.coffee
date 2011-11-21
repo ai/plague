@@ -4,6 +4,7 @@
 #= require core/full-loader
 #= require core/notices
 #= require core/loader
+#= require core/analytics
 
 #= require pages/title
 #= require pages/top-menu
