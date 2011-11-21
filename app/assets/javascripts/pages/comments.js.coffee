@@ -1,17 +1,19 @@
 #= require jquery.elastic
 
 plague.live '.post-comments', ($, $$, comments) ->
+  newComment = comments.parent().find('.new-comment')
 
   # Отображение остальных комментариев
 
   $$('@show-more-comments').click ->
     $$('@more-comments').slideDown()
+    $$('.comments-controls').slideUp()
+    newComment.slideDown()
     false
 
   # Появление формы добавления комментария
 
   $$('@add-comment').click ->
-    newComment = comments.parent().find('.new-comment')
     if newComment.is(':visible')
       newComment.slideUp()
     else
