@@ -11,10 +11,16 @@ plague.ext =
     document.location.hash = hash
     $(window).scrollTop(scroll)
 
-  prefix: ->
-    return 'moz'    if $.browser.mozilla
-    return 'webkit' if $.browser.webkit
-    return 'o'      if $.browser.opera
+  cssPrefix: ->
+    return '-moz-'    if $.browser.mozilla
+    return '-webkit-' if $.browser.webkit
+    return '-o-'      if $.browser.opera
+    return '-ms-'     if $.browser.msie
+
+  domPrefix: ->
+    return 'Moz'    if $.browser.mozilla
+    return 'Webkit' if $.browser.webkit
+    return 'O'      if $.browser.opera
     return 'ms'     if $.browser.msie
 
   once: (name, callback) ->
