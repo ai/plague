@@ -1,5 +1,3 @@
-#= require core/plague
-
 loader = null
 
 jQuery ($) ->

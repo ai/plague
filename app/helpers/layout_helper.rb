@@ -17,14 +17,12 @@ module LayoutHelper
   end
 
   def include_fonts
-    if Rails.env.production?
-      ['Philosopher&subset=cyrillic', 'PT+Sans:400,700&subset=cyrillic,latin'].
-        map { |font|
-          url = '//fonts.googleapis.com/css?family=' + font
-          stylesheet_link_tag(url, media: 'all', type: nil)
-        }.join("\n").html_safe
+    if Rails.env.production? or true
+      fonts = 'PT+Sans:r,b|Philosopher'
+      url   = "//fonts.googleapis.com/css?family=#{fonts}&subset=cyrillic"
+      stylesheet_link_tag(url, media: 'all', type: nil)
     else
-      stylesheet_link_tag('philosopher') + stylesheet_link_tag('ptsans')
+      stylesheet_link_tag('fonts')
     end
   end
 
