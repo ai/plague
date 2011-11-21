@@ -38,12 +38,20 @@ class Comment
     asc(:published_at)
   end
 
+  def for_hero?
+    comment_for == 'hero'
+  end
+
+  def for_author?
+    comment_for == 'author'
+  end
+
   def fictional?
-    answer.try(:answer_from) == 'hero' or comment_for == 'hero'
+    answer.try(:from_hero?) or for_hero?
   end
 
   def real_life?
-    answer.try(:answer_from) == 'author' or comment_for == 'author'
+    answer.try(:from_author?) or for_author?
   end
 
   def author_name
