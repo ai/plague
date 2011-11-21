@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
       flash[:wrong_signin] = true
     else
       session[:session_token] = Session.author_session.token
+      cookies[:author] = { value: 1, expires: 1.year.from_now }
     end
     redirect_to request.env['omniauth.origin'] || root_path
   end

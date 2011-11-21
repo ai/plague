@@ -23,6 +23,13 @@ plague.live '.post-comments', ($, $$, comments) ->
         $('html, body').stop().animate scrollTop: height + scroll, 400
     false
 
+  # Отображение ID комментария для модерации
+
+  if $.cookie('author')
+    $$('.comment .info').dblclick ->
+      comment = $(@).closest('.comment')
+      console.log("c = Comment.find('#{comment.data('id')}')")
+
 plague.live '.new-comment', ($, $$, newComment) ->
   postcard  = $$('.postcard')
   form      = $$('form')

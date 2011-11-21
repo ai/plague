@@ -1,5 +1,5 @@
 - comments.each do |comment|
-  %article.comment{ class_if('real-life', comment.real_life?) }
+  %article.comment{ class_if('real-life', comment.real_life?), 'data-id' => comment.id }
     - if comment.real_life?
       .to-author комментарий для автора
     = comment.html
