@@ -23,3 +23,6 @@ before "deploy:assets:precompile", "deploy:symlink_configs"
 
 require 'bundler/capistrano'
 require 'capistrano-unicorn'
+
+require './config/boot'
+require 'airbrake/capistrano'

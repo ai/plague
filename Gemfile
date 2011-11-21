@@ -11,6 +11,8 @@ gem 'r18n-core'
 
 gem 'oa-openid'
 
+gem 'airbrake'
+
 group :assets do
   gem 'compass', '0.12.alpha.0'
   gem 'sass-rails'

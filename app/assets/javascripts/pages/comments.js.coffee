@@ -27,8 +27,7 @@ plague.live '.post-comments', ($, $$, comments) ->
 
   if $.cookie('author')
     $$('.comment .info').dblclick ->
-      comment = $(@).closest('.comment')
-      console.log("c = Comment.find('#{comment.data('id')}')")
+      console.log("c = Comment.find('#{$(@).closest('.comment').data('id')}')")
 
 plague.live '.new-comment', ($, $$, newComment) ->
   postcard  = $$('.postcard')
