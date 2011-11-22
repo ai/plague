@@ -102,7 +102,7 @@ plague.live '.post-page', ($, $$, postPage) ->
       if source != 'scroll'
         plague.animation.start()
         top = postPage.offset().top - topMenu.height() + 30
-        $('html, body').stop().animate scrollTop: top, 400, ->
+        plague.ext.scroll top, ->
           plague.animation.end()
 
     changePrev(prev = postPage.prev('.post-page'))

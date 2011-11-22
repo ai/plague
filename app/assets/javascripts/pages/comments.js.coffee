@@ -39,7 +39,7 @@ plague.live '.post-comments', ($, $$, comments) ->
     top -= 5 if comment.hasClass('real-life')
     if animated
       plague.animation.wait ->
-        $('html, body').stop().animate scrollTop: top, 400
+        plague.ext.scroll(top)
     else
       $(window).scrollTop(top)
 
@@ -65,7 +65,7 @@ plague.live '.post-comments', ($, $$, comments) ->
       newComment.slideDown ->
         $(@).find('textarea').focus()
       if newComment.offset().top + height > scroll + $(window).height()
-        $('html, body').stop().animate scrollTop: height + scroll, 400
+        plague.ext.scroll(height + scroll)
     false
 
   # Отображение ID комментария для модерации

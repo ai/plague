@@ -48,7 +48,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
       $(window).scrollTop(0)
       closeBook()
     else
-      $('html, body').stop().animate(scrollTop: 0, 400, closeBook)
+      plague.ext.scroll(0, closeBook)
 
   closeBook = ->
     if plague.support.transform3d()

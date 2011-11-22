@@ -11,6 +11,9 @@ plague.ext =
     document.location.hash = hash
     $(window).scrollTop(scroll)
 
+  scroll: (top, callback) ->
+    $('html, body').stop().animate(scrollTop: top, 400, callback)
+
   cssPrefix: ->
     return '-moz-'    if $.browser.mozilla
     return '-webkit-' if $.browser.webkit
