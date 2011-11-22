@@ -33,6 +33,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
 
   titlePage.on 'hide-page', ->
     plague.animation.start()
+    titlePage.css(position: 'fixed')
     $('.post-page').show()
     openBook ->
       topMenu.trigger('show-menu')
@@ -43,12 +44,8 @@ plague.live '.title-page', ($, $$, titlePage) ->
   titlePage.on 'show-page', ->
     plague.animation.start()
     plague.title()
-
-    if $(window).scrollTop() < 50
-      $(window).scrollTop(0)
-      closeBook()
-    else
-      plague.ext.scroll(0, closeBook)
+    titlePage.css(position: 'fixed')
+    closeBook()
 
   closeBook = ->
     if plague.support.transform3d()

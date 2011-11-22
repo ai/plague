@@ -17,7 +17,7 @@ watchCommentHash = ->
   return if commentCacheIsWatching
   commentCacheIsWatching = true
 
-  $(window).bind 'hashchange', ->
+  $(window).on 'hashchange', ->
     if location.hash.match(/^#comment/)
       commentByHash(location.hash).trigger('scroll-to-comment', 'animated')
 
@@ -28,7 +28,7 @@ plague.live '.post-comments', ($, $$, comments) ->
 
   watchCommentHash()
 
-  $$('.comment').bind 'scroll-to-comment', (e, animated) ->
+  $$('.comment').on 'scroll-to-comment', (e, animated) ->
     comment = $(@)
     if comment.closest('@more-comments').length
       moreComemnts.show()

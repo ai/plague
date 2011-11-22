@@ -90,12 +90,14 @@ plague.live '.post-page', ($, $$, postPage) ->
   postPage.on 'show-page', (e, source) ->
     currentPost = postPage
 
+    topMenu     = $('.top-menu')
+    prevNext    = topMenu.find('.prev-next')
+
     plague.title(postPage.data('title'), currentPost.data('story'))
     titlePage = $('.title-page')
-    titlePage.trigger('hide-page') if titlePage.is(':visible')
-
-    topMenu  = $('.top-menu')
-    prevNext = topMenu.find('.prev-next')
+    if titlePage.is(':visible')
+      titlePage.trigger('hide-page')
+      $(window).scrollTop(postPage.offset().top - topMenu.height() + 30)
 
     plague.animation.wait ->
       changeTitleLinks(currentPost)
