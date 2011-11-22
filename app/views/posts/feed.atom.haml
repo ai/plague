@@ -5,17 +5,34 @@
   %title= story['title']
   %link( rel="self" href="#{root}/posts.atom" type="application/atom+xml" )/
   %link( href="#{root}/" type="text/html" )/
-  %updated= @posts.last.updated_at.xmlschema
+  %updated= @entries.last.updated_at.xmlschema
   %author
     %name Автор Инсомниса
     %email insomnis.story@gmail.com
   %id= id_prefix + '/posts.atom'
-  - @posts.reverse_each do |post|
+  - @entries.reverse_each do |entry|
     %entry
-      %title= post.title
-      %link( href="#{root + post.url}" )/
-      %updated= post.updated_at.xmlschema
-      %id= id_prefix + post.url
-      %content( type="xhtml"  )
-        %div( xmlns="http://www.w3.org/1999/xhtml" )
-          = post.html
+      %updated= entry.updated_at.xmlschema
+      %link( href="#{root + entry.url}" )/
+      - if entry.is_a? Post
+        %title= entry.title
+        %id= id_prefix + entry.url
+        %content( type="xhtml"  )
+          %div( xmlns="http://www.w3.org/1999/xhtml" )
+            = entry.html
+      - elsif entry.is_a? Comment
+        %title Комментарий № #{entry.number} к «#{entry.post.title}»
+        %id= id_prefix + 'comment' + entry.id.to_s
+        %author
+          %name= entry.author_name
+        %content( type="xhtml"  )
+          %div( xmlns="http://www.w3.org/1999/xhtml" )
+            - if entry.for_author?
+              Комментарий автору:
+            %blockqoute= entry.html
+            - if entry.answer
+              - if entry.for_hero? and entry.answer.from_author?
+                Ответ от автора:
+              - else
+                Ответ:
+              %blockqoute= entry.answer.html

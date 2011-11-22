@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def feed
-    @posts = Post.all
+    @entries = Post.all_with_important_comments
     Haml::Template.options[:format] = :xhtml
     render layout: false
   end

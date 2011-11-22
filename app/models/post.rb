@@ -57,6 +57,13 @@ class Post
     posts
   end
 
+  def self.all_with_important_comments
+    posts   = self.all
+    entries = posts
+    posts.each { |post| entries += post.important_comments.to_a }
+    entries.sort { |a, b| a.published_at <=> b.published_at }
+  end
+
   def self.git(command)
     `cd '#{self.story_root}'; git #{command}`
   end
