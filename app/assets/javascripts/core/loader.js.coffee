@@ -73,8 +73,9 @@ plague.loader =
 
       $(document).on 'click', 'a', ->
         href = $(@).attr('href')
-        plague.loader.openUrl(href) if href[0] == '/'
-        false
+        if href[0] == '/' and not href.match('#')
+          plague.loader.openUrl(href)
+          false
 
     _openPage: (url, data) ->
       return if url == @_lastUrl

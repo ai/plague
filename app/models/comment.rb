@@ -8,12 +8,15 @@ class Comment
   field :author_ip
   field :text
   field :comment_for
+  field :number
   field :published_at, type: Time
   field :important,    type: Boolean
   field :moderated,    type: Boolean
   include Mongoid::Timestamps
 
   embeds_one :answer
+
+  index :post_path
 
   validates :post_path, exists_post: true
   validates :text,      presence: true
@@ -59,6 +62,14 @@ class Comment
     name.present? ? name : 'Аноним'
   end
 
+  def hash
+    "comment#{self.number}"
+  end
+
+  def url
+    self.post.url + '#' + self.hash
+  end
+
   def post
     @post ||= Post.by_path(self.post_path)
   end
@@ -67,16 +78,14 @@ class Comment
     self.published_at = Time.now
     self.important    = true if important
     self.moderated    = true
+    self.number       = Comment.max(:number).to_i + 1
     self.save!
   end
 
   def answer!(text)
     first, text = text.split("\n", 2)
 
-    self.important    = true         if first =~ /\*/
-    self.published_at = Time.now unless first =~ /p/
-    self.moderated    = true
-    self.save!
+    self.publish!(first =~ /\*/) unless first =~ /p/
 
     self.build_answer
     self.answer.text        = text

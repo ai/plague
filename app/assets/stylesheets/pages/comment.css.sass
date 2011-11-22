@@ -17,6 +17,16 @@ article.comment
     text-align: right
     font-size: 14px
     color: #333
+    position: relative
+  .comment-link
+    color: #666
+    position: absolute
+    top: 0
+    right: -11px
+    opacity: 0
+    +transition(opacity, 200ms)
+  .info:hover .comment-link
+    opacity: 1
   .quote-arrow
     position: absolute
     top: 8px
