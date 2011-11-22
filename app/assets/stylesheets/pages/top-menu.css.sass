@@ -92,6 +92,7 @@ $top-menu: sprite-map("top-menu/*.png")
       float: left
   .slide-button
     position: relative
+    +perspective(2000px)
     .button
       display: block
       color: white
@@ -120,9 +121,10 @@ $top-menu: sprite-map("top-menu/*.png")
       padding: 10px 12px 4px 12px
       +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
       line-height: 1.25
-      margin-top: -5px
+      margin-top: -15px
       opacity: 0
-      +transition("margin-top, opacity", 200ms)
+      +rotateX(60deg)
+      +transition(all, 250ms)
       &, .rotated
         +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
       .arrow
@@ -148,6 +150,7 @@ $top-menu: sprite-map("top-menu/*.png")
       .content
         opacity: 1
         margin-top: 11px
+        +rotateX(0)
   .slide-button.what-is-it
     position: absolute
     top: 0
