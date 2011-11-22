@@ -34,8 +34,27 @@ article.comment
       background: white
       +rotate(45deg)
       +shadow
+  .answer
+    margin: 7px -15px 0 -15px
+    padding: 7px 15px 0 15px
+    border-top: 1px solid #ccc
+    position: relative
+    .quote-arrow
+      left: auto
+      right: -20px
+      .rotate
+        left: -30px
   &.real-life
     border-left: 5px solid black
     padding-left: 10px
-    .quote-arrow .rotate
-      background: black
+    .quote-arrow
+      left: -25px
+      .rotate
+        background: black
+    .answer
+      margin-left: -10px
+      padding-left: 10px
+      .quote-arrow
+        left: auto
+        .rotate
+          background: white

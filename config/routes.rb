@@ -3,7 +3,10 @@ Plague::Application.routes.draw do
   resource :session, only: :destroy
 
   resources :comments, only: [:index, :create, :destroy] do
-    member { post :publish }
+    member do
+      post :publish
+      post :answer
+    end
   end
 
   match '/posts.atom',   to: 'posts#feed', format: [:atom]

@@ -1,7 +1,10 @@
 - comments.each do |comment|
   %article.comment{ class_if('real-life', comment.real_life?), 'data-id' => comment.id }
     - if comment.real_life?
-      .to-author комментарий для автора
+      - if comment.for_author?
+        .to-author комментарий для автора
+      - else
+        .to-author ответ от автора
     = comment.html
     .quote-arrow
       .rotate
@@ -9,3 +12,15 @@
       —
       = comment.author_name + ','
       %span.time= R18n.l comment.created_at, :full
+    - if comment.answer
+      %article.answer
+        = comment.answer.html
+        .quote-arrow
+          .rotate
+        .info
+          —
+          - if comment.answer.from_author?
+            Автор,
+          - else
+            Герой,
+          %span.time= R18n.l comment.answer.created_at, :full

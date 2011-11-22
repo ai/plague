@@ -1,7 +1,9 @@
 - content_for :head do
   %title Модерация комментариев — #{story['title']}
   = include_fonts
-  = stylesheet_link_tag :comments_moderation
+  = stylesheet_link_tag    :comments_moderation
+  = include_jquery
+  = javascript_include_tag :comments_moderation
 
 = form_tag session_path, method: :delete, class: 'exit' do
   = submit_tag 'Выход'
@@ -38,5 +40,12 @@
             = form_tag publish_comment_path(comment) do
               %input( type="hidden" name="important" value="1" )
               %input.star( type="submit" title="Опубликовать как важный" value="*" )
+          %article.answer
+            = form_tag answer_comment_path(comment) do
+              %textarea( name="answer" )= comment.for_author? ? 'a' : 'h'
+              .quote-arrow
+                .rotate
+              .buttons
+                %input.save( type="submit" title="Ответить" value="↲" )
   - unless unmoderated
     .empty Все комментарии проверены
