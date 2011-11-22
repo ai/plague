@@ -22,6 +22,7 @@ plague.loader =
     openUrl: (url, data) ->
       history.pushState({ }, '', url)
       plague.loader._openPage(location.pathname, data)
+      $(window).trigger('hashchange') if url.match('#')
 
     _lastUrl: null
 
@@ -73,7 +74,7 @@ plague.loader =
 
       $(document).on 'click', 'a', ->
         href = $(@).attr('href')
-        if href[0] == '/' and not href.match('#')
+        if href[0] == '/'
           plague.loader.openUrl(href)
           false
 

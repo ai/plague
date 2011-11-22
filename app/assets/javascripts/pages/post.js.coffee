@@ -52,19 +52,6 @@ plague.on '.post-page', ($, $$, postPage) ->
   currentPost   = prevPost = postPage
   $(window).on 'load', ->
     hightlightYear('300ms')
-    if location.hash.match(/^#comment/)
-      immediate ->
-        comment = $(location.hash)
-        return unless comment.length
-
-        if comment.closest('@more-comments').length
-          $$('@more-comments').show()
-          $$('.comments-controls').hide()
-          $$('.new-comment').show()
-
-        top = comment.offset().top - 45
-        top -= 5 if comment.hasClass('real-life')
-        $(window).scrollTop(top)
 
   rememberReading(postPage)
   plague.loader.start() unless postPage.data('draft')

@@ -1,17 +1,56 @@
 #= require jquery.elastic
 
+# Прокрутка к комментарию при нажатию на ссылку
+
+commentByHash = (hash) ->
+  number = hash.replace(/^#comment/, '')
+  $("article.comment[data-number=#{number}]")
+
+plague.on '.post-comments', ($, $$) ->
+  $(window).on 'load', ->
+    if location.hash.match(/^#comment/)
+      immediate ->
+        commentByHash(location.hash).trigger('scroll-to-comment')
+
+commentCacheIsWatching = false
+watchCommentHash = ->
+  return if commentCacheIsWatching
+  commentCacheIsWatching = true
+
+  $(window).bind 'hashchange', ->
+    if location.hash.match(/^#comment/)
+      commentByHash(location.hash).trigger('scroll-to-comment', 'animated')
+
 plague.live '.post-comments', ($, $$, comments) ->
-  newComment = comments.parent().find('.new-comment')
+  newComment   = comments.parent().find('.new-comment')
+  moreComemnts = $$('@more-comments')
+  controls     = $$('.comments-controls')
+
+  watchCommentHash()
+
+  $$('.comment').bind 'scroll-to-comment', (e, animated) ->
+    comment = $(@)
+    if comment.closest('@more-comments').length
+      moreComemnts.show()
+      controls.hide()
+      newComment.show()
+
+    top = comment.offset().top - 45
+    top -= 5 if comment.hasClass('real-life')
+    if animated
+      plague.animation.wait ->
+        $('html, body').stop().animate scrollTop: top, 400
+    else
+      $(window).scrollTop(top)
 
   # Отображение остальных комментариев
 
   $$('@show-more-comments').click ->
-    more = $$('@more-comments')
-    if more.find('.comment').length == 0
+    if moreComemnts.find('.comment').length == 0
       $$('@add-comment').click()
     else
-      more.slideDown()
-      $$('.comments-controls').slideUp()
+      moreComemnts.slideDown()
+      controls.slideUp()
       newComment.slideDown()
     false
 

@@ -1,6 +1,6 @@
 - comments.each do |comment|
   %a.comment-anchor{ name: comment.hash }
-  %article.comment{ class_if('real-life', comment.real_life?), 'data-id' => comment.id, id: comment.hash }
+  %article.comment{ class_if('real-life', comment.real_life?), data: { id: comment.id, number: comment.number } }
     - if comment.real_life?
       - if comment.for_author?
         .to-author комментарий для автора
