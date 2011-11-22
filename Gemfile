@@ -14,7 +14,7 @@ gem 'oa-openid'
 gem 'airbrake'
 
 group :assets do
-  gem 'compass', '~> 0.12.alpha'
+  gem 'compass', '0.12.alpha.0'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
