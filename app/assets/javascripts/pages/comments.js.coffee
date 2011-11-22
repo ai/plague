@@ -6,9 +6,13 @@ plague.live '.post-comments', ($, $$, comments) ->
   # Отображение остальных комментариев
 
   $$('@show-more-comments').click ->
-    $$('@more-comments').slideDown()
-    $$('.comments-controls').slideUp()
-    newComment.slideDown()
+    more = $$('@more-comments')
+    if more.find('.comment').length == 0
+      $$('@add-comment').click()
+    else
+      more.slideDown()
+      $$('.comments-controls').slideUp()
+      newComment.slideDown()
     false
 
   # Появление формы добавления комментария
