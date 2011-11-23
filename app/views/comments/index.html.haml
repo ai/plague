@@ -34,18 +34,18 @@
               = R18n.l comment.created_at, :human
           .buttons
             = form_tag comment_path(comment), method: :delete do
-              %input.delete( type="submit" title="Удалить" value="×" )
+              %input.delete.black-button( type="submit" title="Удалить" value="×" )
             = form_tag publish_comment_path(comment) do
-              %input.public( type="submit" title="Опубликовать" value="↑" )
+              %input.public.black-button( type="submit" title="Опубликовать" value="↑" )
             = form_tag publish_comment_path(comment) do
               %input( type="hidden" name="important" value="1" )
-              %input.star( type="submit" title="Опубликовать как важный" value="*" )
+              %input.star.black-button( type="submit" title="Опубликовать как важный" value="*" )
           %article.answer
             = form_tag answer_comment_path(comment) do
               %textarea( name="answer" )= comment.for_author? ? 'a' : 'h'
               .quote-arrow
                 .rotate
               .buttons
-                %input.save( type="submit" title="Ответить" value="↲" )
+                %input.save.black-button( type="submit" title="Ответить" value="↲" )
   - unless unmoderated
     .empty Все комментарии проверены

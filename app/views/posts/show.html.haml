@@ -33,8 +33,7 @@
     - if @post.next
       - unless @all_posts
         .next-post
-          %a( href="#{@post.next.url}" )
-            .border
+          %a.black-button( href="#{@post.next.url}" )
             .arrow ↓
             .text
               Следующая запись
