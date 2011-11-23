@@ -5,7 +5,5 @@
     = favicon_link_tag
     = enable_html5_for_ie
     = yield :head
-    - if Rails.env.production?
-      = render 'shared/counter'
   %body
     = yield
