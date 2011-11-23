@@ -1,0 +1,19 @@
+%p= hello_with_name(@comment.author_name)
+%p
+  = @comment.answer.from_author? ? "Автор" : "Герой"
+  ответил на Ваш комментарий к записи
+  - if @comment.published?
+    «<a href="#{@root + @comment.url}">#{@comment.post.title}</a>»:
+  - else
+    «<a href="#{@root + @comment.post.url}">#{@comment.post.title}</a>»:
+  %br
+  = blockquote @comment.answer.text
+%p
+  Ваш комментарий:
+  %br
+  = blockquote @comment.text
+%br
+%div( style="color: #999" )
+  \--<br>
+  Инсомнис<br>
+  %a{ href: root_url }= @root.sub(/^http:\/\//, '')

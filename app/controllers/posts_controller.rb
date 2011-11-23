@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if story['key'] == params['key']
+    if params['key'] == story['api_key']
       Post.update_repository!
       expire_all
       render text: 'updated'

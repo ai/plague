@@ -75,6 +75,15 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailcatcher (0.5.3)
+      activesupport (~> 3.0)
+      eventmachine (~> 0.12)
+      haml (~> 3.1)
+      mail (~> 2.3)
+      sinatra (~> 1.2)
+      skinny (~> 0.2)
+      sqlite3 (~> 1.3)
+      thin (~> 1.2)
     mime-types (1.17.2)
     mongo (1.4.0)
       bson (= 1.4.0)
@@ -105,6 +114,8 @@ GEM
     rack-openid (1.3.1)
       rack (>= 1.1.0)
       ruby-openid (>= 2.1.8)
+    rack-protection (1.1.4)
+      rack
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
@@ -137,10 +148,18 @@ GEM
       railties (~> 3.1.0)
       sass (~> 3.1.10)
       tilt (~> 1.3.2)
+    sinatra (1.3.1)
+      rack (~> 1.3, >= 1.3.4)
+      rack-protection (~> 1.1, >= 1.1.2)
+      tilt (~> 1.3, >= 1.3.3)
+    skinny (0.2.0)
+      eventmachine (~> 0.12)
+      thin (~> 1.2)
     sprockets (2.0.3)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.4)
     therubyracer (0.9.9)
       libv8 (~> 3.3.10)
     thin (1.3.1)
@@ -175,6 +194,7 @@ DEPENDENCIES
   compass (= 0.12.alpha.0)
   haml
   kramdown
+  mailcatcher
   mongoid
   oa-openid
   r18n-core

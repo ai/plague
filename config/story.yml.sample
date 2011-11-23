@@ -1,4 +1,6 @@
 title: Инсомнис
 author_email: andrey@sitnik.ru
 story_repo: ../insomnis/
-key: abc
+api_key: abc
+public_email: insomnis.story@gmail.com
+public_email_password: qwerty

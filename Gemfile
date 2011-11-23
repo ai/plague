@@ -27,6 +27,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-unicorn'
   gem 'capistrano_colors'
+  gem 'mailcatcher', require: false
 end
 
 group :production do

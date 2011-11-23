@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     comment.author_name  = params[:author_name]
     comment.author_email = params[:author_email]
     comment.author_ip    = request.remote_ip
-    comment.text         = params[:text]
+    comment.text         = params[:text].strip
     comment.comment_for  = params[:for_author] ? 'author' : 'hero'
 
     session['author_name']  = params[:author_name]
@@ -47,6 +47,7 @@ class CommentsController < ApplicationController
 
   def answer
     @comment.answer! params[:answer]
+    Notifier.answer(@comment).deliver
     expire_post(@comment.post.url)
     redirect_to comments_path
   end

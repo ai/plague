@@ -57,6 +57,10 @@ class Comment
     answer.try(:from_author?) or for_author?
   end
 
+  def published?
+    self.published_at != nil
+  end
+
   def author_name
     name = super
     name.present? ? name : 'Аноним'
@@ -85,11 +89,16 @@ class Comment
   def answer!(text)
     first, text = text.split("\n", 2)
 
-    self.publish!(first =~ /\*/) unless first =~ /p/
+    if first =~ /p/
+      self.moderated = true
+      self.save!
+    else
+      self.publish!(first =~ /\*/)
+    end
 
     self.build_answer
-    self.answer.text        = text
-    self.answer.answer_from = first =~ /a/ ? 'author' : 'hero'
+    self.answer.text        = text.strip
+    self.answer.answer_from = first =~ /(a|p)/ ? 'author' : 'hero'
     self.answer.save!
   end
 

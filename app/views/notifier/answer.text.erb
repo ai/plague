@@ -1,0 +1,15 @@
+<%= hello_with_name(@comment.author_name) %>
+
+<%= @comment.answer.from_author? ? "Автор" : "Герой" %> ответил на Ваш комментарий к записи «<%= @comment.post.title %>»:
+
+<%= format_comment_mail(@comment.answer.text) %>
+
+Ваш комментарий:
+
+<%= format_comment_mail(@comment.text) %>
+
+<%= @comment.published? ? "Посмотреть на сайте: #{@root + @comment.url}" : "Адрес записи: #{@root + @comment.post.url}" %>
+
+--
+Инсомнис
+<%= @root %>

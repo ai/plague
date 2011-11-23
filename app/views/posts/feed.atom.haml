@@ -29,10 +29,10 @@
           %div( xmlns="http://www.w3.org/1999/xhtml" )
             - if entry.for_author?
               Комментарий автору:
-            %blockqoute= entry.html
+            %blockquote= entry.html
             - if entry.answer
               - if entry.for_hero? and entry.answer.from_author?
                 Ответ от автора:
               - else
                 Ответ:
-              %blockqoute= entry.answer.html
+              %blockquote= entry.answer.html
