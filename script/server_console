@@ -1,0 +1,4 @@
+#!/bin/bash
+# Open Rails console for current deploy.
+
+ssh ai@insomnis.ru "cd /home/ai/plague/current/; bundle exec rails console production"
