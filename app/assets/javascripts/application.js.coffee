@@ -11,3 +11,4 @@
 #= require pages/top-menu
 #= require pages/post
 #= require pages/comments
+#= require pages/new-comment

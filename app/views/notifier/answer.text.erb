@@ -1,4 +1,4 @@
-<%= hello_with_name(@comment.author_name) %>
+<%= hello_with_name(@comment) %>
 
 <%= @comment.answer.from_author? ? "Автор" : "Герой" %> ответил на Ваш комментарий к записи «<%= @comment.post.title %>»:
 

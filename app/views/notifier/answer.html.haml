@@ -1,4 +1,4 @@
-%p= hello_with_name(@comment.author_name)
+%p= hello_with_name(@comment)
 %p
   = @comment.answer.from_author? ? "Автор" : "Герой"
   ответил на Ваш комментарий к записи

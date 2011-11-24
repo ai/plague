@@ -20,6 +20,10 @@ class CommentsController < ApplicationController
     comment.text         = params[:text].strip
     comment.comment_for  = params[:for_author] ? 'author' : 'hero'
 
+    if params[:author_time_offset].present?
+      comment.author_time_offset = params[:author_time_offset].to_i
+    end
+
     session['author_name']  = params[:author_name]
     session['author_email'] = params[:author_email]
 

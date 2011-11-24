@@ -5,6 +5,7 @@ class Comment
   field :post_path
   field :author_name
   field :author_email
+  field :author_time_offset
   field :author_ip
   field :text
   field :comment_for
@@ -64,6 +65,14 @@ class Comment
   def author_name
     name = super
     name.present? ? name : 'Аноним'
+  end
+
+  def author_time
+    if self.author_time_offset
+      Time.now.utc - self.author_time_offset.minutes
+    else
+      Time.now
+    end
   end
 
   def hash
