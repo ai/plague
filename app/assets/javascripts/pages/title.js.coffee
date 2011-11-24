@@ -42,6 +42,10 @@ plague.live '.title-page', ($, $$, titlePage) ->
   # Закрытие книги
 
   titlePage.on 'show-page', ->
+    plague.data.closedPost =
+      url:    plague.data.currentPost.data('url')
+      scroll: $(window).scrollTop()
+
     plague.animation.start()
     plague.title()
     titlePage.css(position: 'fixed')

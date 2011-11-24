@@ -59,11 +59,12 @@ postTop = (postPage) ->
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true
   currentPost   = prevPost = postPage
+  plague.data.currentPost  = currentPost
   $(window).on 'load', ->
     hightlightYear('300ms')
     immediate -> $(window).scrollTop(0)
   plague.loader.ready ->
-    $(window).scrollTop(postTop(currentPost))
+    $(window).scrollTop(postTop(postPage))
 
   rememberReading(postPage)
   plague.loader.start() unless postPage.data('draft')
@@ -102,16 +103,21 @@ plague.live '.post-page', ($, $$, postPage) ->
   postPage.on 'show-page', (e, source) ->
     currentPost = postPage
     prevNext    = topMenu.find('.prev-next')
+    plague.data.currentPost = currentPost
 
-    plague.title(postPage.data('title'), currentPost.data('story'))
+    plague.title(postPage.data('title'), postPage.data('story'))
     titlePage = $('.title-page')
     if titlePage.is(':visible')
       titlePage.trigger('hide-page')
-      $(window).scrollTop(postTop(postPage))
+      scrolled = true
+      if plague.data.closedPost?.url == postPage.data('url')
+        $(window).scrollTop(plague.data.closedPost.scroll)
+      else
+        $(window).scrollTop(postTop(postPage))
 
     plague.animation.wait ->
-      changeTitleLinks(currentPost)
-      if source != 'scroll'
+      changeTitleLinks(postPage)
+      if source != 'scroll' and not scrolled
         plague.animation.start()
         plague.ext.scroll postTop(postPage), ->
           plague.animation.end()
@@ -123,4 +129,4 @@ plague.live '.post-page', ($, $$, postPage) ->
     prevPost = postPage
     recalculateScroll()
 
-    rememberReading(currentPost)
+    rememberReading(postPage)

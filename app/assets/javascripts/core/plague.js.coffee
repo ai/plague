@@ -15,12 +15,14 @@ vitality = (root, selector, callback) ->
 
 window.plague =
 
-  _vitalities: [],
+  _vitalities: []
+
+  _alive: false
+
+  data: { }
 
   on: (selector, callback) ->
     $(document).ready -> vitality($('body'), selector, callback)
-
-  _alive: false
 
   live: (selector, callback) ->
     @_vitalities.push([selector, callback])
