@@ -1,6 +1,9 @@
 startFromPost = false
 currentPost   = prevPost = null
 
+topMenu = null
+$(document).ready -> topMenu = $('.top-menu')
+
 recalculateScroll = ->
 
 hightlightYear = (delay) ->
@@ -47,11 +50,20 @@ changeNext = (next) ->
   $('@prev-next-page').toggleClass('last', !next.length)
   $('@next-page').attr(href: next.data('url')) if next.length
 
+postTop = (postPage) ->
+  if postPage.hasClass('first-post')
+    0
+  else
+    postPage.offset().top - topMenu.height() + 60
+
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true
   currentPost   = prevPost = postPage
   $(window).on 'load', ->
     hightlightYear('300ms')
+    immediate -> $(window).scrollTop(0)
+  plague.loader.ready ->
+    $(window).scrollTop(postTop(currentPost))
 
   rememberReading(postPage)
   plague.loader.start() unless postPage.data('draft')
@@ -89,22 +101,19 @@ plague.live '.post-page', ($, $$, postPage) ->
 
   postPage.on 'show-page', (e, source) ->
     currentPost = postPage
-
-    topMenu     = $('.top-menu')
     prevNext    = topMenu.find('.prev-next')
 
     plague.title(postPage.data('title'), currentPost.data('story'))
     titlePage = $('.title-page')
     if titlePage.is(':visible')
       titlePage.trigger('hide-page')
-      $(window).scrollTop(postPage.offset().top - topMenu.height() + 30)
+      $(window).scrollTop(postTop(postPage))
 
     plague.animation.wait ->
       changeTitleLinks(currentPost)
       if source != 'scroll'
         plague.animation.start()
-        top = postPage.offset().top - topMenu.height() + 30
-        plague.ext.scroll top, ->
+        plague.ext.scroll postTop(postPage), ->
           plague.animation.end()
 
     changePrev(prev = postPage.prev('.post-page'))

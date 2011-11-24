@@ -48,18 +48,13 @@ plague.loader =
           else
             after.append(page)
 
-        beforeScroll = $(window).scrollTop()
-        before = plague.enliven(before.children().insertBefore(current))
-        after  = plague.enliven(after.children().insertAfter(current))
+        plague.enliven(before.children().insertBefore(current))
+        plague.enliven(after.children().insertAfter(current))
 
-        if current.is('.title-page')
+        if current.hasClass('title-page')
           $('.post-page').hide()
         else
           $('.title-page, .post-page .next-post').hide()
-          height = 0
-          for el in before.filter(':not(.title-page)')
-            height += $(el).outerHeight()
-          $(window).scrollTop(beforeScroll + height)
 
         $('body').addClass('all-posts')
         @_watchUrl()
