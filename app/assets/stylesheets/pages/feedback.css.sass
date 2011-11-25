@@ -3,11 +3,11 @@
   bottom: -35px
   right: 10px
   z-index: 150
-  width: 220px
+  width: 212px
   background: rgba(0, 0, 0, 0)
   text-align: center
-  +transition(all, 400ms)
   +box-shadow(#ccc 0 0 0 0)
+  +transition(all, 400ms)
   &:hover
     background: rgba(0, 0, 0, 1)
     bottom: 0
@@ -32,3 +32,14 @@
       +transition(text-shadow, 200ms)
       &:hover
         text-shadow: white 0 0 1px
+
+@media all and (max-width: 1100px)
+  .feedback-content
+    right: 0
+    width: auto
+    bottom: 0
+    .feedback-link
+      font-size: 13px
+      padding: 0 10px
+    .feedback-mail
+      display: none
