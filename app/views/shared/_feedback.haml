@@ -1,0 +1,5 @@
+.feedback-content
+  %a.feedback-link( href="mailto:#{story['public_email']}" )
+    Связаться с автором
+  .feedback-mail
+    %a( href="mailto:#{story['public_email']}" )= story['public_email']
