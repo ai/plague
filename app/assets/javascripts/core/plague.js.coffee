@@ -66,10 +66,7 @@ window.plague =
 
    initBodyClasses: ->
     classes  = 'js '
-    classes += if plague.support.transform3d()
-      ' transform3d'
-    else
-      ' transform2d'
+    classes += 'transform' + if plague.support.transform3d() then '3d' else '2d'
     $('body').removeClass('no-js').addClass(classes)
 
   storage: (key, value) ->

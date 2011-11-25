@@ -6,14 +6,16 @@
   text-align: center
   font-size: 14px
   z-index: 102
-  +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
+  .center
+    width: 760px
+    margin: 0 auto
+    height: 30px
+    line-height: 30px
+    color: white
+    +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
 
-.disabled-js
-  border-top: 2px solid black
-  height: 28px
-  line-height: 26px
-  background: #af1109
-  color: white
+.disabled-js .center
+  background-color: #af1109
   text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px
   font-weight: bold
 body.js .disabled-js
@@ -21,11 +23,9 @@ body.js .disabled-js
 
 .old-browser-notice
   display: none
-  height: 30px
-  line-height: 30px
-  background-color: black
-  color: white
-  text-shadow: black 1px 1px 1px
+  .center
+    background-color: black
+    text-shadow: black 1px 1px 1px
   a
     color: white
     &:hover
