@@ -140,6 +140,10 @@ $top-menu: sprite-map("top-menu/*.png")
         top: 3px
       p
         padding-bottom: 6px
+      .social-widget
+        padding-bottom: 2px
+      a
+        color: white
     &.open
       .button
         +box-shadow(white 0 -13px 13px -13px inset)
@@ -170,7 +174,6 @@ $top-menu: sprite-map("top-menu/*.png")
       .arrow
         right: 41px
         left: auto
-    .button
   .slide-button.subscribe
     margin-right: 2px
     .icon
@@ -200,9 +203,14 @@ $top-menu: sprite-map("top-menu/*.png")
   .slide-button
     +perspective(2000px)
     .content
-      margin-top: -15px
+      margin-top: 5px
       +rotateX(60deg)
     &.open
       .content
         +rotateX(0)
         margin-top: 11px
+  .slide-button.what-is-it
+    .content
+      margin-top: -15px
+    &.open .content
+      margin-top: 11px

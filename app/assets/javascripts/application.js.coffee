@@ -6,6 +6,7 @@
 #= require core/notices
 #= require core/loader
 #= require core/analytics
+#= require core/social
 
 #= require pages/title
 #= require pages/top-menu
