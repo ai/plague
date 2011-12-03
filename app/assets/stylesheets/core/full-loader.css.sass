@@ -47,6 +47,6 @@ body.no-js .full-loader
 @each $vendor in $animation-vendors
   @#{$vendor}keyframes full-loader-ouroboros
     from
-      +rotate(0)
+      #{$vendor}transorm: rotate(0)
     to
-      +rotate(360deg)
+      #{$vendor}transorm: rotate(360deg)
