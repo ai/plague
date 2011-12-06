@@ -13,3 +13,4 @@
 #= require pages/post
 #= require pages/comments
 #= require pages/new-comment
+#= require pages/feedback
