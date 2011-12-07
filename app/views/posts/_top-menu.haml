@@ -27,7 +27,14 @@
           .content
             .arrow
               .rotated
-            .social-widget
+            .social-widget.vk
+              .vk-subscribe
+                .vk-crop
+                  #vk_top_group
+                .vk-group
+                  .vk-icon
+                  %a( href="http://vkontakte.ru/insomnis_story" ) Инсомнис
+            .social-widget.twitter
               = twitter_subscribe('insomnis_story')
         .slide-button.share
           %a.button( role="top-menu-open" href="#share" )
