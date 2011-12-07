@@ -46,3 +46,6 @@
               .or или
               %a( href="#{@first.url}" role="open-book" )
                 начать сначала
+
+- unless @all_posts
+  = render 'to_be_continue'

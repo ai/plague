@@ -52,7 +52,6 @@ plague.on '.top-menu', ($, $$, topMenu) ->
       link.click() unless link.data('opening')
   $(window).trigger('hashchange')
 
-  $$('@subscribe-on-last').click ->
-    hash = $(@).attr('href')
-    openLinks.filter("[href=#{hash}]").click()
+  $$('@go-to-be-continue').click ->
+    plague.ext.scroll($('.to-be-continue').offset().top)
     false

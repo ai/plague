@@ -55,6 +55,7 @@ plague.loader =
           $('.post-page').hide()
         else
           $('.title-page, .post-page .next-post').hide()
+          $('.to-be-continue').show()
 
         $('body').addClass('all-posts')
         @_watchUrl()

@@ -34,7 +34,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
   titlePage.on 'hide-page', ->
     plague.animation.start()
     titlePage.css(position: 'fixed')
-    $('.post-page').show()
+    $('.post-page, .to-be-continue').show()
     openBook ->
       topMenu.trigger('show-menu')
       titlePage.fadeOut 600, -> plague.animation.end()
@@ -71,4 +71,4 @@ plague.live '.title-page', ($, $$, titlePage) ->
         after '300ms', ->
           title.animate(opacity: 1, 400)
           back.fadeOut 400, end
-      $('.post-page').hide()
+      $('.post-page, .to-be-continue').hide()

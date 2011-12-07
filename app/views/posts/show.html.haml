@@ -30,13 +30,12 @@
 
     = render 'comments'
 
-    - if @post.next
-      - unless @all_posts
-        .next-post
-          %a.black-button( href="#{@post.next.url}" )
-            .arrow ↓
-            .text
-              Следующая запись
-    - else
-      - unless @post.draft?
-        .to-be-continue Продолжение следует
+    - if @post.next and not @all_posts
+      .next-post
+        %a.black-button( href="#{@post.next.url}" )
+          .arrow ↓
+          .text
+            Следующая запись
+
+- unless @all_posts
+  = render 'to_be_continue'

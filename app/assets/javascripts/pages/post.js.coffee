@@ -82,6 +82,7 @@ plague.loader.ready ->
   win.resize(recalculateScroll)
   recalculateScroll()
 
+  afterLastPost = false
   win.on 'scroll', ->
     return if plague.animation.animating
     return if location.pathname == '/'
@@ -94,6 +95,23 @@ plague.loader.ready ->
       next = currentPost.next('.post-page:first')
       if next.length
         plague.loader.openUrl(next.data('url'), 'scroll')
+      else unless afterLastPost
+        afterLastPost = true
+        $('.to-be-continue').trigger('show-page')
+    else if afterLastPost
+      afterLastPost = false
+      $('.to-be-continue').trigger('hide-page')
+
+plague.on '.to-be-continue', ($, $$, toBeContinue) ->
+  toBeContinue.on 'show-page', ->
+    last = $('.post-page:last')
+    changePrev(last).on 'click.return-to-last', ->
+      toBeContinue.trigger('hide-page')
+      plague.ext.scroll(postTop(last))
+      false
+  toBeContinue.on 'hide-page', ->
+    changePrev($('.post-page:last').prev('.post-page:first')).
+      off('click.return-to-last')
 
 plague.live '.post-page', ($, $$, postPage) ->
   hightlightYear('2s') unless startFromPost
