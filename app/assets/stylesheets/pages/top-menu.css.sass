@@ -117,7 +117,6 @@ $top-menu: sprite-map("top-menu/*.png")
       background: black
       color: white
       font-size: 15px
-      padding: 13px 15px 9px 15px
       +box-shadow(rgba(0, 0, 0, 0.5) 0 0 7px)
       line-height: 1.25
       margin-top: -5px
@@ -178,6 +177,9 @@ $top-menu: sprite-map("top-menu/*.png")
     margin-right: 2px
     .icon
       +sized-sprite($top-menu, subscribe)
+    .content
+      width: 180px
+      padding: 13px 15px 9px 15px
     .vk-subscribe
       position: relative
       margin-bottom: 10px
@@ -205,7 +207,7 @@ $top-menu: sprite-map("top-menu/*.png")
         position: absolute
         +sized-sprite($top-menu, vk)
       a
-        font-size: 14px
+        font-size: 13px
         text-decoration: none
         &:hover
           text-decoration: underline
@@ -216,6 +218,7 @@ $top-menu: sprite-map("top-menu/*.png")
       left: 65px
     .content
       width: 160px
+      padding: 14px 15px 10px 15px
     .vk
       margin-bottom: 12px
     .twitter
