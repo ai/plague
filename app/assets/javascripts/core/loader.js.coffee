@@ -65,22 +65,26 @@ plague.loader =
     _watchUrl: ->
       @_lastUrl = location.pathname
 
-      $(window).on 'popstate', =>
+      $(window).on 'popstate', ->
         plague.loader._openPage(location.pathname)
 
       $(document).on 'click', 'a', ->
         href = $(@).attr('href')
-        if href[0] == '/'
+        if href[0] == '/' and plague.loader._isPageLoaded(href)
           plague.loader.openUrl(href)
           false
+
+    _isPageLoaded: (url) ->
+      @_page(url).length
+
+    _page: (url) ->
+      $("article[data-url='#{url}']")
 
     _openPage: (url, data) ->
       return if url == @_lastUrl
       @_lastUrl = url
 
-      page = $("article[data-url='#{url}']")
+      page = @_page(url)
       if page.length
         plague.animation.wait ->
           page.trigger('show-page', data)
-      else
-        location.href = url

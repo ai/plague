@@ -9,7 +9,7 @@ Plague::Application.routes.draw do
     end
   end
 
-  match '/posts.atom',   to: 'posts#feed', format: [:atom]
+  match '/posts.atom',   to: 'posts#feed', format: [:atom], as: :feed
   match '/posts',        to: 'posts#all'
   match '/posts/update', to: 'posts#update'
   root to: 'posts#title'

@@ -1,3 +1,6 @@
+$(document).ready ->
+  $('@rss-link').attr(target: '_blank')
+
 $(window).load ->
   $.getScript('http://platform.twitter.com/widgets.js')
   $.getScript 'http://userapi.com/js/api/openapi.js?45', ->

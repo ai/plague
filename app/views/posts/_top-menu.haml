@@ -36,6 +36,10 @@
                   .vk-name Инсомнис
             .social-widget.twitter
               = twitter_subscribe('insomnis_story')
+            .social-widget.rss
+              %a.rss-link( href="#{ feed_path }" role="rss-link" )
+                .rss-icon
+                Читать по RSS
         .slide-button.share
           %a.button( role="top-menu-open" href="#share" )
             .icon
