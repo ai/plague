@@ -29,13 +29,12 @@
               .rotated
             .social-widget.vk
               .vk-subscribe
-                %a.vk-group( href="http://vkontakte.ru/insomnis_story" role="subscribe-link" )
-                  .vk-icon
-                  Инсомнис В Контакте
+                .vk-crop
+                  #vk_top_group
             .social-widget.twitter
               = twitter_subscribe('insomnis_story')
             .social-widget.rss
-              %a.rss-link( href="#{ feed_path }" role="subscribe-link" )
+              %a.rss-link( href="#{ feed_path }" role="rss-link" )
                 .rss-icon
                 Читать по RSS
         .slide-button.share
