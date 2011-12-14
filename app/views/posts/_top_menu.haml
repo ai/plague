@@ -27,16 +27,11 @@
           .content
             .arrow
               .rotated
-            .social-widget.vk
-              .vk-subscribe
-                .vk-crop
-                  #vk_top_group
-            .social-widget.twitter
+            .vk-subscribe
+              .vk-crop
+                #vk_top_group.vk-group-widget
+            .twitter-subscribe
               = twitter_subscribe('insomnis_story')
-            .social-widget.rss
-              %a.rss-link( href="#{ feed_path }" role="rss-link" )
-                .rss-icon
-                Читать по RSS
 
         .slide-button.share
           %a.button( role="top-menu-open" href="#share" )
@@ -45,9 +40,9 @@
           .content
             .arrow
               .rotated
-            .social-widget.vk
+            .vk-share
               #vk_top_like
-            .social-widget.twitter
+            .twitter-share
               = twitter_share('insomnis_story', root_url, 'Инсомнис — книга в виде блога')
       .slide-button.what-is-it
         %a.button( role="top-menu-open" href="#what-is-it" )

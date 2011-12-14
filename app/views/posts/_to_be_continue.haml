@@ -1,2 +1,16 @@
 .to-be-continue{ class_if('hide', (@title or @post.next or @post.draft?)) }
   .text Продолжение следует
+  .subscribe-and-share
+
+    .subscribe
+      .vk-subscribe
+        .vk-crop
+          #vk_bottom_group.vk-group-widget
+      .twitter-subscribe
+        = twitter_subscribe('insomnis_story')
+
+    .share
+      .vk-share
+        #vk_bottom_like
+      .twitter-share
+        = twitter_share('insomnis_story', root_url, 'Инсомнис — книга в виде блога')

@@ -122,12 +122,28 @@ body.all-posts .post-page
       z-index: 2
 
 .to-be-continue
-  text-align: center
-  font-style: italic
-  text-shadow: white 0 1px 1px
   min-height: 100%
   background: $gray-background
+  position: relative
   &.hide
     display: none
   .text
+    font-style: italic
     padding-top: 110px
+    text-shadow: white 0 1px 1px
+    text-align: center
+  .subscribe-and-share
+    display: inline-block
+    position: absolute
+    bottom: 75px
+    left: 50%
+    width: 420px
+    margin-left: -200px
+  .subscribe
+    float: left
+    width: 200px
+  .share
+    float: right
+    width: 170px
+    position: relative
+    left: 10px
