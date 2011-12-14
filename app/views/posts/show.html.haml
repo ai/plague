@@ -1,7 +1,7 @@
 - title @post.title, @post.story_title
 
 - unless @all_posts
-  = render 'top-menu'
+  = render 'top_menu'
 
 - data = { title: @post.title, story: @post.story_title, url: @post.url }
 - data['draft'] = 1 if @post.draft?

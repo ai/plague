@@ -18,8 +18,8 @@
         .top-title( role="prev-title-top title-slider" )
         .current-title( role="current-title" )= @post.try(:title)
         .bottom-title( role="prev-title-bottom" )
-
       .subscribe-and-share
+
         .slide-button.subscribe
           %a.button( role="top-menu-open" href="#subscribe" )
             .icon
@@ -37,6 +37,7 @@
               %a.rss-link( href="#{ feed_path }" role="rss-link" )
                 .rss-icon
                 Читать по RSS
+
         .slide-button.share
           %a.button( role="top-menu-open" href="#share" )
             .icon
