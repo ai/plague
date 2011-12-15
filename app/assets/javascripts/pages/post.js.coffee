@@ -76,6 +76,7 @@ plague.loader.ready ->
 
   currentPost = prevPost = $('.post-page:first') unless currentPost
   before = after = null
+
   recalculateScroll = ->
     before = currentPost.offset().top - $('.top-menu').height()
     after  = before + currentPost.outerHeight(true)
@@ -116,7 +117,7 @@ plague.on '.to-be-continue', ($, $$, toBeContinue) ->
 plague.live '.post-page', ($, $$, postPage) ->
   hightlightYear('2s') unless startFromPost
 
-  # Открытие поста
+  # Открытие записи
 
   postPage.on 'show-page', (e, source) ->
     currentPost = postPage
