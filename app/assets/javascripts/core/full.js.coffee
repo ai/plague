@@ -4,6 +4,10 @@ plague.full =
 
   loading: false
 
+  current: null
+
+  prev: null
+
   isSupported: ->
     plague.support.history()
 
@@ -30,7 +34,9 @@ plague.full =
 
     page = @page(url)
     if page.length
-      plague.animation.wait ->
+      plague.animation.wait =>
+        @prev    = @current
+        @current = page
         page.trigger('show-page', data)
 
   isPageLoaded: (url) ->
@@ -43,38 +49,40 @@ plague.full =
 
   _readyCallbacks: jQuery.Callbacks('once memory')
 
+  _pages: (html) ->
+    @prev = @current = $('article.page')
+
+    before = $('<div class="loaded-before" />')
+    after  = $('<div class="loaded-after" />')
+
+    beforeCurrent = true
+    for page in $(html).filter('article.page')
+      if beforeCurrent
+        if $(page).data('url') != @current.data('url')
+          before.append(page)
+        else
+          beforeCurrent = false
+      else
+        after.append(page)
+
+    plague.enliven(before.children().insertBefore(@current))
+    plague.enliven(after.children().insertAfter(@current))
+
+    if @current.hasClass('title-page')
+      $('.post-page').hide()
+    else
+      $('.title-page, .post-page .next-post').hide()
+      $('.to-be-continue').show()
+
+    $('body').addClass('full')
+
   _load: ->
     return if @loaded
 
     $.get '/posts', (html) =>
       plague.full.loaded = true
-
-      current = $('article.page')
-      before  = $('<div class="loaded-before" />')
-      after   = $('<div class="loaded-after" />')
-
-      beforeCurrent = true
-      for page in $(html).filter('article.page')
-        if beforeCurrent
-          if $(page).data('url') != current.data('url')
-            before.append(page)
-          else
-            beforeCurrent = false
-        else
-          after.append(page)
-
-      plague.enliven(before.children().insertBefore(current))
-      plague.enliven(after.children().insertAfter(current))
-
-      if current.hasClass('title-page')
-        $('.post-page').hide()
-      else
-        $('.title-page, .post-page .next-post').hide()
-        $('.to-be-continue').show()
-
-      $('body').addClass('full')
+      @_pages(html)
       @_watchUrl()
-
       @_readyCallbacks.fire()
 
   _watchUrl: ->

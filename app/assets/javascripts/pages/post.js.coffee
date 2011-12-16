@@ -1,5 +1,4 @@
 startFromPost = false
-currentPost   = prevPost = null
 
 topMenu = null
 $(document).ready -> topMenu = $('.top-menu')
@@ -27,8 +26,6 @@ postTop = (postPage) ->
 
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true
-  currentPost   = prevPost = postPage
-  plague.data.currentPost  = currentPost
   $(window).on 'load', ->
     hightlightYear('300ms')
     immediate -> $(window).scrollTop(0)
@@ -42,13 +39,11 @@ plague.on '.post-page', ($, $$, postPage) ->
 
 plague.full.ready ->
   win = $(window)
-
-  currentPost = prevPost = $('.post-page:first') unless currentPost
   before = after = null
 
   recalculateScroll = ->
-    before = currentPost.offset().top - $('.top-menu').height()
-    after  = before + currentPost.outerHeight(true)
+    before  = plague.full.current.offset().top - $('.top-menu').height()
+    after   = before + plague.full.current.outerHeight(true)
   win.resize(recalculateScroll)
   recalculateScroll()
 
@@ -58,11 +53,11 @@ plague.full.ready ->
     return if location.pathname == '/'
     x = win.scrollTop()
     if x < before
-      prev = currentPost.prev('.post-page:first')
+      prev = plague.full.current.prev('.post-page:first')
       if prev.length
         plague.full.openUrl(prev.data('url'), 'scroll')
     else if x > after
-      next = currentPost.next('.post-page:first')
+      next = plague.full.current.next('.post-page:first')
       if next.length
         plague.full.openUrl(next.data('url'), 'scroll')
       else unless afterLastPost
@@ -89,9 +84,7 @@ plague.live '.post-page', ($, $$, postPage) ->
   # Открытие записи
 
   postPage.on 'show-page', (e, source) ->
-    currentPost = postPage
-    prevNext    = topMenu.find('.prev-next')
-    plague.data.currentPost = currentPost
+    prevNext = topMenu.find('.prev-next')
 
     plague.documentTitle(postPage.data('title'), postPage.data('story'))
     titlePage = $('.title-page')
@@ -112,9 +105,8 @@ plague.live '.post-page', ($, $$, postPage) ->
 
     plague.topMenu.prev(prev = postPage.prev('.post-page'))
     plague.topMenu.next(next = postPage.next('.post-page'))
-    plague.topMenu.title(postPage.data('title'), next.is(prevPost))
+    plague.topMenu.title(postPage.data('title'), next.is(plague.full.prev))
 
-    prevPost = postPage
     recalculateScroll()
 
     rememberReading(postPage)

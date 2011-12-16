@@ -55,7 +55,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
 
   titlePage.on 'show-page', ->
     plague.data.closedPost =
-      url:    plague.data.currentPost.data('url')
+      url:    plague.full.prev.data('url')
       scroll: $(window).scrollTop()
 
     plague.animation.start()
