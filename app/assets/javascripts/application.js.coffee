@@ -4,7 +4,7 @@
 #= require core/flash
 #= require core/full-loader
 #= require core/notices
-#= require core/loader
+#= require core/full
 #= require core/analytics
 
 #= require pages/title

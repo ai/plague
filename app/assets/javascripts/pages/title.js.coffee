@@ -10,7 +10,7 @@ plague.title =
       controls.find('.continue-reading').show().
         find('a.open-badge').attr(href: post.data('url'))
 
-plague.on '.title-page', -> plague.loader.start()
+plague.on '.title-page', -> plague.full.start()
 
 plague.live '.title-page', ($, $$, titlePage) ->
   title   = $$('.title')
@@ -39,7 +39,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
     after '700ms', callback
 
   $$('@open-book').click ->
-    unless plague.loader.loaded
+    unless plague.full.loaded
       openBook => location.href = @href
       false
 

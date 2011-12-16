@@ -32,15 +32,15 @@ plague.on '.post-page', ($, $$, postPage) ->
   $(window).on 'load', ->
     hightlightYear('300ms')
     immediate -> $(window).scrollTop(0)
-  plague.loader.ready ->
+  plague.full.ready ->
     $(window).scrollTop(postTop(postPage))
 
   rememberReading(postPage)
-  plague.loader.start() unless postPage.data('draft')
+  plague.full.start() unless postPage.data('draft')
 
 # Переключение постов по скроллу
 
-plague.loader.ready ->
+plague.full.ready ->
   win = $(window)
 
   currentPost = prevPost = $('.post-page:first') unless currentPost
@@ -60,11 +60,11 @@ plague.loader.ready ->
     if x < before
       prev = currentPost.prev('.post-page:first')
       if prev.length
-        plague.loader.openUrl(prev.data('url'), 'scroll')
+        plague.full.openUrl(prev.data('url'), 'scroll')
     else if x > after
       next = currentPost.next('.post-page:first')
       if next.length
-        plague.loader.openUrl(next.data('url'), 'scroll')
+        plague.full.openUrl(next.data('url'), 'scroll')
       else unless afterLastPost
         afterLastPost = true
         $('.to-be-continue').trigger('show-page')
