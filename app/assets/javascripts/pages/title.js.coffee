@@ -1,3 +1,15 @@
+plague.title =
+  changeLinks: (post) ->
+    controls = $('.title-page .controls')
+    controls.find('> div').hide()
+    unless post.prev('.post-page').length
+      controls.find('.start-reading').show()
+    else unless post.next('.post-page').length
+      controls.find('.wait-new-post').show()
+    else
+      controls.find('.continue-reading').show().
+        find('a.open-badge').attr(href: post.data('url'))
+
 plague.on '.title-page', -> plague.loader.start()
 
 plague.live '.title-page', ($, $$, titlePage) ->
@@ -47,7 +59,7 @@ plague.live '.title-page', ($, $$, titlePage) ->
       scroll: $(window).scrollTop()
 
     plague.animation.start()
-    plague.title()
+    plague.clearDocumentTitle()
     titlePage.css(position: 'fixed')
     closeBook()
 

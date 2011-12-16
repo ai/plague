@@ -1,5 +1,27 @@
-plague.on '.top-menu', ($, $$, topMenu) ->
+plague.topMenu =
 
+  title: (title, isNext) ->
+    topTitle = $('@current-title')
+    slider   = $('@title-slider')
+    height   = slider.height()
+    if isNext
+      $('@prev-title-bottom').text(topTitle.text())
+      slider.stop().css(marginTop: -2 * height).animate(marginTop: -height, 400)
+    else
+      $('@prev-title-top').text(topTitle.text())
+      slider.stop().css(marginTop: 0).animate(marginTop: -height, 400)
+    topTitle.text(title)
+
+  prev: (page) ->
+    $('@prev-next-page').toggleClass('first', !page.length)
+    $('@prev-page').attr(href: page.data('url')) if page.length
+
+  next: (page) ->
+    $('@prev-next-page').toggleClass('last', !page.length)
+    $('@next-page').attr(href: page.data('url')) if page.length
+
+
+plague.on '.top-menu', ($, $$, topMenu) ->
   slider  =  $('@top-menu-slider')
   rotator = $$('@top-menu-rotator')
 

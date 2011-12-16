@@ -33,9 +33,12 @@ window.plague =
       vitality(root, selector, callback)
     root
 
-  title: (titles...) ->
+  documentTitle: (titles...) ->
     titles.push('Инсомнис')
     document.title = titles.join(' — ')
+
+  clearDocumentTitle: ->
+    @documentTitle()
 
   animating: false
 

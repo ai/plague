@@ -19,37 +19,6 @@ rememberReading = (post) ->
   $.cookie('reading', post.data('url'), expires: 365, path: '/')
   $.cookie('reading-last', (if last then 1 else null), expires: 365, path: '/')
 
-changeTitleLinks = (post) ->
-  controls = $('.title-page .controls')
-  controls.find('> div').hide()
-  unless post.prev('.post-page').length
-    controls.find('.start-reading').show()
-  else unless post.next('.post-page').length
-    controls.find('.wait-new-post').show()
-  else
-    controls.find('.continue-reading').show().
-      find('a.open-badge').attr(href: post.data('url'))
-
-changeTopTitle = (title, isNext) ->
-  topTitle = $('@current-title')
-  slider   = $('@title-slider')
-  height   = slider.height()
-  if isNext
-    $('@prev-title-bottom').text(topTitle.text())
-    slider.stop().css(marginTop: -2 * height).animate(marginTop: -height, 400)
-  else
-    $('@prev-title-top').text(topTitle.text())
-    slider.stop().css(marginTop: 0).animate(marginTop: -height, 400)
-  topTitle.text(title)
-
-changePrev = (prev) ->
-  $('@prev-next-page').toggleClass('first', !prev.length)
-  $('@prev-page').attr(href: prev.data('url')) if prev.length
-
-changeNext = (next) ->
-  $('@prev-next-page').toggleClass('last', !next.length)
-  $('@next-page').attr(href: next.data('url')) if next.length
-
 postTop = (postPage) ->
   if postPage.hasClass('first-post')
     0
@@ -106,12 +75,12 @@ plague.loader.ready ->
 plague.on '.to-be-continue', ($, $$, toBeContinue) ->
   toBeContinue.on 'show-page', ->
     last = $('.post-page:last')
-    changePrev(last).on 'click.return-to-last', ->
+    plague.topMenu.prev(last).on 'click.return-to-last', ->
       toBeContinue.trigger('hide-page')
       plague.ext.scroll(postTop(last))
       false
   toBeContinue.on 'hide-page', ->
-    changePrev($('.post-page:last').prev('.post-page:first')).
+    plague.topMenu.prev($('.post-page:last').prev('.post-page:first')).
       off('click.return-to-last')
 
 plague.live '.post-page', ($, $$, postPage) ->
@@ -124,7 +93,7 @@ plague.live '.post-page', ($, $$, postPage) ->
     prevNext    = topMenu.find('.prev-next')
     plague.data.currentPost = currentPost
 
-    plague.title(postPage.data('title'), postPage.data('story'))
+    plague.documentTitle(postPage.data('title'), postPage.data('story'))
     titlePage = $('.title-page')
     if titlePage.is(':visible')
       titlePage.trigger('hide-page')
@@ -135,15 +104,15 @@ plague.live '.post-page', ($, $$, postPage) ->
         $(window).scrollTop(postTop(postPage))
 
     plague.animation.wait ->
-      changeTitleLinks(postPage)
+      plague.title.changeLinks(postPage)
       if source != 'scroll' and not scrolled
         plague.animation.start()
         plague.ext.scroll postTop(postPage), ->
           plague.animation.end()
 
-    changePrev(prev = postPage.prev('.post-page'))
-    changeNext(next = postPage.next('.post-page'))
-    changeTopTitle(postPage.data('title'), next.is(prevPost))
+    plague.topMenu.prev(prev = postPage.prev('.post-page'))
+    plague.topMenu.next(next = postPage.next('.post-page'))
+    plague.topMenu.title(postPage.data('title'), next.is(prevPost))
 
     prevPost = postPage
     recalculateScroll()
