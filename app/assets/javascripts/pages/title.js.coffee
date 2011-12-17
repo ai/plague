@@ -54,6 +54,8 @@ plague.live '.title-page', ($, $$, titlePage) ->
   # Закрытие книги
 
   titlePage.on 'show-page', ->
+    plague.scroll.unwatch()
+
     plague.data.closedPost =
       url:    plague.full.prev.data('url')
       scroll: $(window).scrollTop()

@@ -55,9 +55,11 @@ window.plague =
 
     start: ->
       @animating = true
+      plague.scroll.unwatch()
 
     end: ->
       @animating = false
+      plague.scroll.watch()
       while waiter = @_waiters.pop()
         waiter()
 

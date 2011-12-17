@@ -17,8 +17,8 @@ plague.topMenu =
     $('@prev-page').attr(href: page.data('url')) if page.length
 
   next: (page) ->
-    $('@prev-next-page').toggleClass('last', !page.length)
-    $('@next-page').attr(href: page.data('url')) if page.length
+    $('@prev-next-page').toggleClass('last', !page.data('url'))
+    $('@next-page').attr(href: page.data('url')) if page.data('url')
 
 
 plague.on '.top-menu', ($, $$, topMenu) ->
@@ -73,7 +73,3 @@ plague.on '.top-menu', ($, $$, topMenu) ->
       link = openLinks.filter("[href=#{location.hash}]")
       link.click() unless link.data('opening')
   $(window).trigger('hashchange')
-
-  $$('@go-to-be-continue').click ->
-    plague.ext.scroll($('.to-be-continue').offset().top)
-    false

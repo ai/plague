@@ -23,21 +23,21 @@ plague.full =
   ready: (callback) ->
     @_readyCallbacks.add(callback)
 
-  openUrl: (url, data) ->
+  openUrl: (url, source) ->
     history.pushState({ }, '', url)
-    plague.full.openPage(location.pathname, data)
+    plague.full.open(location.pathname, source)
     $(window).trigger('hashchange') if url.match('#')
 
-  openPage: (url, data) ->
-    return if url == @_lastUrl
-    @_lastUrl = url
+  open: (url, source) ->
+    return if url == @current.data('url')
+    @openPage(@page(url), source)
 
-    page = @page(url)
-    if page.length
-      plague.animation.wait =>
-        @prev    = @current
-        @current = page
-        page.trigger('show-page', data)
+  openPage: (page, source) ->
+    return unless page.length
+    plague.animation.wait =>
+      @prev    = @current
+      @current = page
+      page.trigger('show-page', source)
 
   isPageLoaded: (url) ->
     @page(url).length
@@ -50,7 +50,7 @@ plague.full =
   _readyCallbacks: jQuery.Callbacks('once memory')
 
   _pages: (html) ->
-    @prev = @current = $('article.page')
+    @prev = @current = $('article.page:not(.to-be-continue)')
 
     before = $('<div class="loaded-before" />')
     after  = $('<div class="loaded-after" />')
@@ -89,7 +89,7 @@ plague.full =
     @_lastUrl = location.pathname
 
     $(window).on 'popstate', ->
-      plague.full.openPage(location.pathname)
+      plague.full.open(location.pathname)
 
     $(document).on 'click', 'a', ->
       href = $(@).attr('href')
