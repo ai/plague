@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter do
-    Post.cache = { }
+  unless Rails.env.production?
+    before_filter do
+      Post.cache = { }
+    end
   end
 
   rescue_from Post::NotFound do
@@ -40,6 +42,7 @@ class ApplicationController < ActionController::Base
   def expire_all
     config = Rails.application.config
     FileUtils.rm_rf(config.action_controller.page_cache_directory)
+    Post.cache = { }
   end
 
   def expire_post(url)
@@ -49,6 +52,7 @@ class ApplicationController < ActionController::Base
     expire_page('/posts.html.gz')
     expire_page(url)
     expire_page(url + '.html.gz')
+    Post.cache = { }
   end
 
   def gzip_cache
