@@ -1,6 +1,6 @@
 # encoding: utf-8
 class CommentsController < ApplicationController
-  before_filter :only_for_author, expect: :create
+  before_filter :only_for_author, except: :create
   before_filter :spam_defence,    only:   :create
   before_filter :load_comment,    only:   %w(destroy publish answer)
 
@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
 
   def answer
     @comment.answer! params[:answer]
-    Notifier.answer(@comment).deliver
+    Notifier.answer(@comment).deliver if @comment.author_email.present?
     expire_post(@comment.post.url)
     redirect_to comments_path
   end

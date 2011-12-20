@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -30,7 +31,11 @@ class ApplicationController < ActionController::Base
 
   def only_for_author
     unless author_signed_in?
-      render 'sessions/new', layout: 'simple', status: :forbidden
+      if request.xhr?
+        render text: 'Доступ запрещён', status: :forbidden
+      else
+        render 'sessions/new', layout: 'simple', status: :forbidden
+      end
     end
   end
 
