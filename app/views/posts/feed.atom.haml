@@ -15,6 +15,7 @@
       %updated= entry.updated_at.xmlschema
       %link( href="#{root + entry.url}" )/
       - if entry.is_a? Post
+        - next if entry.draft?
         %title= entry.title
         %id= id_prefix + entry.url
         %content( type="xhtml"  )
