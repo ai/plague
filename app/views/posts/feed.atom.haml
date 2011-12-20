@@ -20,6 +20,10 @@
         %content( type="xhtml"  )
           %div( xmlns="http://www.w3.org/1999/xhtml" )
             = entry.html
+
+            %p
+              %a{ href: root + entry.url }
+                Оставить комментарий герою или автору
       - elsif entry.is_a? Comment
         %title Комментарий № #{entry.number} к «#{entry.post.title}»
         %id= id_prefix + 'comment' + entry.id.to_s
@@ -27,8 +31,12 @@
           %name= entry.author_name
         %content( type="xhtml"  )
           %div( xmlns="http://www.w3.org/1999/xhtml" )
+            %a{ href: root + entry.url }
+              Комментарий
             - if entry.for_author?
-              Комментарий автору:
+              автору
+            к записи
+            «<a href="#{ root + entry.post.url }">#{entry.post.title}</a>»:
             %blockquote= entry.html
             - if entry.answer
               - if entry.for_hero? and entry.answer.from_author?
