@@ -1,7 +1,7 @@
 class Post
   class NotFound < StandardError; end
 
-  URLS  = { hero: '/say-and-relax.com/hero' }
+  URLS  = { hero: '/hero' }
 
   @@cache = { }
   cattr_accessor :cache
