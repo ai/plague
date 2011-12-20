@@ -30,4 +30,8 @@ module LayoutHelper
     content_for(:title) { titles.join(' — ') }
   end
 
+  def feed_url
+    'http://feeds.feedburner.com/insomnis/feed'
+  end
+
 end
