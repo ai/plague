@@ -1,8 +1,6 @@
 class Post
   class NotFound < StandardError; end
 
-  URLS  = { hero: '/hero' }
-
   @@cache = { }
   cattr_accessor :cache
 
@@ -16,16 +14,17 @@ class Post
     self.by_path(path)
   end
 
+  def self.story?(story)
+    File.exist? self.story_root.join(story, 'title')
+  end
+
   def self.by_url(url)
-    story = URLS.find { |i, prefix| url.start_with? prefix }
-    raise NotFound unless story
-    story = story.first.to_s
+    story, name = url.gsub('.', '').sub(/^\//, '').split('/', 2)
 
-    name = url.match  /\/([^\/]+)\/?$/
+    raise NotFound unless story? story
     raise NotFound unless name
-    name = name[1]
 
-    Dir.glob(story_root.join(story, '*.md')) do |file|
+    Dir.glob(self.story_root.join(story, '*.md')) do |file|
       post = self.by_path(story, File.basename(file, '.md'))
       return post if post.name == name
     end
@@ -157,7 +156,7 @@ class Post
 
   def url
     return '/' if self.title?
-    URLS[self.story_name] + '/' + self.name
+    "/#{self.story_name}/#{self.name}"
   end
 
   def draft?
