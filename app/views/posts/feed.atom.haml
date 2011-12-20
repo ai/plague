@@ -32,8 +32,7 @@
           %name= entry.author_name
         %content( type="xhtml"  )
           %div( xmlns="http://www.w3.org/1999/xhtml" )
-            %a{ href: root + entry.url }
-              Комментарий
+            %a{ href: root + entry.url } Комментарий
             - if entry.for_author?
               автору
             к записи
