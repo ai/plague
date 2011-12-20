@@ -3,7 +3,7 @@
     .center
       %a.story-title( href="/" role="home" )
         .story-logo
-        = story['title']
+        = book_title
 
       - prevPage = @post.try(:prev)
       - nextPage = @post.try(:next)

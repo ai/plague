@@ -14,5 +14,6 @@ Plague::Application.routes.draw do
   match '/posts/update', to: 'posts#update'
   root to: 'posts#title'
 
-  match '*path', to: 'posts#show'
+  match '/:story', to: 'posts#story'
+  match '*path',   to: 'posts#show'
 end

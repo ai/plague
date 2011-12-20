@@ -34,10 +34,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def story
+  def story_config
     Rails.configuration.story
   end
-  helper_method :story
+  helper_method :story_config
+
+  def book_title
+    Rails.configuration.story['title']
+  end
+  helper_method :book_title
 
   def expire_all
     config = Rails.application.config

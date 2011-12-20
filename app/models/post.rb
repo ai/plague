@@ -21,7 +21,7 @@ class Post
   def self.by_url(url)
     story, name = url.gsub('.', '').sub(/^\//, '').split('/', 2)
 
-    raise NotFound unless story? story
+    raise NotFound unless self.story? story
     raise NotFound unless name
 
     Dir.glob(self.story_root.join(story, '*.md')) do |file|
@@ -30,6 +30,11 @@ class Post
     end
 
     raise NotFound
+  end
+
+  def self.first_in_story(story)
+    raise NotFound unless self.story? story
+    self.by_path(story, '01')
   end
 
   def self.title

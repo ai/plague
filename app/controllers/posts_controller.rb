@@ -28,8 +28,12 @@ class PostsController < ApplicationController
     @post = Post.by_url("/#{params[:path]}")
   end
 
+  def story
+    redirect_to Post.first_in_story(params[:story]).url
+  end
+
   def update
-    if params['key'] == story['api_key']
+    if params['key'] == story_config['api_key']
       Post.update_repository!
       expire_all
       render text: 'updated'

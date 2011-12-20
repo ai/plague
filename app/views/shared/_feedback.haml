@@ -1,5 +1,6 @@
 .feedback-content
-  %a.feedback-link( href="mailto:#{story['public_email']}" )
+  %a.feedback-link( href="mailto:#{story_config['public_email']}" )
     Связаться с автором
   .feedback-mail
-    %a( href="mailto:#{story['public_email']}" )= story['public_email']
+    %a( href="mailto:#{story_config['public_email']}" )
+      = story_config['public_email']
