@@ -52,9 +52,7 @@ plague.on '.top-menu', ($, $$, topMenu) ->
       slide.removeClass('open')
       $('body').off('click.hide-top-slide')
       after '200ms', -> slide.find('.content').hide()
-      plague.ext.hash('') if location.hash == hash
     else
-      plague.ext.hash(hash)
       $('body').trigger('click.hide-top-slide')
       slide.find('.content').show()
       link.data(opening: true)
@@ -65,11 +63,3 @@ plague.on '.top-menu', ($, $$, topMenu) ->
         unless $(e.target).closest('.slide-button').length
           slide.find('.button').click()
     false
-
-  $(window).on 'hashchange', ->
-    if location.hash == ''
-      $('body').trigger('click.hide-top-slide')
-    else
-      link = openLinks.filter("[href=#{location.hash}]")
-      link.click() unless link.data('opening')
-  $(window).trigger('hashchange')
