@@ -24,11 +24,11 @@ postTop = (postPage) ->
 
 plague.on '.post-page', ($, $$, postPage) ->
   startFromPost = true
-  $(window).on 'load', ->
+  $(window).load ->
     hightlightYear('300ms')
-    immediate -> $(window).scrollTop(0)
   plague.full.ready ->
-    $(window).scrollTop(postTop(postPage))
+    unless location.hash.match(/^#comment/)
+      $(window).scrollTop(postTop(postPage))
     plague.scroll.watch()
 
   rememberReading(postPage)

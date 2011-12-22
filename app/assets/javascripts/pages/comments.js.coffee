@@ -3,14 +3,20 @@
 # Прокрутка к комментарию при нажатию на ссылку
 
 commentByHash = (hash) ->
-  number = hash.replace(/^#comment/, '')
-  $("article.comment[data-number=#{number}]")
+  if location.hash.match(/^#comment/)
+    number = location.hash.replace(/^#comment/, '')
+    $("article.comment[data-number=#{number}]")
+  else
+    $()
 
 plague.on '.post-comments', ($, $$) ->
-  $(window).on 'load', ->
-    if location.hash.match(/^#comment/)
-      immediate ->
-        commentByHash(location.hash).trigger('scroll-to-comment')
+  scroll = ->
+    commentByHash().trigger('scroll-to-comment')
+  if plague.full.isSupported()
+    plague.full.ready(scroll)
+  else
+    $(window).load ->
+      immediate -> scroll()
 
 commentCacheIsWatching = false
 watchCommentHash = ->
@@ -18,8 +24,12 @@ watchCommentHash = ->
   commentCacheIsWatching = true
 
   $(window).on 'hashchange', ->
+    commentByHash().trigger('scroll-to-comment', 'animated')
+
+plague.full.ready ->
+  $('.post-page').on 'show-page', (e, source) ->
     if location.hash.match(/^#comment/)
-      commentByHash(location.hash).trigger('scroll-to-comment', 'animated')
+      plague.ext.hash('')
 
 plague.live '.post-comments', ($, $$, comments) ->
   newComment   = comments.parent().find('.new-comment')

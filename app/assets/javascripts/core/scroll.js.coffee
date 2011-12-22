@@ -26,7 +26,8 @@ plague.scroll =
   _open: (page) ->
     if page.length
       if page.data('url')
-        plague.full.openUrl(page.data('url'), 'scroll')
+        url = page.data('url') + location.hash
+        plague.full.openUrl(url, 'scroll')
       else
         plague.full.openPage(page, 'scroll')
       @recalculate()

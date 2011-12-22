@@ -1,5 +1,4 @@
 - comments.each do |comment|
-  %a.comment-anchor{ name: comment.hash }
   %article.comment{ class_if('real-life', comment.real_life?), data: { id: comment.id, number: comment.number } }
     - if comment.real_life?
       - if comment.for_author?
@@ -26,3 +25,4 @@
           - else
             Герой,
           %span.time= R18n.l comment.answer.created_at, :full
+          %a.comment-link{ href: comment.url } #

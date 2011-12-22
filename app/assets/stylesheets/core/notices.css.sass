@@ -98,8 +98,9 @@ body.old-browser .old-browser-notice
       background: #888
   .description
     bottom: 0
-body.transform3d .no3d-notice
-  display: none
+body.transform3d, body.no-js
+  .no3d-notice
+    display: none
 
 @-moz-document url-prefix()
   .no3d-notice .banner .text

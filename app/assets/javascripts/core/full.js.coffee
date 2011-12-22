@@ -17,16 +17,17 @@ plague.full =
     return if @loading
     @loading = true
 
-    $(window).on 'load', ->
-      after '0.5s', -> plague.full._load()
+    $(window).load =>
+      immediate => @_load()
 
   ready: (callback) ->
     @_readyCallbacks.add(callback)
 
   openUrl: (url, source) ->
+    beforeHash = location.hash
     history.pushState({ }, '', url)
-    plague.full.open(location.pathname, source)
-    $(window).trigger('hashchange') if url.match('#')
+    @open(location.pathname, source)
+    $(window).trigger('hashchange') if location.hash != beforeHash
 
   open: (url, source) ->
     return if url == @current.data('url')
