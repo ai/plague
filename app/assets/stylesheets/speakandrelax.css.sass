@@ -1,0 +1,43 @@
+@import 'base'
+@import 'core/common'
+
+body
+  font-family: Andika, sans-serif
+.center
+  width: 500px
+  margin: 20px auto
+  position: relative
+.logo
+  position: absolute
+  z-index: 1
+  +image-size("speak-and-relax/logo.png")
+  background: image-url("speak-and-relax/logo.png") no-repeat
+  top: 0
+  left: 195px
+h1
+  font-size: 60px
+  font-family: 'Merienda One', cursive
+  padding: 50px 0 70px 0
+  position: relative
+  z-index: 2
+  .and
+    padding: 0 28px 0 30px
+    font-size: 40px
+    color: white
+    text-shadow: black 0 0 5px
+.promo
+  font-size: 20px
+  line-height: 1.15
+  width: 420px
+  margin-left: 40px
+  p
+    margin-bottom: 10px
+  strong
+    font-weight: normal
+    text-shadow: #162983 0 0 1px
+.description
+  margin-top: 40px
+  line-height: 1.2
+  font-size: 18px
+  p
+    margin-bottom: 13px

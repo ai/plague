@@ -9,6 +9,8 @@ Plague::Application.routes.draw do
     end
   end
 
+  match '/speakandrelax.com', to: 'fake_internet#speakandrelax'
+
   match '/posts.atom',   to: 'posts#feed', format: [:atom], as: :feed
   match '/posts',        to: 'posts#all'
   match '/posts/update', to: 'posts#update'

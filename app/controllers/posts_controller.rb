@@ -29,7 +29,11 @@ class PostsController < ApplicationController
   end
 
   def story
-    redirect_to Post.first_in_story(params[:story]).url
+    if params[:story] == 'hero'
+      redirect_to '/speakandrelax.com'
+    else
+      raise Page::NotFound
+    end
   end
 
   def update
