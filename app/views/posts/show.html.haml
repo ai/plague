@@ -28,7 +28,8 @@
             .right-corner
       = @post.html
 
-    = render 'comments'
+    - unless @post.draft?
+      = render 'comments'
 
     - if @post.next and not @all_posts
       .next-post
@@ -37,5 +38,5 @@
           .text
             Следующая запись
 
-- unless @all_posts
+- unless @all_posts or @post.draft?
   = render 'to_be_continue'
