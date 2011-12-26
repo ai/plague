@@ -12,7 +12,10 @@
         %a.prev.to-page( title="Предыдущая запись" href="#{prevPage.try(:url)}" role="prev-page" ) ↑
         %a.prev.to-title( title="Обложка" href="#{root_path}" ) ↑
         %a.next.to-page( title="Следующая запись" href="#{nextPage.try(:url)}" role="next-page" ) ↓
-        %a.next.waiting( title="Продолжение следует" href="#" role="go-to-be-continue" ) ↓
+        - if @post.draft?
+          %a.next.waiting( href="#" role="go-to-be-continue" ) ↓
+        - else
+          %a.next.waiting( title="Продолжение следует" href="#" role="go-to-be-continue" ) ↓
 
       .post-title
         .top-title( role="prev-title-top title-slider" )
