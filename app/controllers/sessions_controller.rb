@@ -1,14 +1,16 @@
 class SessionsController < ApplicationController
 
   def create
-    auth   = request.env['omniauth.auth']
-    author = story_config['author_email']
-    if author != auth['user_info']['email']
-      flash[:wrong_signin] = true
-    else
+    signin_email  = request.env['omniauth.auth'].info.email
+    author_emails = [story_config['author_email'], 'insomnis.story@gmail.com']
+
+    if author_emails.include? signin_email
       session[:session_token] = Session.author_session.token
       cookies[:author] = { value: 1, expires: 1.year.from_now }
+    else
+      flash[:wrong_signin] = true
     end
+
     redirect_to request.env['omniauth.origin'] || root_path
   end
 
