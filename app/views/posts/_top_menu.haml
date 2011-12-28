@@ -12,7 +12,7 @@
         %a.prev.to-page( title="Предыдущая запись" href="#{prevPage.try(:url)}" role="prev-page" ) ↑
         %a.prev.to-title( title="Обложка" href="#{root_path}" ) ↑
         %a.next.to-page( title="Следующая запись" href="#{nextPage.try(:url)}" role="next-page" ) ↓
-        - if @post.draft?
+        - if @post.try(:draft?)
           %a.next.waiting( href="#" role="go-to-be-continue" ) ↓
         - else
           %a.next.waiting( title="Продолжение следует" href="#" role="go-to-be-continue" ) ↓
@@ -34,7 +34,7 @@
               .vk-crop
                 #vk_top_group.vk-group-widget
             .twitter-subscribe
-              = twitter_subscribe('insomnis_story')
+              = twitter_subscribe
 
         .slide-button.share
           %a.button( role="top-menu-open" href="#" )
@@ -46,7 +46,7 @@
             .vk-share
               #vk_top_like
             .twitter-share
-              = twitter_share('insomnis_story', root_url, 'Инсомнис — книга в виде блога')
+              = twitter_share
       .slide-button.what-is-it
         %a.button( role="top-menu-open" href="#" )
           .icon
@@ -55,9 +55,7 @@
           .arrow
             .rotated
           %p
-            Инсомнис — книга в формате блога.
+            Инсомнис — блог из другого мира.
           %p
-            Герой из научно-фантастического мира пишет дневник прямо по ходу
-            развития событий
-          %p
-            Он отвечает и прислушивается к вашим комментарии.
+            В отличии от книги вы можете общаться с героем прямо
+            по ходу развития событий.
