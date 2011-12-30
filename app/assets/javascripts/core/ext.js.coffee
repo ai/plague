@@ -28,6 +28,6 @@ plague.ext =
 
   once: (name, callback) ->
     name = "once-#{name}"
-    return if plague.storage(name) and location.hash != '#newvisit'
-    plague.storage(name, 1)
+    return if localStorage.getItem(name) and location.hash != '#newvisit'
+    localStorage.setItem(name, 1)
     callback()

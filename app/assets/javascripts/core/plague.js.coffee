@@ -73,22 +73,3 @@ window.plague =
     classes  = 'js '
     classes += 'transform' + if plague.support.transform3d() then '3d' else '2d'
     $('body').removeClass('no-js').addClass(classes)
-
-  storage: (key, value) ->
-    if typeof(key) == 'object'
-      for name, value of key
-        plague.storage(name, value)
-    else
-      if value == undefined
-        if plague.support.localStore()
-          localStorage.getItem(key)
-        else
-          $.cookie(key)
-      else
-        if plague.support.localStore()
-          if value == null
-            localStorage.removeItem(key)
-          else
-            localStorage.setItem(key, value)
-        else
-          $.cookie(key, value, expires: 365, path: '/')
