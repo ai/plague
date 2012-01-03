@@ -23,11 +23,11 @@
             = entry.html
 
             - if entry.links.present?
-              %h5 См. также
+              %h4 См. также
               %ul
                 - entry.links.each do |link|
-                  %a{ href: link.href }
-                    %h6= link.title
+                  %li
+                    %a{ href: link.href }= link.title
                     %p= link.description
 
             %p
