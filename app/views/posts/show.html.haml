@@ -28,6 +28,17 @@
             .right-corner
       = @post.html
 
+    - if @post.links.present?
+      .post-links
+        %h6 См. также
+        %ul
+          - @post.links.each do |link|
+            %li
+              %a{ href: link.href, role: 'post-link' }
+                .corner
+                .title= link.title
+                %p= link.description
+
     - unless @post.draft?
       = render 'comments'
 

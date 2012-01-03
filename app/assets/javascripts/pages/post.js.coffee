@@ -37,6 +37,8 @@ plague.on '.post-page', ($, $$, postPage) ->
 plague.live '.post-page', ($, $$, postPage) ->
   hightlightYear('2s') unless startFromPost
 
+  $$('@post-link').attr(target: '_blank')
+
   # Открытие записи
 
   postPage.on 'show-page', (e, source) ->

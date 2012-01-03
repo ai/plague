@@ -1,5 +1,6 @@
 class Post
   class NotFound < StandardError; end
+  Link = Struct.new(:href, :title, :description)
 
   @@cache = { }
   cattr_accessor :cache
@@ -99,7 +100,7 @@ class Post
   end
 
   def attrs
-    compile unless @compiled
+    compile
     @attrs
   end
 
@@ -122,8 +123,13 @@ class Post
     end
   end
 
+  def links
+    compile
+    @links
+  end
+
   def html
-    compile unless @compiled
+    compile
     @html
   end
 
@@ -205,13 +211,24 @@ class Post
   end
 
   def compile
+    return if @compiled
     @compiled = true
+
     text = @source_code
+
     @attrs = {}
     if text.lines.first =~ /^[\w-]+: /
       before, text = text.split("\n\n", 2)
       @attrs = YAML.load(before)
     end
+
+    @links = []
+    text.gsub! /\n*link\n(  [^\n]+\n){3}/ do |link|
+      link = link.strip.split("\n").map(&:strip)
+      @links << Link.new(*link[1..-1])
+      ''
+    end
+
     @html = Kramdown::Document.new(text).to_html.html_safe
   end
 end

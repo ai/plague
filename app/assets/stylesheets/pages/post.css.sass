@@ -96,6 +96,48 @@ body.full .post-page
   .left-corner, .right-corner
     background: #666
 
+.post-page .post-links
+  padding: 5px 0 10px (80px - 15px)
+  list-style: none
+  display: inline-block
+  width: 100%
+  position: relative
+  h6
+    position: absolute
+    +rotate(-90deg)
+    top: 35px
+    left: -5px
+  li
+    float: left
+    margin-right: 10px
+    width: 190px
+  a
+    display: block
+    padding: 10px 15px
+    background: white
+    +shadow
+    color: black
+    text-decoration: none
+    position: relative
+    overflow: hidden
+    &:hover
+      .title
+        text-decoration: none
+  .corner
+    background: black
+    width: 30px
+    height: 30px
+    position: absolute
+    top: -18px
+    left: -18px
+    +rotate(45deg)
+  .title
+    font-size: 18px
+    margin-bottom: 7px
+    text-decoration: underline
+  p
+    font-size: 14px
+
 .post-page .next-post
   margin: 30px 0 42px 0
   a

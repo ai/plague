@@ -22,6 +22,14 @@
           %div( xmlns="http://www.w3.org/1999/xhtml" )
             = entry.html
 
+            - if entry.links.present?
+              %h5 См. также
+              %ul
+                - entry.links.each do |link|
+                  %a{ href: link.href }
+                    %h6= link.title
+                    %p= link.description
+
             %p
               %a{ href: root + entry.url }
                 Оставить комментарий герою или автору
