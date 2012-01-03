@@ -2,7 +2,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  unless Rails.env.production?
+  if Rails.env.production?
+    before_filter do
+      Post.clear_cache! unless Post.actual_cache?
+    end
+  else
     before_filter do
       Post.cache = { }
     end
@@ -62,7 +66,7 @@ class ApplicationController < ActionController::Base
     expire_page('/posts.html.gz')
     expire_page(url)
     expire_page(url + '.html.gz')
-    Post.cache = { }
+    Post.clear_cache!
   end
 
   def gzip_cache

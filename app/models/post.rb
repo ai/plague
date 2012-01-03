@@ -2,8 +2,8 @@ class Post
   class NotFound < StandardError; end
   Link = Struct.new(:href, :title, :description)
 
-  @@cache = { }
   cattr_accessor :cache
+  cattr_accessor :cached_commit
 
   def self.story_root
     Rails.root.join(Rails.configuration.story['story_repo'])
@@ -31,6 +31,10 @@ class Post
     end
 
     raise NotFound
+  end
+
+  def self.last_commit
+    self.story_root.join('.git/refs/heads/master').read.strip
   end
 
   def self.first_in_story(story)
@@ -80,6 +84,17 @@ class Post
   def self.by_path(path, file = nil)
     path += '/' + file if file
     @@cache[path] ||= self.new(path)
+  end
+
+  def self.clear_cache!
+    self.cache = {}
+    self.cached_commit = self.last_commit
+  end
+
+  clear_cache!
+
+  def self.actual_cache?
+    self.cached_commit == self.last_commit
   end
 
   attr_reader :path, :source_code
