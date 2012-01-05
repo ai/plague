@@ -56,6 +56,12 @@ class Post
     post
   end
 
+  def self.last_published
+    post = self.first
+    post = post.next while post.next and not post.next.draft?
+    post
+  end
+
   def self.all
     posts = []
     post   = Post.first
@@ -137,7 +143,7 @@ class Post
 
   def date
     @date ||= begin
-      return nil if draft?
+      return nil unless attrs['published']
       self.published_at.to_date + 17.years
     end
   end
@@ -190,7 +196,11 @@ class Post
   end
 
   def draft?
-    attrs['published'].nil?
+    if Rails.env.production?
+      self.attrs['published'].nil? or self.published_at > Time.now
+    else
+      self.attrs['published'].nil?
+    end
   end
 
   def updated_at
