@@ -97,6 +97,10 @@ class Post
     self.cached_commit == self.last_commit
   end
 
+  def self.clear_comments_cache!
+    self.cache.values.map(&:clear_comments_cache!)
+  end
+
   attr_reader :path, :source_code
 
   def initialize(path)
@@ -217,6 +221,13 @@ class Post
 
   def unmoderated_comments
     @unmoderated_comments ||= Comment.where(post_path: @path).unmoderated
+  end
+
+  def clear_comments_cache!
+    @comments = nil
+    @important_comments   = nil
+    @unimportant_comments = nil
+    @unmoderated_comments = nil
   end
 
   private

@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
 
   if Rails.env.production?
     before_filter do
-      Post.clear_cache! unless Post.actual_cache?
+      if Post.actual_cache?
+        Post.clear_comments_cache!
+      else
+        Post.clear_cache!
+      end
     end
   else
     before_filter do
@@ -56,7 +60,7 @@ class ApplicationController < ActionController::Base
   def expire_all
     config = Rails.application.config
     FileUtils.rm_rf(config.action_controller.page_cache_directory)
-    Post.cache = { }
+    Post.clear_cache!
   end
 
   def expire_post(url)
