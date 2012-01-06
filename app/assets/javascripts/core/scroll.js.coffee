@@ -24,13 +24,15 @@ plague.scroll =
     @after  = @before + plague.full.current.outerHeight(true)
 
   _open: (page) ->
-    if page.length
-      if page.data('url')
-        url = page.data('url') + location.hash
-        plague.full.openUrl(url, 'scroll')
-      else
-        plague.full.openPage(page, 'scroll')
-      @recalculate()
+    return unless page.length
+    return if page.is('.title-page')
+
+    if page.data('url')
+      url = page.data('url') + location.hash
+      plague.full.openUrl(url, 'scroll')
+    else
+      plague.full.openPage(page, 'scroll')
+    @recalculate()
 
   _scroll: ->
     return unless @watching
