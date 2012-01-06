@@ -31,7 +31,7 @@ module LayoutHelper
   end
 
   def feed_url
-    'http://feeds.feedburner.com/insomnis/feed'
+    'http://feeds.feedburner.com/insomnis/story'
   end
 
 end
