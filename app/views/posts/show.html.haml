@@ -35,7 +35,8 @@
           - @post.links.each do |link|
             %li
               %a{ href: link.href, role: 'post-link' }
-                .corner
+                .crop
+                  .corner
                 .title= link.title
                 %p= link.description
 
