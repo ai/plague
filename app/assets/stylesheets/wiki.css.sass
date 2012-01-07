@@ -3,27 +3,31 @@
 
 .center
   width: 600px
-  margin: 70px auto
+  margin: 50px auto
 
 article
   line-height: 1.3
   position: relative
 .auth
   position: absolute
-  top: -50px
   left: 0
+  bottom: 100%
+  height: 0
   font-size: 13px
   color: #666
-  height: 50px
-  .text
-    opacity: 0
+  +transition(all, 250ms)
+  .crop
     position: relative
-    top: 10px
-    +transition(all, 200ms)
+    overflow: hidden
+    height: 100%
+    top: -5px
+  .text
+    position: relative
+    top: 5px
   &:hover
-    .text
+    height: 40px
+    .text, .crop
       opacity: 1
-      top: 0
     .locker
       opacity: 0.6
 .locker
@@ -53,6 +57,6 @@ footer
   color: #666
   margin-top: 30px
 p
-  padding: 5px 0
+  padding: 6px 0
 strong
   font-weight: bold

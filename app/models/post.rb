@@ -303,7 +303,7 @@ class Post
     end
 
     @wikis = {}
-    text.gsub! /\n*wiki [^\n]+\n(  [^\n]+\n|\n)+(  [^\n]+|)+/ do |wiki|
+    text.gsub! /\n*wiki [^\n]+\n(  [^\n]+\n|\n)*(  [^\n]+|)+/ do |wiki|
       lines = wiki.strip.split("\n")
       wiki_name = lines.first.gsub(/^wiki /, '').strip
       wiki_text = lines[1..-1].map(&:strip).join("\n")
