@@ -26,7 +26,7 @@
           .crop
             .left-corner
             .right-corner
-      = @post.html
+      = output_symbols @post.html
 
     - if @post.links.present?
       .post-links
