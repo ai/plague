@@ -1,0 +1,58 @@
+@import 'base'
+@import 'core/common'
+
+.center
+  width: 600px
+  margin: 70px auto
+
+article
+  line-height: 1.3
+  position: relative
+.auth
+  position: absolute
+  top: -50px
+  left: 0
+  font-size: 13px
+  color: #666
+  height: 50px
+  .text
+    opacity: 0
+    position: relative
+    top: 10px
+    +transition(all, 200ms)
+  &:hover
+    .text
+      opacity: 1
+      top: 0
+    .locker
+      opacity: 0.6
+.locker
+  position: absolute
+  top: 100%
+  right: 0
+  width: 80px
+  height: 25px
+  background: white
+  opacity: 0
+  +transition(opacity, 200ms)
+.edit
+  float: right
+  font-size: 13px
+  margin-top: 2px
+  &, a
+    color: #777
+h2
+  font-family: Philosopher, serif
+  font-size: 22px
+  line-height: 1
+h4
+  font-size: 13px
+  margin: 4px 0 15px 0
+footer
+  font-size: 13px
+  color: #666
+  margin-top: 30px
+p
+  padding: 5px 0
+strong
+  font-weight: bold

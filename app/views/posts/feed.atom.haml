@@ -26,9 +26,18 @@
               %h4 См. также
               %ul
                 - entry.links.each do |link|
+                  - next if link.wiki?
                   %li
                     %a{ href: link.href }= link.title
                     %p= link.description
+
+            - if entry.wikis.present?
+              %h4 Википедия 2029 года
+              - entry.links.each do |link|
+                - next unless link.wiki?
+                - wiki = entry.wikis[link.wiki_page]
+                %h5= wiki.title
+                = wiki.html
 
             %p
               %a{ href: root + entry.url }

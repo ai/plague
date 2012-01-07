@@ -1,6 +1,31 @@
+# encoding: utf-8
 class Post
   class NotFound < StandardError; end
-  Link = Struct.new(:href, :title, :description)
+
+  Link = Struct.new(:href, :title, :description) do
+    def wiki?
+      href.start_with? 'wiki:'
+    end
+
+    def wiki_page
+      href.sub(/^wiki:/, '')
+    end
+  end
+
+  class Wiki
+    def self.wikipedia
+      "Википедия #{(Date.today + 17.years).year} года"
+    end
+
+    attr_reader :name, :title, :text, :html
+
+    def initialize(name, text)
+      @name  = name
+      @text  = text
+      @html  = Kramdown::Document.new(text).to_html.html_safe
+      @title = @text.match(/\*\*([^\*]*)\*\*/)[1]
+    end
+  end
 
   cattr_accessor :cache
   cattr_accessor :cached_commit
@@ -107,6 +132,13 @@ class Post
     self.cache.values.map(&:clear_comments_cache!)
   end
 
+  def self.each(&block)
+    post = self.first
+    begin
+      yield(post)
+    end while post = post.next
+  end
+
   attr_reader :path, :source_code
 
   def initialize(path)
@@ -151,6 +183,11 @@ class Post
   def links
     compile
     @links
+  end
+
+  def wikis
+    compile
+    @wikis
   end
 
   def html
@@ -259,9 +296,18 @@ class Post
     end
 
     @links = []
-    text.gsub! /\n*link\n(  [^\n]+\n){3}/ do |link|
+    text.gsub! /\n*link\n(  [^\n]+\n){2,3}/ do |link|
       link = link.strip.split("\n").map(&:strip)
       @links << Link.new(*link[1..-1])
+      ''
+    end
+
+    @wikis = {}
+    text.gsub! /\n*wiki [^\n]+\n(  [^\n]+\n|\n)+(  [^\n]+|)+/ do |wiki|
+      lines = wiki.strip.split("\n")
+      wiki_name = lines.first.gsub(/^wiki /, '').strip
+      wiki_text = lines[1..-1].map(&:strip).join("\n")
+      @wikis[wiki_name] = Wiki.new(wiki_name, wiki_text)
       ''
     end
 

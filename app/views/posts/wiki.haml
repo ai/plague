@@ -1,0 +1,23 @@
+- content_for :head do
+  %title= @wiki.title + ' —  ' + Post::Wiki.wikipedia
+  = stylesheet_link_tag :wiki, media: :all, type: nil
+
+.center
+  %article.wiki-page
+    .auth
+      .text
+        В соответствии с «Актом защиты Интернета от терроризма и педофилии»
+        анонимное редактирование Википедии запрещено. Войдите с помощью
+        своего цифрового паспорта.
+      .locker
+    .edit
+      [<a href="#">править</a>]
+    %hgroup
+      %h2= @wiki.title
+      %h4
+        Материал из Википедии © #{(Date.today + 17.years).year} год
+    = @wiki.html
+    %footer
+      В соответствии с «Актом против пропаганды пиратства» бесплатный
+      просмотр Википедии запрещён. Вы должны оплатить доступ к полной версии
+      статье.

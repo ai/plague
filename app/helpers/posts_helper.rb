@@ -17,4 +17,12 @@ module PostsHelper
     text.gsub('<p>—', '<p class="mdash-first">—').html_safe
   end
 
+  def link_href(link)
+    if link.wiki?
+      wiki_path(link.wiki_page)
+    else
+      link.href
+    end
+  end
+
 end

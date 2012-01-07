@@ -34,11 +34,15 @@
         %ul
           - @post.links.each do |link|
             %li
-              %a{ href: link.href, role: 'post-link' }
+              %a{ href: link_href(link), role: 'post-link' }
                 .crop
                   .corner
                 .title= link.title
-                %p= link.description
+                %p
+                  - if link.wiki?
+                    = link.description || Post::Wiki.wikipedia
+                  - else
+                    = link.description
 
     - unless @post.draft?
       = render 'comments'
