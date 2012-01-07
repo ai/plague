@@ -136,7 +136,7 @@ class Post
     post = self.first
     begin
       yield(post)
-    end while post = post.next
+    end while post = post.next_with_draft
   end
 
   attr_reader :path, :source_code
@@ -206,15 +206,19 @@ class Post
     end
   end
 
+  def next_with_draft
+    return self.class.by_path(attrs['next']) if attrs['next']
+
+    posts   = story_posts
+    current = posts.find_index { |i| i == @filepath }
+    return nil if current == posts.length - 1
+
+    self.class.by_file(posts[current + 1])
+  end
+
   def next
     @next ||= begin
-      return self.class.by_path(attrs['next']) if attrs['next']
-
-      posts = story_posts
-      current = posts.find_index { |i| i == @filepath }
-      return nil if current == posts.length - 1
-
-      post = self.class.by_file(posts[current + 1])
+      post = self.next_with_draft
       post.draft? ? nil : post
     end
   end

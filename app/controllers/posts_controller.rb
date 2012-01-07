@@ -44,7 +44,6 @@ class PostsController < ApplicationController
 
   def wiki
     Post.each do |post|
-      logger.debug post.wikis.keys
       if post.wikis.has_key? params[:page]
         @post = post
         break
