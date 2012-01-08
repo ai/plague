@@ -23,7 +23,7 @@
             = entry.html
 
             - if entry.links.present?
-              %h4 См. также
+              %h3 См. также
               %ul
                 - entry.links.each do |link|
                   - next if link.wiki?
@@ -32,11 +32,10 @@
                     %p= link.description
 
             - if entry.wikis.present?
-              %h4 Википедия 2029 года
+              %h3 Википедия 2029 года
               - entry.links.each do |link|
                 - next unless link.wiki?
                 - wiki = entry.wikis[link.wiki_page]
-                %h5= wiki.title
                 = wiki.html
 
             %p
