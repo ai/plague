@@ -9,6 +9,9 @@
   .post-center
     .paper
       - if @post.draft?
+        .will-be-published
+          автоматическая публикация
+          = R18n.l @post.published_at, :human
         .draft-badge
           .text
             .rotated Черновик

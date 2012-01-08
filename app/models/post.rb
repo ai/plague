@@ -219,7 +219,7 @@ class Post
   def next
     @next ||= begin
       post = self.next_with_draft
-      post.draft? ? nil : post
+      post.try(:draft?) ? nil : post
     end
   end
 
