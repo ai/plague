@@ -27,7 +27,7 @@ module Plague
     config.assets.precompile += %w( quick.css sessions.css error.css
                                     comments_moderation.css
                                     comments_moderation.js
-                                    speakandrelax.css wiki.css)
+                                    speakandrelax.css wiki.css tracker.js)
 
     config.autoload_paths << "#{config.root}/lib/validators/"
 
