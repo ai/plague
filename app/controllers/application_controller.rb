@@ -2,6 +2,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  self.page_cache_compression = true
+
   if Rails.env.production?
     before_filter do
       if Post.actual_cache?
@@ -22,13 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-
-  def self.caches_page_with_gzip(*args)
-    actions, options = args, {}
-    actions, options = args[0..-2], args.last if args.last.is_a?(::Hash)
-    after_filter({ only: actions }.merge(options)) { |c| c.gzip_cache }
-    caches_page *args
-  end
 
   def author_signed_in?
     @author_signed_in ||= begin
@@ -71,29 +66,5 @@ class ApplicationController < ActionController::Base
     expire_page(url)
     expire_page(url + '.html.gz')
     Post.clear_cache!
-  end
-
-  def gzip_cache
-    return unless perform_caching
-
-    path = request.path
-    file = if path.empty? or path == "/"
-      "/index"
-    else
-      URI.parser.unescape(path.chomp('/'))
-    end
-    unless (file.split('/').last || file).include? '.'
-      file << self.page_cache_extension
-    end
-    file = page_cache_directory.to_s + file
-
-    File.open(file, 'rb') do |text|
-      File.open(file + '.gz', 'wb') do |gziped|
-        buf = ""
-        gz  = Zlib::GzipWriter.new(gziped, Zlib::BEST_COMPRESSION)
-        gz.write(buf) while text.read(16384, buf)
-        gz.close
-      end
-    end
   end
 end

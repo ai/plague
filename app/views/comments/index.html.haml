@@ -33,15 +33,15 @@
             %span.time{ title: R18n.l(comment.created_at, :full) }
               = R18n.l comment.created_at, :human
           .buttons
-            = form_tag comment_path(comment), method: :delete do
+            = form_tag comment_path(comment.id), method: :delete do
               %input.delete.black-button( type="submit" title="Удалить" value="×" )
-            = form_tag publish_comment_path(comment) do
+            = form_tag publish_comment_path(comment.id) do
               %input.public.black-button( type="submit" title="Опубликовать" value="↑" )
-            = form_tag publish_comment_path(comment) do
+            = form_tag publish_comment_path(comment.id) do
               %input( type="hidden" name="important" value="1" )
               %input.star.black-button( type="submit" title="Опубликовать как важный" value="*" )
           %article.answer
-            = form_tag answer_comment_path(comment) do
+            = form_tag answer_comment_path(comment.id) do
               %textarea( name="answer" )= comment.for_author? ? 'a' : 'h'
               .quote-arrow
                 .rotate

@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   before_filter :load_title, only: %w(title all)
 
-  caches_page_with_gzip :all, :feed, :show, :wiki
-  caches_page_with_gzip :title, if: :new_reader?
+  caches_page :all, :feed, :show, :wiki
+  caches_page :title, if: :new_reader?
 
   def title
   end
