@@ -287,34 +287,46 @@ class Post
     @filepath.dirname.children.select { |i| i.to_s.end_with? '.md' }.sort
   end
 
-  def compile
-    return if @compiled
-    @compiled = true
-
-    text = @source_code
-
+  def compile_attrs
     @attrs = {}
-    if text.lines.first =~ /^[\w-]+: /
-      before, text = text.split("\n\n", 2)
+    if @compiling.lines.first =~ /^[\w-]+: /
+      before, @compiling = @compiling.split("\n\n", 2)
       @attrs = YAML.load(before)
     end
+  end
 
+  def compile_links
     @links = []
-    text.gsub! /\n*link\n(  [^\n]+\n){2,3}/ do |link|
+    @compiling.gsub! /\n*link\n(  [^\n]+\n){2,3}/ do |link|
       link = link.strip.split("\n").map(&:strip)
       @links << Link.new(*link[1..-1])
       ''
     end
+  end
 
+  def compile_wikis
     @wikis = {}
-    text.gsub! /\n*wiki [^\n]+\n(  [^\n]+\n|\n)*(  [^\n]+|)+/ do |wiki|
+    @compiling.gsub! /\n*wiki [^\n]+\n(  [^\n]+\n|\n)*(  [^\n]+|)+/ do |wiki|
       lines = wiki.strip.split("\n")
       wiki_name = lines.first.gsub(/^wiki /, '').strip
       wiki_text = lines[1..-1].map(&:strip).join("\n")
       @wikis[wiki_name] = Wiki.new(wiki_name, wiki_text)
       ''
     end
+  end
 
-    @html = Kramdown::Document.new(text).to_html.html_safe
+  def compile_html
+    @html = Kramdown::Document.new(@compiling).to_html.html_safe
+  end
+
+  def compile
+    return if @compiled
+    @compiled = true
+
+    @compiling = @source_code
+    compile_attrs
+    compile_links
+    compile_wikis
+    compile_html
   end
 end
