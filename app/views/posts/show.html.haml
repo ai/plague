@@ -19,7 +19,9 @@
             .left-corner
             .right-corner
       - elsif @post.date
-        .date-badge
+        - if Rails.env.development? and @post.published_at > Time.now
+          - diff = 'публикация ' + R18n.l(@post.published_at, :human)
+        .date-badge{ diff ? { title: diff } : {} }
           .year
             .hightlight( role="hightlight-year" )
             .text= @post.date.year
