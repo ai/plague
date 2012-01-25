@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_filter :load_title, only: %w(title all)
 
-  caches_page :all, :feed, :show, :wiki
+  caches_page :all, :feed, :show
   caches_page :title, if: :new_reader?
 
   def title
@@ -40,20 +40,6 @@ class PostsController < ApplicationController
     else
       render text: 'wrong key', status: :bad_request
     end
-  end
-
-  def wiki
-    Post.each do |post|
-      if post.wikis.has_key? params[:page]
-        @post = post
-        break
-      end
-    end
-
-    raise Post::NotFound unless @post
-
-    @wiki = @post.wikis[params[:page]]
-    render :wiki, layout: 'simple'
   end
 
   def start

@@ -9,10 +9,10 @@ Plague::Application.routes.draw do
     end
   end
 
-  match '/speakandrelax.com', to: 'fake_internet#speakandrelax'
+  match '/speakandrelax', to: 'fake_internet#speakandrelax'
 
   match '/wiki/',      to: 'posts#start'
-  match '/wiki/:page', to: 'posts#wiki', as: :wiki
+  match '/wiki/:page', to: 'fake_internet#wiki', as: :wiki
 
   match '/posts.atom',   to: 'posts#feed', format: [:atom], as: :feed
   match '/posts',        to: 'posts#all'
