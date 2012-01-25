@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0.rc2'
+gem 'rails', '3.2.0'
 
 gem 'mongoid'
 gem 'bson_ext'
@@ -9,7 +9,7 @@ gem 'haml'
 gem 'kramdown'
 gem 'r18n-core'
 
-gem 'omniauth', git: 'https://github.com/intridea/omniauth.git'
+gem 'omniauth'
 gem 'omniauth-openid'
 
 gem 'airbrake'
