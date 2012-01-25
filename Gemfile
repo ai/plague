@@ -31,6 +31,7 @@ group :development do
   gem 'capistrano-unicorn'
   gem 'capistrano_colors'
   gem 'mailcatcher', require: false
+  gem 'rvm'
 end
 
 group :production do

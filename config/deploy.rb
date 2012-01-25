@@ -21,6 +21,10 @@ end
 
 before "deploy:assets:precompile", "deploy:symlink_configs"
 
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require "rvm/capistrano"
+set :rvm_ruby_string, 'default'
+
 require 'bundler/capistrano'
 require 'capistrano-unicorn'
 
