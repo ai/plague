@@ -1,4 +1,9 @@
 .post-comments
+  .motivation
+    = random_comment_motivation_prefix
+    %a( href="#" role="add-comment" )
+      %span.text= random_comment_motivation_postfix
+      %span.arrow ↓
   = render partial: 'comments_list', locals: { comments: @post.important_comments }
   .unimportant-comments( role="more-comments" )
     = render partial: 'comments_list', locals: { comments: @post.unimportant_comments }

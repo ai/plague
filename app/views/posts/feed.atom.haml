@@ -39,8 +39,9 @@
                 = wiki.html
 
             %p
+              = random_comment_motivation_prefix
               %a{ href: root + entry.url }
-                Оставить комментарий герою или автору
+                = random_comment_motivation_postfix
       - elsif entry.is_a? Comment
         %title Комментарий № #{entry.number} к «#{entry.post.title}»
         %id= id_prefix + 'comment' + entry.id.to_s

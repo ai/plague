@@ -2,6 +2,30 @@
   width: 600px + 160px
   margin: 30px auto 0 auto
   position: relative
+  .motivation
+    position: relative
+    top: -14px
+    padding-left: 80px
+    a
+      position: relative
+      top: -2px
+      color: black
+      text-decoration: none
+      border-bottom: 1px solid #aaa
+      +transition(border-bottom-color, 200ms)
+      &:hover
+        border-bottom-color: $gray-background
+        .arrow
+          opacity: 1
+      .text
+        position: relative
+        top: 2px
+      .arrow
+        position: absolute
+        top: 4px
+        right: -12px
+        opacity: 0
+        +transition(opacity, 200ms)
   .unimportant-comments
     display: none
     margin-top: -5px

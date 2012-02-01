@@ -25,4 +25,14 @@ module PostsHelper
     end
   end
 
+  def random_comment_motivation_prefix
+    ['Стань частью книги',
+     'Попробуй новый лит. формат',
+     'Узнай о мире больше'].sample + ' — '
+  end
+
+  def random_comment_motivation_postfix
+    ['спроси героя', 'оставь комментарий', 'общайся с героем'].sample
+  end
+
 end
