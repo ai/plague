@@ -2,9 +2,9 @@
   %article.comment{ class_if('real-life', comment.real_life?), data: { id: comment.id, number: comment.number } }
     - if comment.real_life?
       - if comment.for_author?
-        .to-author комментарий для автора
+        .to-author автору
       - else
-        .to-author ответ от автора
+        .to-author от автора
     = comment.html
     .quote-arrow
       .rotate

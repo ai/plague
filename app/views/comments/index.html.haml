@@ -20,7 +20,7 @@
       - post.unmoderated_comments.each do |comment|
         %article.comment{ class_if('real-life', comment.real_life?) }
           - if comment.real_life?
-            .to-author комментарий для автора
+            .to-author автору
           = comment.html
           .quote-arrow
             .rotate
