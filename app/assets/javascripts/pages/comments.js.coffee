@@ -26,17 +26,6 @@ watchCommentHash = ->
   $(window).on 'hashchange', ->
     commentByHash().trigger('scroll-to-comment', 'animated')
 
-showAddComment = (newComment) ->
-  if newComment.is(':visible')
-    newComment.slideUp()
-  else
-    height = newComment.outerHeight()
-    scroll = $(window).scrollTop()
-    newComment.slideDown ->
-      $(@).find('textarea').focus()
-    if newComment.offset().top + height > scroll + $(window).height()
-      plague.ext.scroll(height + scroll)
-
 plague.full.ready ->
   $('.post-page').on 'show-page', (e, source) ->
     if location.hash.match(/^#comment/)
@@ -68,7 +57,7 @@ plague.live '.post-comments', ($, $$, comments) ->
 
   $$('@show-more-comments').click ->
     if moreComemnts.find('.comment').length == 0
-      showAddComment(newComment)
+      $$('@add-comment:first-child').click()
     else
       moreComemnts.slideDown()
       controls.slideUp()
@@ -78,7 +67,15 @@ plague.live '.post-comments', ($, $$, comments) ->
   # Появление формы добавления комментария
 
   $$('@add-comment').click ->
-    showAddComment(newComment)
+    if newComment.is(':visible')
+      newComment.slideUp()
+    else
+      height = newComment.outerHeight()
+      scroll = $(window).scrollTop()
+      newComment.slideDown ->
+        $(@).find('textarea').focus()
+      if newComment.offset().top + height > scroll + $(window).height()
+        plague.ext.scroll(height + scroll)
     false
 
   # Отображение ID комментария для модерации
