@@ -175,6 +175,7 @@ class Post
 
   def date
     @date ||= begin
+      return Time.parse(attrs['date']) if attrs['date']
       return nil unless attrs['published']
       self.published_at.to_date + 17.years
     end
